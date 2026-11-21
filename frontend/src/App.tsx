@@ -11,6 +11,7 @@ import { AuthPage, type AuthScreen } from './pages/AuthPage';
 import { AccountPage, AccountDeletionPage } from './pages/AccountPage';
 import { HistoryPage } from './pages/HistoryPage';
 import { InformationPage } from './pages/InformationPage';
+import { AssistantChat } from './components/AssistantChat';
 
 const authRoutes: Record<string, AuthScreen> = {
   '/login': 'login', '/register': 'register', '/forgot-password': 'forgot',
@@ -23,7 +24,7 @@ export default function App() {
   const route = useNavigation(flow.invalidate);
   const copy = copies[language];
   const main = useRef<HTMLElement>(null);
-  const landing = route === '/' || route === '/how' || route === '/team';
+  const landing = route === '/' || route === '/how' || route === '/team' || route === '/assistant';
   const auth = authRoutes[route];
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function App() {
   }, [language, copy]);
 
   useEffect(() => {
+    if (route === '/assistant') return;
     const target = route === '/how' ? document.getElementById('how-heading')
       : route === '/team' ? document.getElementById('team-heading') : main.current?.querySelector('h1');
     target?.setAttribute('tabindex', '-1');
@@ -57,5 +59,6 @@ export default function App() {
         : <InformationPage route={route} copy={copy} model={mode === 'real' && flow.metadata.status === 'ready' ? flow.metadata.model : undefined} />}
     </main>
     <SiteFooter copy={copy} />
+    <AssistantChat copy={copy} language={language} openFromRoute={route === '/assistant'} />
   </>;
 }

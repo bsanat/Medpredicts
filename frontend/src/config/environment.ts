@@ -4,7 +4,16 @@ import { createHttpApi } from '../api/http';
 import { ApiError } from '../api/errors';
 import { ru } from '../i18n/ru';
 
+import { createAssistantClient, type AssistantClient } from '../api/assistant';
+
 export const mode = import.meta.env.VITE_API_MODE;
+
+/** The assistant needs the real backend; demo mode has no assistant. */
+export function configuredAssistant(): AssistantClient | undefined {
+  if (mode !== 'real') return undefined;
+  const baseUrl: string = import.meta.env.VITE_API_BASE_URL ?? '';
+  return createAssistantClient(baseUrl, 60000);
+}
 
 export function configuredApi(): PredictionApi {
   if (mode === 'demo') {

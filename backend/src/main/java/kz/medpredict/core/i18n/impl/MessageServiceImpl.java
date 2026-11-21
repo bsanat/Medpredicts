@@ -22,4 +22,9 @@ public class MessageServiceImpl implements MessageService {
     public String getMessage(String code) {
         return getMessage(code, new Object[0]);
     }
+
+    @Override
+    public String getMessageForLanguage(String code, Locale locale) {
+        return messageSource.getMessage(code, new Object[0], code, locale);
+    }
 }

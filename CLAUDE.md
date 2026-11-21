@@ -9,6 +9,6 @@ Diploma project (AITU, SE-2409): "Интеллектуальная систем�
 
 Team: Баймен Али (ML), Сеилхан Оралхан (backend), Бөгенбаев Санат (frontend). Supervisor: Турарова М. К.
 
-AI-analysis roadmap: `AI_ANALYSIS_PLAN.md`.
+AI-analysis roadmap: `AI_ANALYSIS_PLAN.md`. Assistant: backend feature `assistant` (Gemini via `GEMINI_API_KEY` from env or git-ignored `backend/.env`, see `backend/.env.example`; never commit the key), knowledge base `backend/src/main/resources/assistant/knowledge-base.json`, eval protocol `assistant/PROTOCOL.md`, runner `assistant/eval/run_eval.py`. zsh gotcha: write `${m}:generateContent`, not `$m:generate...` (zsh modifiers).
 
 Always keep: research-prototype disclaimers, no diagnosis/treatment advice, no "±MAE" as individual interval, no medical values in logs/storage, contract changes = code + tests + docs together.

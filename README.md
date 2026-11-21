@@ -12,6 +12,7 @@
 | [`ml-ai/`](ml-ai/) | Воспроизводимый pipeline M2 (NHANES → MLP/baselines → ONNX), отчёты, model card, bundle `MedPredict-SBP-mlp-v2` | Баймен Али |
 | [`backend/`](backend/) | Java 17 / Spring Boot 3.5 REST API, валидация, i18n, ONNX Runtime provider | Сеилхан Оралхан |
 | [`frontend/`](frontend/) | React + TypeScript + Vite, форма, RU/KK/EN, результат, PDF | Бөгенбаев Санат |
+| [`assistant/`](assistant/) | Протокол и набор вопросов для оценки AI-ассистента (Google Gemini), результаты прогонов | Команда |
 | [`AI_ANALYSIS_PLAN.md`](AI_ANALYSIS_PLAN.md) | План усиления ИИ-анализа (фазы 0–7) | — |
 
 Научный руководитель — Турарова Маржан Кабдыкалиевна. История коммитов исходных репозиториев [MedPredicts](https://github.com/MedPredicts) сохранена.
@@ -40,7 +41,7 @@ npm ci
 npm run dev
 ```
 
-Откройте http://127.0.0.1:5173/#/predict. Подробности — в README каждого каталога. Полное воспроизведение обучения из данных CDC: [`ml-ai/README.md`](ml-ai/README.md#установка-запуск-и-тестирование).
+Откройте http://127.0.0.1:5173/#/predict. Для AI-ассистента (`#/assistant`) скопируйте `backend/.env.example` в `backend/.env` и впишите `GEMINI_API_KEY` (файл не попадает в git; без ключа ассистент отвечает 503). Подробности — в README каждого каталога. Полное воспроизведение обучения из данных CDC: [`ml-ai/README.md`](ml-ai/README.md#установка-запуск-и-тестирование).
 
 ## Текущее состояние M2
 

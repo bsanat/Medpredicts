@@ -15,4 +15,10 @@ public final class MessageCode {
     public static final String NUMBER_REQUIRED = "validation.number.required";
     public static final String NUMBER_CONSTRAINTS = "validation.number.constraints";
     public static final String OPTION_INVALID = "validation.option.invalid";
+    public static final String ASSISTANT_UNAVAILABLE = "error.assistant.unavailable";
+    public static final String ASSISTANT_RATE_LIMITED = "error.assistant.rate-limited";
+    public static final String ASSISTANT_MESSAGE_LENGTH = "validation.assistant.message-length";
+    public static final String ASSISTANT_LANGUAGE = "validation.assistant.language";
+    public static final String ASSISTANT_CONTEXT_INVALID = "validation.assistant.context";
+    public static final String ASSISTANT_NO_ANSWER = "assistant.answer.not-found";
 }

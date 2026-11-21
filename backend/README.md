@@ -160,6 +160,20 @@ The result is an experimental estimate of a current systolic measurement. It doe
 
 M2 estimates current systolic blood pressure; it is not a future forecast, diagnosis, treatment recommendation or replacement for measurement. The separate experimental M2 model has substantial high-SBP errors and no Kazakhstan clinical validation. A successful API response or numerical parity check does not establish clinical suitability.
 
+## Documentation assistant (Google Gemini)
+
+`POST /api/v1/assistant/messages` answers questions about fields, units, app features, results and model limitations using only the approved knowledge base `src/main/resources/assistant/knowledge-base.json` (28 entries, each citing its source document). `GET /api/v1/assistant/status` reports whether it is configured. The assistant is separate from prediction: it never computes or changes an estimate, refuses diagnosis, treatment, dosage and off-topic requests, and routes emergencies to 103/112.
+
+Put local secrets in `backend/.env` (git-ignored; copy [`.env.example`](.env.example)). It is imported via `spring.config.import=optional:file:.env[.properties]` relative to the working directory, so start the server from `backend/`. Real environment variables override `.env` values; tests never read it (Surefire points `MEDPREDICT_ENV_FILE` to a missing file). Equivalent shell form:
+
+```sh
+export GEMINI_API_KEY=...            # never commit; without it the assistant returns 503 ASSISTANT_UNAVAILABLE
+export GEMINI_MODELS=gemini-3.5-flash-lite,gemini-3.1-flash-lite   # tried in order on 429/5xx/timeout; free tier
+sh mvnw spring-boot:run -Dspring-boot.run.profiles=onnx
+```
+
+Request: `{"message": "...", "language": "ru|kk|en", "history": [{"role":"user|assistant","text":"..."}] (≤6), "resultContext": {...}}`. `resultContext` may contain only derived numbers (`predictedValue`, interval bounds, `measuredCoverage`, `referenceValue`, `contributions`, `warnings`); unknown keys such as raw inputs are rejected with 400. Response: `{"answer", "refused", "sources": [{"id","title","document"}], "model"}`. Answers without a valid source are replaced by a localized "no approved answer" refusal. Other settings: `GEMINI_TIMEOUT_SECONDS` (30), `GEMINI_THINKING_LEVEL` (`low`; blank disables), `ASSISTANT_REQUESTS_PER_MINUTE` (20, global; 429 when exceeded). Prompts, answers and the key are never logged. Free-tier Gemini traffic may be used by Google to improve its products: do not send personal data. Evaluation protocol and results: `../assistant/`.
+
 ## Structure and conventions
 
 - `prediction/controller/`: HTTP endpoints delegating to the service interface.

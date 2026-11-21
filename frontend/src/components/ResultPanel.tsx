@@ -9,6 +9,8 @@ import type { Report } from '../pdf/report';
 import { isDemoResponse } from '../config/indicator';
 import { UnavailableNotice } from './UnavailableNotice';
 import { ContributionChart } from './ContributionChart';
+import { contextFromPrediction } from '../api/assistant';
+import { openAssistantWithResult } from '../api/assistantContext';
 
 function PdfDownload({ report, copy }: { report: Report; copy: Copy }) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
@@ -98,7 +100,9 @@ export function ResultPanel({ state, copy, language, model, demo, onEdit, onCanc
           {!demo && state.result.disclaimer && state.result.disclaimer !== copy.disclaimer && state.result.disclaimer !== copy.estimateDisclaimer && <span className="server-disclaimer">{state.result.disclaimer}</span>}
         </p></div>
         <div className="actions"><button className="button button-secondary" type="button" onClick={onEdit}><Icon name="edit" />{copy.edit}</button>
-          <button className="button button-secondary" type="button" onClick={onNew}>{copy.pages.newPrediction}</button></div>
+          <button className="button button-secondary" type="button" onClick={onNew}>{copy.pages.newPrediction}</button>
+          {estimated && <button className="button button-secondary" type="button"
+            onClick={() => openAssistantWithResult(contextFromPrediction(state.result))}><Icon name="info" />{copy.explainWithAssistant}</button>}</div>
         <PdfDownload key={language} copy={copy} report={{ model, result: state.result, input: state.input, demo, language }} />
         <details className="submitted-input"><summary>{copy.pages.submitted}</summary><dl>
           {model.fields.filter((field) => state.input[field.key] !== undefined).map((field) => <div key={field.key}>

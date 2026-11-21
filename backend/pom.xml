@@ -23,6 +23,14 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- Tests must not pick up a developer's local .env (real keys or model paths). -->
+          <systemPropertyVariables><MEDPREDICT_ENV_FILE>${project.build.directory}/no-local-env</MEDPREDICT_ENV_FILE></systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
           <excludes><exclude><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId></exclude></excludes>
