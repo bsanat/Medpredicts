@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1560" viewBox="0 0 2000 1560" font-family="Arial, Helvetica, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44546A"/></marker></defs>
+<rect width="2000" height="1560" fill="#fff"/>
+<text x="40" y="55" font-size="32" font-weight="700" fill="#1A2238">CMP-01. Компоненты и путь обработки</text>
+<text x="40" y="92" font-size="20" fill="#333">Обновлено 21.10.2026  |  Синий сплошной: реализованный frontend  |  Зелёный сплошной: backend (по его README)  |  Пунктир: планируется / подлежит согласованию</text>
+<rect x="45" y="150" width="1910" height="600" fill="none" stroke="#8E9AB5" stroke-width="3"/>
+<text x="67" y="186" font-size="22" font-weight="700" fill="#1A2238">Браузер: frontend на React + TypeScript (реализован)</text>
+<rect x="90" y="235" width="385" height="120" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="282.5" y="286.5" font-size="21" text-anchor="middle" fill="#1A2238">App / pages / Field / i18n</text>
+<text x="282.5" y="317.5" font-size="21" text-anchor="middle" fill="#1A2238">Навигация, поля, KK / RU / EN</text>
+<rect x="590" y="235" width="410" height="120" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="795.0" y="286.5" font-size="21" text-anchor="middle" fill="#1A2238">usePrediction</text>
+<text x="795.0" y="317.5" font-size="21" text-anchor="middle" fill="#1A2238">Состояния, отмена, снимок ввода</text>
+<rect x="1150" y="235" width="410" height="120" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="1355.0" y="286.5" font-size="21" text-anchor="middle" fill="#1A2238">validation.ts</text>
+<text x="1355.0" y="317.5" font-size="21" text-anchor="middle" fill="#1A2238">Проверка и разбор ввода</text>
+<rect x="1150" y="385" width="410" height="120" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="1355.0" y="421.0" font-size="21" text-anchor="middle" fill="#1A2238">api/demo.ts: локальное демо</text>
+<text x="1355.0" y="452.0" font-size="21" text-anchor="middle" fill="#1A2238">Фиксированные 134,2 мм рт. ст.</text>
+<text x="1355.0" y="483.0" font-size="21" text-anchor="middle" fill="#1A2238">Нейронная сеть не вызывается</text>
+<rect x="90" y="535" width="385" height="125" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="282.5" y="589.0" font-size="21" text-anchor="middle" fill="#1A2238">api/http.ts + environment.ts</text>
+<text x="282.5" y="620.0" font-size="21" text-anchor="middle" fill="#1A2238">Явный реальный режим; GET / POST</text>
+<rect x="590" y="535" width="410" height="125" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="795.0" y="589.0" font-size="21" text-anchor="middle" fill="#1A2238">api/contract.ts</text>
+<text x="795.0" y="620.0" font-size="21" text-anchor="middle" fill="#1A2238">Проверка метаданных и ответа</text>
+<rect x="1150" y="535" width="410" height="125" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="1355.0" y="589.0" font-size="21" text-anchor="middle" fill="#1A2238">ResultPanel / страница</text>
+<text x="1355.0" y="620.0" font-size="21" text-anchor="middle" fill="#1A2238">Число, единица, ввод, ограничения</text>
+<rect x="1620" y="535" width="300" height="125" rx="14" fill="#EBF3FA" stroke="#44546A" stroke-width="3"/>
+<text x="1770.0" y="589.0" font-size="21" text-anchor="middle" fill="#1A2238">pdf/report.ts</text>
+<text x="1770.0" y="620.0" font-size="21" text-anchor="middle" fill="#1A2238">Локальный PDF, без запроса</text>
+<rect x="45" y="830" width="1910" height="590" fill="none" stroke="#8E9AB5" stroke-width="3" stroke-dasharray="9 6"/>
+<text x="67" y="866" font-size="22" font-weight="700" fill="#1A2238">Backend: Spring Boot (по его README); обученные модели планируются</text>
+<rect x="90" y="915" width="385" height="135" rx="14" fill="#E8F4EE" stroke="#3B6E57" stroke-width="3"/>
+<text x="282.5" y="958.5" font-size="21" text-anchor="middle" fill="#1A2238">REST API на Spring Boot</text>
+<text x="282.5" y="989.5" font-size="21" text-anchor="middle" fill="#1A2238">GET model/info, POST predictions</text>
+<text x="282.5" y="1020.5" font-size="21" text-anchor="middle" fill="#1A2238">Swagger UI, список CORS</text>
+<rect x="590" y="915" width="410" height="135" rx="14" fill="#E8F4EE" stroke="#3B6E57" stroke-width="3"/>
+<text x="795.0" y="958.5" font-size="21" text-anchor="middle" fill="#1A2238">Валидация входа</text>
+<text x="795.0" y="989.5" font-size="21" text-anchor="middle" fill="#1A2238">По схеме, из метаданных модели</text>
+<text x="795.0" y="1020.5" font-size="21" text-anchor="middle" fill="#1A2238">Локализованные ошибки (kk / ru / en)</text>
+<rect x="1150" y="915" width="410" height="135" rx="14" fill="#E8F4EE" stroke="#3B6E57" stroke-width="3"/>
+<text x="1355.0" y="958.5" font-size="21" text-anchor="middle" fill="#1A2238">Интерфейс PredictionModel</text>
+<text x="1355.0" y="989.5" font-size="21" text-anchor="middle" fill="#1A2238">По умолчанию: недоступна (503)</text>
+<text x="1355.0" y="1020.5" font-size="21" text-anchor="middle" fill="#1A2238">Demo-профиль: фикс. значение</text>
+<rect x="1620" y="915" width="300" height="135" rx="14" fill="#E8F4EE" stroke="#3B6E57" stroke-width="3"/>
+<text x="1770.0" y="958.5" font-size="21" text-anchor="middle" fill="#1A2238">Ответ API</text>
+<text x="1770.0" y="989.5" font-size="21" text-anchor="middle" fill="#1A2238">Число, единица, версия</text>
+<text x="1770.0" y="1020.5" font-size="21" text-anchor="middle" fill="#1A2238">или безопасная ошибка</text>
+<rect x="90" y="1230" width="540" height="130" rx="14" fill="#FFF8EA" stroke="#7F5A2B" stroke-width="3" stroke-dasharray="9 6"/>
+<text x="360.0" y="1271.0" font-size="21" text-anchor="middle" fill="#1A2238">M1: Diabetes Progression</text>
+<text x="360.0" y="1302.0" font-size="21" text-anchor="middle" fill="#1A2238">Базовая регрессия + MLP</text>
+<text x="360.0" y="1333.0" font-size="21" text-anchor="middle" fill="#1A2238">Не реализован; не диагноз</text>
+<rect x="730" y="1230" width="540" height="130" rx="14" fill="#FFF8EA" stroke="#7F5A2B" stroke-width="3" stroke-dasharray="9 6"/>
+<text x="1000.0" y="1271.0" font-size="21" text-anchor="middle" fill="#1A2238">M2: оценка систолического АД</text>
+<text x="1000.0" y="1302.0" font-size="21" text-anchor="middle" fill="#1A2238">NHANES; базовый метод + MLP; мм рт. ст.</text>
+<text x="1000.0" y="1333.0" font-size="21" text-anchor="middle" fill="#1A2238">Не реализован; не прогноз</text>
+<rect x="1370" y="1230" width="550" height="130" rx="14" fill="#FFF8EA" stroke="#7F5A2B" stroke-width="3" stroke-dasharray="9 6"/>
+<text x="1645.0" y="1271.0" font-size="21" text-anchor="middle" fill="#1A2238">M3: краткосрочный прогноз глюкозы</text>
+<text x="1645.0" y="1302.0" font-size="21" text-anchor="middle" fill="#1A2238">PhysioNet; временной базовый метод + НС</text>
+<text x="1645.0" y="1333.0" font-size="21" text-anchor="middle" fill="#1A2238">Не реализован; набор и горизонт открыты</text>
+<polyline points="475,295 590,295" fill="none" stroke="#44546A" stroke-width="2.6" marker-end="url(#a)"/>
+<rect x="484.2" y="256" width="95.6" height="26" fill="#fff" opacity="0.92"/>
+<text x="532" y="275" font-size="19" text-anchor="middle" fill="#1A2238">Действия</text>
+<polyline points="1000,295 1150,295" fill="none" stroke="#44546A" stroke-width="2.6" marker-end="url(#a)"/>
+<rect x="1027.2" y="256" width="95.6" height="26" fill="#fff" opacity="0.92"/>
+<text x="1075" y="275" font-size="19" text-anchor="middle" fill="#1A2238">Проверка</text>
+<polyline points="1000,330 1075,330 1075,445 1150,445" fill="none" stroke="#44546A" stroke-width="2.6" marker-end="url(#a)"/>
+<rect x="1084.6" y="401" width="54.8" height="26" fill="#fff" opacity="0.92"/>
+<text x="1112" y="420" font-size="19" text-anchor="middle" fill="#1A2238">демо</text>
+<polyline points="590,340 532,340 532,598 475,598" fill="none" stroke="#44546A" stroke-width="2.6" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="484.2" y="451" width="95.6" height="26" fill="#fff" opacity="0.92"/>
+<text x="532" y="470" font-size="19" text-anchor="middle" fill="#1A2238">реальный</text>
+<polyline points="795,535 795,355" fill="none" stroke="#44546A" stroke-width="2.6" marker-end="url(#a)"/>
+<rect x="696.2" y="436" width="197.6" height="26" fill="#fff" opacity="0.92"/>
+<text x="795" y="455" font-size="19" text-anchor="middle" fill="#1A2238">Проверенные данные</text>
+<polyline points="475,598 590,598" fill="none" stroke="#44546A" stroke-width="2.6" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="504.6" y="609" width="54.8" height="26" fill="#fff" opacity="0.92"/>
+<text x="532" y="628" font-size="19" text-anchor="middle" fill="#1A2238">JSON</text>
+<polyline points="1000,345 1060,345 1060,598 1150,598" fill="none" stroke="#44546A" stroke-width="2.6" marker-end="url(#a)"/>
+<polyline points="1560,598 1620,598" fill="none" stroke="#44546A" stroke-width="2.6" marker-end="url(#a)"/>
+<polyline points="282,660 282,915" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<rect x="162.8" y="771" width="238.39999999999998" height="26" fill="#fff" opacity="0.92"/>
+<text x="282" y="790" font-size="19" text-anchor="middle" fill="#1A2238">GET /api/v1/model/info</text>
+<rect x="152.60000000000002" y="797" width="258.79999999999995" height="26" fill="#fff" opacity="0.92"/>
+<text x="282" y="816" font-size="19" text-anchor="middle" fill="#1A2238">POST /api/v1/predictions</text>
+<polyline points="475,982 590,982" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<polyline points="1000,982 1150,982" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<polyline points="1560,982 1620,982" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<polyline points="1770,915 1770,790 795,790 795,660" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<rect x="1028.2" y="751" width="503.59999999999997" height="26" fill="#fff" opacity="0.92"/>
+<text x="1280" y="770" font-size="19" text-anchor="middle" fill="#1A2238">JSON, затем валидация, затем состояние, затем UI</text>
+<polyline points="1355,1050 1355,1130 360,1130 360,1230" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<polyline points="1355,1130 1000,1130 1000,1230" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<polyline points="1355,1130 1645,1130 1645,1230" fill="none" stroke="#44546A" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#a)"/>
+<text x="92" y="1112" font-size="19" fill="#1A2238">Одна реализация PredictionModel обслуживает один выбранный модуль; три модуля — планируемые альтернативы, а не готовые сервисы.</text>
+<text x="45" y="1470" font-size="19" fill="#1A2238">Ввод хранится только в памяти frontend: без localStorage / sessionStorage, аналитики и журналов приложения.</text>
+<text x="45" y="1505" font-size="19" fill="#1A2238">API выбора модуля и формат ввода временного ряда пока не определены. Аккаунт и постоянная история находятся вне этого конвейера.</text>
+</svg>
