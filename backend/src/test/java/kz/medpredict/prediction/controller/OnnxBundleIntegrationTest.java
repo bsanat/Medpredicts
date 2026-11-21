@@ -94,6 +94,29 @@ class OnnxBundleIntegrationTest {
     }
 
     @Test
+    void explanationAndOodMatchPythonGoldenWhenPublished() throws Exception {
+        var file = Path.of(System.getProperty("medpredict.model.test-directory")).resolve("explanation_golden.json");
+        if (!Files.exists(file) || !json("metadata.json").path("explanation").isObject()) {
+            return;
+        }
+        var golden = mapper.readTree(Files.readAllBytes(file));
+        double tolerance = golden.path("absoluteTolerance").doubleValue();
+        for (var example : golden.path("cases")) {
+            var body = mapper.readTree(mvc.perform(post("/api/v1/predictions").contentType("application/json")
+                            .content(mapper.writeValueAsBytes(example.path("input"))))
+                    .andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+            assertThat(body.path("explanation").path("referenceValue").doubleValue())
+                    .isCloseTo(golden.path("referencePrediction").doubleValue(), org.assertj.core.data.Offset.offset(tolerance));
+            for (var contribution : body.path("explanation").path("contributions")) {
+                double expected = example.path("contributions").path(contribution.path("key").textValue()).doubleValue();
+                assertThat(contribution.path("value").doubleValue()).isCloseTo(expected, org.assertj.core.data.Offset.offset(tolerance));
+            }
+            boolean flagged = body.path("warnings").toString().contains("OUT_OF_DISTRIBUTION");
+            assertThat(flagged).isEqualTo(example.path("outOfDistribution").booleanValue());
+        }
+    }
+
+    @Test
     void rejectsInputsOutsideTheArtifactDomainBeforeInference() throws Exception {
         var metadata = json("metadata.json");
         var input = json("golden.json").path("cases").get(0).path("input").deepCopy();

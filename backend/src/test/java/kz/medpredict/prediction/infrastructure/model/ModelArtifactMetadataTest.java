@@ -89,6 +89,31 @@ public class ModelArtifactMetadataTest {
         }
     }
 
+    public static final String EXPLANATION = "\"explanation\":{\"method\":\"exact_baseline_shapley\",\"reference\":"
+            + "{\"age\":40,\"sex\":0.5,\"bmi\":25,\"totalCholesterol\":5,\"glucose\":6}},"
+            + "\"outOfDistribution\":{\"method\":\"mahalanobis_squared\",\"mean\":[40,0.5,25,5,6],"
+            + "\"precision\":[[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]],\"threshold\":200},";
+
+    @Test
+    void explanationAndOodCalibrationsAreOptionalAndValidated() throws Exception {
+        var plain = read(METADATA, "");
+        assertThat(plain.explanation()).isNull();
+        assertThat(plain.outOfDistribution()).isNull();
+        var calibrated = read(METADATA.replace("{\"schemaVersion\"", "{" + EXPLANATION + "\"schemaVersion\""), "");
+        assertThat(calibrated.explanation().reference()).containsExactly(40, 0.5, 25, 5, 6);
+        assertThat(calibrated.outOfDistribution().squaredDistance(new double[]{50, 0.5, 25, 5, 6})).isEqualTo(100);
+        assertThat(calibrated.outOfDistribution().isOutOfDistribution(new double[]{60, 0.5, 25, 5, 6})).isTrue();
+        for (String invalid : new String[]{EXPLANATION.replace("exact_baseline_shapley", "lime"),
+                EXPLANATION.replace("\"glucose\":6}", "\"glucose\":\"6\"}"),
+                EXPLANATION.replace("[[1,0,0,0,0]", "[[-1,0,0,0,0]"),
+                EXPLANATION.replace("[0,1,0,0,0]", "[5,1,0,0,0]"),
+                EXPLANATION.replace("\"threshold\":200", "\"threshold\":0"),
+                EXPLANATION.replace("[40,0.5,25,5,6]", "[40,0.5,25,5]")}) {
+            assertThatThrownBy(() -> read(METADATA.replace("{\"schemaVersion\"", "{" + invalid + "\"schemaVersion\""), ""))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
+    }
+
     private ModelArtifactMetadata read(String value, String version) throws Exception {
         return ModelArtifactMetadata.read(mapper.readTree(value), validator, version);
     }

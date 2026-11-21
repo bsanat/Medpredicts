@@ -1,4 +1,4 @@
-import type { FieldDefinition, ModelInfo, Prediction, PredictionInterval } from '../types';
+import type { FieldDefinition, ModelInfo, Prediction, PredictionExplanation, PredictionInterval, PredictionWarning } from '../types';
 import { ru } from '../i18n/ru';
 import { ApiError } from './errors';
 
@@ -20,6 +20,29 @@ function parseInterval(value: unknown, estimate: number): PredictionInterval {
     ...(value.method === undefined ? {} : { method: value.method as string }) };
 }
 
+const KNOWN_WARNINGS: readonly PredictionWarning[] = ['OUT_OF_DISTRIBUTION'];
+// Server sums float32 graph outputs; allow a small accumulation error in the exact decomposition.
+const ADDITIVITY_TOLERANCE = 0.05;
+
+function parseExplanation(value: unknown, estimate: number): PredictionExplanation {
+  if (!record(value) || !finite(value.referenceValue) || !Array.isArray(value.contributions) || value.contributions.length === 0
+    || !optionalText(value.method)) throw unexpected();
+  const contributions = value.contributions.map((item) => {
+    if (!record(item) || !text(item.key) || !finite(item.value)) throw unexpected();
+    return { key: item.key, value: item.value };
+  });
+  if (new Set(contributions.map((item) => item.key)).size !== contributions.length) throw unexpected();
+  const total = contributions.reduce((sum, item) => sum + item.value, value.referenceValue);
+  if (Math.abs(total - estimate) > ADDITIVITY_TOLERANCE) throw unexpected();
+  return { referenceValue: value.referenceValue, contributions,
+    ...(value.method === undefined ? {} : { method: value.method as string }) };
+}
+
+function parseWarnings(value: unknown): PredictionWarning[] {
+  if (!Array.isArray(value) || !value.every((item) => KNOWN_WARNINGS.includes(item as PredictionWarning))) throw unexpected();
+  return [...new Set(value as PredictionWarning[])];
+}
+
 export function parsePrediction(value: unknown, expectedUnit?: string): Prediction {
   if (!record(value) || !finite(value.predictedValue) || !text(value.unit)
     || !optionalText(value.modelVersion) || !optionalText(value.disclaimer) || !validSemantics(value)
@@ -32,6 +55,8 @@ export function parsePrediction(value: unknown, expectedUnit?: string): Predicti
     ...(value.predictionType === undefined ? {} : { predictionType: value.predictionType as Prediction['predictionType'] }),
     ...(value.demo === undefined ? {} : { demo: value.demo as boolean }),
     ...(value.interval === undefined ? {} : { interval: parseInterval(value.interval, value.predictedValue) }),
+    ...(value.explanation === undefined ? {} : { explanation: parseExplanation(value.explanation, value.predictedValue) }),
+    ...(value.warnings === undefined ? {} : { warnings: parseWarnings(value.warnings) }),
   };
 }
 

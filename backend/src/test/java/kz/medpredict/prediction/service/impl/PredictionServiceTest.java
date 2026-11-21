@@ -4,6 +4,8 @@ import kz.medpredict.core.exception.InputValidationException;
 import kz.medpredict.core.exception.InvalidModelResponseException;
 import kz.medpredict.prediction.infrastructure.model.PredictionModel;
 import kz.medpredict.prediction.model.dto.PredictionFieldResponse;
+import kz.medpredict.prediction.model.dto.PredictionContributionResponse;
+import kz.medpredict.prediction.model.dto.PredictionExplanationResponse;
 import kz.medpredict.prediction.model.dto.PredictionIntervalResponse;
 import kz.medpredict.prediction.model.dto.PredictionModelInfoResponse;
 import kz.medpredict.prediction.model.dto.PredictionResultResponse;
@@ -70,7 +72,10 @@ class PredictionServiceTest {
                 new PredictionResultResponse(5, "units", "test-v1", "Test", null, false,
                         new PredictionIntervalResponse(1, Double.POSITIVE_INFINITY, 0.9, 0.91, "split")),
                 new PredictionResultResponse(5, "units", "test-v1", "Test", null, false,
-                        new PredictionIntervalResponse(1, 9, 1.0, 0.91, "split")))) {
+                        new PredictionIntervalResponse(1, 9, 1.0, 0.91, "split")),
+                new PredictionResultResponse(5, "units", "test-v1", "Test", null, false, null,
+                        new PredictionExplanationResponse(3, List.of(new PredictionContributionResponse("value", 1)), "exact_baseline_shapley"), List.of()),
+                new PredictionResultResponse(5, "units", "test-v1", "Test", null, false, null, null, List.of("SOMETHING_ELSE")))) {
             when(model.predict(anyMap())).thenReturn(result);
             assertThatThrownBy(() -> service.predict(new PredictionCreateRequest(body))).isInstanceOf(InvalidModelResponseException.class);
         }
@@ -82,7 +87,9 @@ class PredictionServiceTest {
     void preservesVersionActuallyReturnedByModel() throws Exception {
         when(model.info()).thenReturn(metadata);
         var result = new PredictionResultResponse(5, "units", "actual-v2", "Test", null, false,
-                new PredictionIntervalResponse(1, 9, 0.9, 0.91, "split"));
+                new PredictionIntervalResponse(1, 9, 0.9, 0.91, "split"),
+                new PredictionExplanationResponse(3, List.of(new PredictionContributionResponse("value", 2)), "exact_baseline_shapley"),
+                List.of("OUT_OF_DISTRIBUTION"));
         when(model.predict(anyMap())).thenReturn(result);
         assertThat(service.predict(new PredictionCreateRequest(mapper.readTree("{\"value\":5}")))).isEqualTo(result);
     }

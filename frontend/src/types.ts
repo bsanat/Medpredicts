@@ -33,6 +33,20 @@ export interface PredictionInterval {
   method?: string;
 }
 
+export interface PredictionContribution {
+  key: string;
+  value: number;
+}
+
+/** Exact baseline Shapley decomposition: referenceValue + Σ contributions = predictedValue. Not causal. */
+export interface PredictionExplanation {
+  referenceValue: number;
+  contributions: PredictionContribution[];
+  method?: string;
+}
+
+export type PredictionWarning = 'OUT_OF_DISTRIBUTION';
+
 export interface Prediction {
   predictedValue: number;
   unit: string;
@@ -41,6 +55,8 @@ export interface Prediction {
   predictionType?: 'estimated_current_measurement';
   demo?: boolean;
   interval?: PredictionInterval;
+  explanation?: PredictionExplanation;
+  warnings?: PredictionWarning[];
 }
 
 export interface PredictionApi {

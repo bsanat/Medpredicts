@@ -35,3 +35,8 @@ export function validateInput(values: FormValues, fields: FieldDefinition[]) {
 export function formatPrediction(value: number, decimalPlaces: number | null, language = 'ru'): string {
   return (decimalPlaces === null ? String(value) : value.toFixed(decimalPlaces)).replace('.', language === 'en' ? '.' : ',');
 }
+
+/** Signed contribution with one decimal, using a true minus sign. */
+export function signed(value: number, language: 'ru' | 'kk' | 'en'): string {
+  return `${value < 0 ? '−' : '+'}${formatPrediction(Math.abs(value), 1, language)}`;
+}

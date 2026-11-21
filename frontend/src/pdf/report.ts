@@ -2,7 +2,7 @@ import tokenCss from '../styles/tokens.css?raw';
 import { jsPDF } from 'jspdf';
 import { copies, type Language } from '../i18n';
 import type { ModelInfo, Prediction, PredictionInput } from '../types';
-import { formatPrediction } from '../validation';
+import { formatPrediction, signed } from '../validation';
 import { isDemoResponse } from '../config/indicator';
 
 const reportColors = Object.fromEntries([...tokenCss.matchAll(/--([a-z-]+):\s*(#[a-f0-9]+)/gi)]
@@ -151,6 +151,16 @@ export function createReportPdf(report: Report, assets: ReportAssets, date: Date
     paragraph(copy.intervalRange(Math.round(result.interval.level * 100), formatPrediction(result.interval.lower, model.decimalPlaces, language),
       formatPrediction(result.interval.upper, model.decimalPlaces, language), result.unit), 11, true);
     paragraph(copy.intervalNote(Math.round(result.interval.measuredCoverage * 100)), 9);
+  }
+  if (estimated && result.warnings?.includes('OUT_OF_DISTRIBUTION')) paragraph(copy.oodWarning, 10, true);
+  if (estimated && result.explanation) {
+    paragraph(copy.explanationTitle, 11, true);
+    paragraph(copy.explanationReference(formatPrediction(result.explanation.referenceValue, 1, language), result.unit), 9);
+    const labels = new Map(model.fields.map((field) => [field.key, field.label]));
+    for (const item of [...result.explanation.contributions].sort((a, b) => Math.abs(b.value) - Math.abs(a.value))) {
+      paragraph(`${labels.get(item.key) ?? item.key}: ${signed(item.value, language)} ${result.unit}`, 10);
+    }
+    paragraph(copy.explanationNote, 9);
   }
   if (result.modelVersion) paragraph(`${example ? copy.demoVersion : copy.modelVersion}: ${result.modelVersion}`, 9);
   y += 4;

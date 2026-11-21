@@ -34,6 +34,22 @@ describe('runtime contract', () => {
   ])('rejects an inconsistent interval %j', (interval) => {
     expect(() => parsePrediction({ ...prediction, interval })).toThrow();
   });
+  it('accepts an additive explanation and known warnings', () => {
+    const explanation = { referenceValue: 130, contributions: [{ key: 'age', value: 3 }, { key: 'sex', value: 1.2 }], method: 'exact_baseline_shapley' };
+    const parsed = parsePrediction({ ...prediction, explanation, warnings: ['OUT_OF_DISTRIBUTION'] });
+    expect(parsed.explanation).toEqual(explanation);
+    expect(parsed.warnings).toEqual(['OUT_OF_DISTRIBUTION']);
+  });
+  it.each([
+    { explanation: { referenceValue: 100, contributions: [{ key: 'age', value: 3 }] } },
+    { explanation: { referenceValue: 130, contributions: [] } },
+    { explanation: { referenceValue: 130, contributions: [{ key: 'age', value: 2.1 }, { key: 'age', value: 2.1 }] } },
+    { explanation: { referenceValue: 130, contributions: [{ key: '', value: 4.2 }] } },
+    { warnings: ['SOMETHING_NEW'] },
+    { warnings: 'OUT_OF_DISTRIBUTION' },
+  ])('rejects a malformed explanation or warning %j', (extra) => {
+    expect(() => parsePrediction({ ...prediction, ...extra })).toThrow();
+  });
   it.each([{ demo: 'false' }, { demo: null }, { predictionType: 'future_forecast' }, { predictionType: null }])(
     'rejects malformed or unsupported prediction semantics %j', (semantics) => {
       expect(() => parsePrediction({ ...prediction, ...semantics })).toThrow();

@@ -47,7 +47,9 @@ describe('PDF report', () => {
   it('includes the calibrated interval for a trained estimate', () => {
     const pdf = createReportPdf({ ...report, demo: false, model: { ...model, predictionType: 'estimated_current_measurement' },
       result: { predictedValue: 125.3, unit: model.unit, predictionType: 'estimated_current_measurement', demo: false,
-        interval: { lower: 99.8, upper: 150.8, level: 0.9, measuredCoverage: 0.913 } } }, assets, date);
+        interval: { lower: 99.8, upper: 150.8, level: 0.9, measuredCoverage: 0.913 },
+        explanation: { referenceValue: 122.7, contributions: [{ key: 'age', value: 1.4 }, { key: 'sex', value: 1.2 }] },
+        warnings: ['OUT_OF_DISTRIBUTION'] } }, assets, date);
     const data = pdf.output();
     expect(data).toMatch(/^%PDF-/);
     expect(pdf.getNumberOfPages()).toBeGreaterThanOrEqual(1);

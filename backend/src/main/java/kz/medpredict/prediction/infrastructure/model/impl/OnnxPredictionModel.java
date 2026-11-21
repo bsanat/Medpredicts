@@ -14,11 +14,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.Map;
 import kz.medpredict.core.exception.ModelUnavailableException;
 import kz.medpredict.core.exception.ServiceValidationException;
 import kz.medpredict.prediction.infrastructure.model.ModelArtifactMetadata;
+import kz.medpredict.prediction.infrastructure.model.ModelOodCalibration;
 import kz.medpredict.prediction.infrastructure.model.PredictionModel;
 import kz.medpredict.prediction.model.dto.PredictionModelInfoResponse;
 import kz.medpredict.prediction.model.dto.PredictionModelStatusResponse;
@@ -97,26 +100,54 @@ public final class OnnxPredictionModel implements PredictionModel, AutoCloseable
     public PredictionResultResponse predict(Map<String, Object> input) {
         requireReady();
         var validated = inputValidator.validate(objectMapper.valueToTree(input), metadata.info());
-        float[][] features = new float[1][5];
-        for (int index = 0; index < ModelArtifactMetadata.FEATURE_ORDER.size(); index++) {
+        int width = ModelArtifactMetadata.FEATURE_ORDER.size();
+        float[] features = new float[width];
+        for (int index = 0; index < width; index++) {
             String key = ModelArtifactMetadata.FEATURE_ORDER.get(index);
-            features[0][index] = "sex".equals(key) ? ("male".equals(validated.get(key)) ? 0 : 1)
+            features[index] = "sex".equals(key) ? ("male".equals(validated.get(key)) ? 0 : 1)
                     : ((Number) validated.get(key)).floatValue();
         }
-        try (var tensor = OnnxTensor.createTensor(OrtEnvironment.getEnvironment(), features);
+        var explanation = metadata.explanation();
+        // With an explanation reference all 2^5 coalitions run in one batch; the last row is the input itself.
+        float[][] batch = explanation == null ? new float[][]{features} : ShapleyExplainer.coalitions(features, explanation.reference());
+        float[] outputs = run(batch);
+        double estimate = outputs[outputs.length - 1];
+        var interval = metadata.interval() == null ? null : metadata.interval().around(estimate);
+        var contributions = explanation == null ? null : ShapleyExplainer.explain(outputs, ModelArtifactMetadata.FEATURE_ORDER);
+        List<String> warnings = new ArrayList<>();
+        if (metadata.outOfDistribution() != null && metadata.outOfDistribution().isOutOfDistribution(toDouble(features))) {
+            warnings.add(ModelOodCalibration.WARNING);
+        }
+        return new PredictionResultResponse(estimate, metadata.info().getUnit(), metadata.info().getModelVersion(),
+                metadata.disclaimer(), ModelArtifactMetadata.PREDICTION_TYPE, false, interval, contributions, warnings);
+    }
+
+    private float[] run(float[][] batch) {
+        try (var tensor = OnnxTensor.createTensor(OrtEnvironment.getEnvironment(), batch);
                 var result = session.run(Map.of("features", tensor))) {
             Object value = result.get("predictedValue").orElseThrow(ModelUnavailableException::new).getValue();
-            if (!(value instanceof float[][] values) || values.length != 1 || values[0].length != 1
-                    || !Float.isFinite(values[0][0])) {
+            if (!(value instanceof float[][] values) || values.length != batch.length) {
                 throw new ModelUnavailableException();
             }
-            double estimate = values[0][0];
-            var interval = metadata.interval() == null ? null : metadata.interval().around(estimate);
-            return new PredictionResultResponse(estimate, metadata.info().getUnit(), metadata.info().getModelVersion(),
-                    metadata.disclaimer(), ModelArtifactMetadata.PREDICTION_TYPE, false, interval);
+            float[] outputs = new float[values.length];
+            for (int i = 0; i < values.length; i++) {
+                if (values[i].length != 1 || !Float.isFinite(values[i][0])) {
+                    throw new ModelUnavailableException();
+                }
+                outputs[i] = values[i][0];
+            }
+            return outputs;
         } catch (OrtException exception) {
             throw new ModelUnavailableException();
         }
+    }
+
+    private static double[] toDouble(float[] values) {
+        double[] result = new double[values.length];
+        for (int i = 0; i < values.length; i++) {
+            result[i] = values[i];
+        }
+        return result;
     }
 
     private void requireReady() {

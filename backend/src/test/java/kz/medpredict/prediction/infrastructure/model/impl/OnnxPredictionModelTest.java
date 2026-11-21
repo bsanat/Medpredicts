@@ -88,6 +88,29 @@ class OnnxPredictionModelTest {
     }
 
     @Test
+    void affineGraphGetsExactShapleyContributionsAndOodWarning() throws Exception {
+        fixture("synthetic-affine.onnx", ModelArtifactMetadataTest.EXPLANATION);
+        try (var model = createModel()) {
+            var result = model.predict(VALID);
+            assertThat(result.getPredictedValue()).isCloseTo(286.1, org.assertj.core.data.Offset.offset(0.0001));
+            var explanation = result.getExplanation();
+            // affine graph sum(features * [1..5]) + 100 against reference (40, 0.5, 25, 5, 6)
+            assertThat(explanation.getReferenceValue()).isCloseTo(40 + 1 + 75 + 20 + 30 + 100, org.assertj.core.data.Offset.offset(1e-4));
+            double[] expected = {1 * (52 - 40), 2 * (0 - 0.5), 3 * (27.4 - 25), 4 * (5.6 - 5), 5 * (5.9 - 6)};
+            for (int i = 0; i < expected.length; i++) {
+                assertThat(explanation.getContributions().get(i).getKey()).isEqualTo(
+                        kz.medpredict.prediction.infrastructure.model.ModelArtifactMetadata.FEATURE_ORDER.get(i));
+                assertThat(explanation.getContributions().get(i).getValue()).isCloseTo(expected[i], org.assertj.core.data.Offset.offset(1e-3));
+            }
+            assertThat(result.getWarnings()).isEmpty();           // d2 = 144+0.25+5.76+0.36+0.01 < 200
+            var atypical = new HashMap<>(VALID);
+            atypical.put("age", 18);
+            atypical.put("glucose", 20.0);
+            assertThat(model.predict(atypical).getWarnings()).containsExactly("OUT_OF_DISTRIBUTION");
+        }
+    }
+
+    @Test
     void rejectsWrongInputAndOutputTensorShapesAtStartup() throws Exception {
         for (String name : new String[]{"wrong-input-shape.onnx", "wrong-output-shape.onnx"}) {
             fixture(name);
@@ -109,12 +132,17 @@ class OnnxPredictionModelTest {
     }
 
     private void fixture(String name) throws Exception {
+        fixture(name, "");
+    }
+
+    private void fixture(String name, String extraMetadata) throws Exception {
         byte[] bytes;
         try (var resource = getClass().getResourceAsStream("/onnx/" + name)) {
             bytes = resource.readAllBytes();
         }
         Files.write(directory.resolve("model.onnx"), bytes);
-        var metadata = (com.fasterxml.jackson.databind.node.ObjectNode) mapper.readTree(ModelArtifactMetadataTest.METADATA);
+        var metadata = (com.fasterxml.jackson.databind.node.ObjectNode) mapper.readTree(
+                ModelArtifactMetadataTest.METADATA.replace("{\"schemaVersion\"", "{" + extraMetadata + "\"schemaVersion\""));
         metadata.put("sha256", HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)));
         Files.write(directory.resolve("metadata.json"), mapper.writeValueAsBytes(metadata));
     }

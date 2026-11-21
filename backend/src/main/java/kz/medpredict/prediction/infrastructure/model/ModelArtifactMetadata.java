@@ -11,7 +11,7 @@ import kz.medpredict.prediction.validation.ModelMetadataValidator;
 
 /** Metadata is the input domain of the trained artifact, not a set of clinical normal ranges. */
 public record ModelArtifactMetadata(PredictionModelInfoResponse info, String sha256, String disclaimer,
-        ModelIntervalCalibration interval) {
+        ModelIntervalCalibration interval, ModelExplanationCalibration explanation, ModelOodCalibration outOfDistribution) {
     public static final List<String> FEATURE_ORDER = List.of("age", "sex", "bmi", "totalCholesterol", "glucose");
     public static final String PREDICTION_TYPE = "estimated_current_measurement";
     private static final Map<String, String> UNITS = Map.of(
@@ -66,7 +66,8 @@ public record ModelArtifactMetadata(PredictionModelInfoResponse info, String sha
         var info = new PredictionModelInfoResponse(text(root, "indicatorName"), text(root, "unit"),
                 root.path("decimalPlaces").intValue(), version, definitions, PREDICTION_TYPE, false);
         validator.validate(info);
-        return new ModelArtifactMetadata(info, hash, text(root, "disclaimer"), ModelIntervalCalibration.read(root));
+        return new ModelArtifactMetadata(info, hash, text(root, "disclaimer"), ModelIntervalCalibration.read(root),
+                ModelExplanationCalibration.read(root), ModelOodCalibration.read(root));
     }
 
     private static String text(JsonNode node, String key) {

@@ -8,6 +8,7 @@ import { Icon } from './Icon';
 import type { Report } from '../pdf/report';
 import { isDemoResponse } from '../config/indicator';
 import { UnavailableNotice } from './UnavailableNotice';
+import { ContributionChart } from './ContributionChart';
 
 function PdfDownload({ report, copy }: { report: Report; copy: Copy }) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
@@ -79,12 +80,17 @@ export function ResultPanel({ state, copy, language, model, demo, onEdit, onCanc
         {estimated && <p className="result-tag">{copy.estimateResult}</p>}
         <h3 tabIndex={-1} ref={heading}>{model.indicatorName}</h3>
         <p className="prediction-value"><span>{formatPrediction(state.result.predictedValue, model.decimalPlaces, language)}</span><span className="prediction-unit">{demo ? model.unit : state.result.unit}</span></p>
+        {estimated && state.result.warnings?.includes('OUT_OF_DISTRIBUTION') && <div className="ood-warning" role="note">
+          <Icon name="info" /><p>{copy.oodWarning}</p>
+        </div>}
         {estimated && state.result.interval && <div className="prediction-interval">
           <p className="interval-range">{copy.intervalRange(Math.round(state.result.interval.level * 100),
             formatPrediction(state.result.interval.lower, model.decimalPlaces, language),
             formatPrediction(state.result.interval.upper, model.decimalPlaces, language), state.result.unit)}</p>
           <p className="interval-note">{copy.intervalNote(Math.round(state.result.interval.measuredCoverage * 100))}</p>
         </div>}
+        {estimated && state.result.explanation && <ContributionChart explanation={state.result.explanation} model={model}
+          unit={state.result.unit} copy={copy} language={language} />}
         {state.result.modelVersion && <p className="model-version">{example ? copy.demoVersion : copy.modelVersion}: {state.result.modelVersion}</p>}
         {example && <p className="demo-explanation">{copy.demoExplanation}</p>}
         {estimated && <p className="demo-explanation">{copy.estimateExplanation}</p>}

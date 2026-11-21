@@ -3,13 +3,12 @@ package kz.medpredict.prediction.model.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode
-@AllArgsConstructor
 @Schema(description = "A finite prediction with the version actually used and an educational disclaimer.")
 public final class PredictionResultResponse {
     @Schema(description = "Finite numeric output; the demo profile always returns 134.2.")
@@ -32,6 +31,12 @@ public final class PredictionResultResponse {
     @Schema(description = "Optional calibrated interval; absent for demo and for bundles without an approved calibration.")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final PredictionIntervalResponse interval;
+    @Schema(description = "Optional per-input contributions; absent for demo and bundles without an explanation reference.")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final PredictionExplanationResponse explanation;
+    @Schema(description = "Machine-readable warning codes, e.g. OUT_OF_DISTRIBUTION for an atypical combination of inputs.")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private final List<String> warnings;
 
     public PredictionResultResponse(double predictedValue, String unit, String modelVersion, String disclaimer) {
         this(predictedValue, unit, modelVersion, disclaimer, null, null, null);
@@ -40,5 +45,24 @@ public final class PredictionResultResponse {
     public PredictionResultResponse(double predictedValue, String unit, String modelVersion, String disclaimer,
             String predictionType, Boolean demo) {
         this(predictedValue, unit, modelVersion, disclaimer, predictionType, demo, null);
+    }
+
+    public PredictionResultResponse(double predictedValue, String unit, String modelVersion, String disclaimer,
+            String predictionType, Boolean demo, PredictionIntervalResponse interval) {
+        this(predictedValue, unit, modelVersion, disclaimer, predictionType, demo, interval, null, List.of());
+    }
+
+    public PredictionResultResponse(double predictedValue, String unit, String modelVersion, String disclaimer,
+            String predictionType, Boolean demo, PredictionIntervalResponse interval,
+            PredictionExplanationResponse explanation, List<String> warnings) {
+        this.predictedValue = predictedValue;
+        this.unit = unit;
+        this.modelVersion = modelVersion;
+        this.disclaimer = disclaimer;
+        this.predictionType = predictionType;
+        this.demo = demo;
+        this.interval = interval;
+        this.explanation = explanation;
+        this.warnings = warnings == null ? List.of() : List.copyOf(warnings);
     }
 }
