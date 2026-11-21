@@ -1,0 +1,10 @@
+{
+  "experiment": "MedPredict-SBP-v2",
+  "scope": "Separate workspace; same public source files and frozen config; repeated prepare/train only; no repeated test evaluation",
+  "cohort_and_split_csv_identical": true,
+  "validation_metrics_identical": true,
+  "mlp_state_dict_tensors_identical": true,
+  "dataset_sha256": "8b7d69e4c428708d6f0eb0d4f9f8e9df6a8b5c67c1abf8d51aa79075eba8b42c",
+  "test_evaluated_in_reproduction": false,
+  "platform_scope": "same local CPU/package versions; cross-platform identity not asserted"
+}

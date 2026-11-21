@@ -1,0 +1,15 @@
+{
+  "experiment": "MedPredict-SBP-v2",
+  "unit_tests_passed": 16,
+  "unit_tests_failed": 0,
+  "warnings": [
+    "2 PyTorch legacy ONNX exporter deprecation warnings; exported graph passes parity checks"
+  ],
+  "coverage_percent_rounded": 90,
+  "coverage_scope": "Combined synthetic unit tests and actual corrected prepare/train/evaluate/export/verify execution; not unit-only coverage",
+  "test_command": "COVERAGE_FILE=ml/.coverage ml/.venv/bin/python -m pytest ml/tests --cov=medpredict_ml --cov-append --cov-report=term-missing",
+  "frozen_training_source_checksums_match_current_files": true,
+  "actual_pipeline_completed": true,
+  "same_machine_training_reproduced_without_reopening_test": true,
+  "clinical_validation": false
+}
