@@ -8,7 +8,7 @@ from pathlib import Path
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="MedPredict reproducible NHANES research pipeline")
-    parser.add_argument("command", choices=["download", "prepare", "train", "evaluate", "export", "verify", "download-external", "evaluate-external", "package-interval"])
+    parser.add_argument("command", choices=["download", "prepare", "train", "evaluate", "export", "verify", "download-external", "evaluate-external", "package-interval", "explain-ood"])
     parser.add_argument("--workspace", type=Path, help="Separate output workspace for an exact reproduction, preserving the original frozen experiment")
     arguments = parser.parse_args()
     if arguments.workspace:
@@ -32,6 +32,9 @@ def main() -> None:
             if arguments.command == "train":
                 from .training import train
                 train()
+            elif arguments.command == "explain-ood":
+                from .explain import explain_ood
+                explain_ood()
             elif arguments.command in ["download-external", "evaluate-external", "package-interval"]:
                 from . import external
                 getattr(external, arguments.command.replace("-", "_"))()

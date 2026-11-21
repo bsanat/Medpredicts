@@ -1,0 +1,43 @@
+{
+  "method": "exact_baseline_shapley",
+  "reference": {
+    "age": 46.309855453010485,
+    "sex": 0.5004941876561839,
+    "bmi": 29.882474254027297,
+    "totalCholesterol": 4.8013678028584845,
+    "glucose": 6.079894118118758
+  },
+  "reference_prediction": 122.73094940185547,
+  "validation_n": 497,
+  "max_additivity_error_mmhg": 5.329070518200751e-15,
+  "mean_abs_phi_validation": {
+    "age": 4.818331707059578,
+    "sex": 2.622729678189171,
+    "bmi": 1.241115303986189,
+    "totalCholesterol": 0.7422239519780632,
+    "glucose": 0.9875863528747354
+  },
+  "signed_summary_validation": {
+    "age": {
+      "mean_phi": 0.5509739722924134,
+      "corr_with_feature": 0.9781168153892136
+    },
+    "sex": {
+      "mean_phi": -0.9622550562673731,
+      "corr_with_feature": -0.9146804199688812
+    },
+    "bmi": {
+      "mean_phi": -0.7501001190451628,
+      "corr_with_feature": 0.7532367320950603
+    },
+    "totalCholesterol": {
+      "mean_phi": -0.38257609289976513,
+      "corr_with_feature": 0.48898692130711396
+    },
+    "glucose": {
+      "mean_phi": -0.44973594261287125,
+      "corr_with_feature": 0.6896666557801322
+    }
+  },
+  "interpretation": "Model behaviour relative to the weighted average training participant; not causal effects."
+}

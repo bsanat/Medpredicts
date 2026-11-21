@@ -1,0 +1,115 @@
+{
+  "absoluteTolerance": 0.01,
+  "referencePrediction": 122.73094940185547,
+  "source": "Synthetic inputs, not observations; expected values from Python ONNX Runtime",
+  "cases": [
+    {
+      "input": {
+        "age": 52,
+        "sex": "male",
+        "bmi": 27.4,
+        "totalCholesterol": 5.6,
+        "glucose": 5.9
+      },
+      "contributions": {
+        "age": 1.4326179504394532,
+        "sex": 1.5979183197021485,
+        "bmi": -0.45103378295898433,
+        "totalCholesterol": 0.09561042785644526,
+        "glucose": -0.11327667236328123
+      },
+      "mahalanobisSquared": 1.9018171695316954,
+      "outOfDistribution": false
+    },
+    {
+      "input": {
+        "age": 35,
+        "sex": "female",
+        "bmi": 23.5,
+        "totalCholesterol": 4.5,
+        "glucose": 4.8
+      },
+      "contributions": {
+        "age": -4.5817818959554035,
+        "sex": -5.360099029541017,
+        "bmi": -2.4008965810139973,
+        "totalCholesterol": 0.11528981526692705,
+        "glucose": -2.6830576578776038
+      },
+      "mahalanobisSquared": 2.5479992533612976,
+      "outOfDistribution": false
+    },
+    {
+      "input": {
+        "age": 70,
+        "sex": "male",
+        "bmi": 30.0,
+        "totalCholesterol": 6.1,
+        "glucose": 6.4
+      },
+      "contributions": {
+        "age": 7.769476699829102,
+        "sex": 1.472210693359375,
+        "bmi": 0.019130833943684897,
+        "totalCholesterol": 0.9176261901855469,
+        "glucose": 0.21351572672526042
+      },
+      "mahalanobisSquared": 4.197857231098875,
+      "outOfDistribution": false
+    },
+    {
+      "input": {
+        "age": 45,
+        "sex": "female",
+        "bmi": 26.0,
+        "totalCholesterol": 5.0,
+        "glucose": 5.2
+      },
+      "contributions": {
+        "age": -0.7039396921793619,
+        "sex": -5.017046229044596,
+        "bmi": -1.2928037007649742,
+        "totalCholesterol": -0.32769482930501304,
+        "glucose": -2.6197811126708985
+      },
+      "mahalanobisSquared": 1.500456558435395,
+      "outOfDistribution": false
+    },
+    {
+      "input": {
+        "age": 22,
+        "sex": "female",
+        "bmi": 45.0,
+        "totalCholesterol": 9.5,
+        "glucose": 15.0
+      },
+      "contributions": {
+        "age": -6.168390019734701,
+        "sex": -2.1215690612792972,
+        "bmi": 2.718923187255859,
+        "totalCholesterol": 10.905821736653646,
+        "glucose": 4.676177597045899
+      },
+      "mahalanobisSquared": 49.2943642426302,
+      "outOfDistribution": true
+    },
+    {
+      "input": {
+        "age": 79,
+        "sex": "male",
+        "bmi": 17.0,
+        "totalCholesterol": 2.5,
+        "glucose": 4.0
+      },
+      "contributions": {
+        "age": 10.432688903808593,
+        "sex": 0.9298603057861325,
+        "bmi": -3.791068522135416,
+        "totalCholesterol": -1.6753859202067058,
+        "glucose": -1.8095087687174483
+      },
+      "mahalanobisSquared": 14.875851886273841,
+      "outOfDistribution": false
+    }
+  ]
+}
