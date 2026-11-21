@@ -1,0 +1,49 @@
+{
+  "dataset": "NHANES-August-2021-August-2023",
+  "checked_at_utc": "2026-11-21T23:02:21.663135+00:00",
+  "files": [
+    {
+      "name": "DEMO_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DEMO_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DEMO_L.htm",
+      "bytes": 2582160,
+      "sha256": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23"
+    },
+    {
+      "name": "BMX_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BMX_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BMX_L.htm",
+      "bytes": 1563200,
+      "sha256": "44440c416d9ad709e8b1708a5975378ab4d5b18edc39eb5015c2ae7186500170"
+    },
+    {
+      "name": "TCHOL_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/TCHOL_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/TCHOL_L.htm",
+      "bytes": 259520,
+      "sha256": "5c3312e555bb0706fd97cbd63fcbc9e78f00bda8d2d149732d9dd368169b25d3"
+    },
+    {
+      "name": "GLU_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/GLU_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/GLU_L.htm",
+      "bytes": 129200,
+      "sha256": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201"
+    },
+    {
+      "name": "BPXO_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPXO_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPXO_L.htm",
+      "bytes": 696720,
+      "sha256": "189aa9bed689d2c69cf8d780b01de85073276fea5694dd52cdf696229f9054a6"
+    },
+    {
+      "name": "BPQ_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPQ_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPQ_L.htm",
+      "bytes": 409680,
+      "sha256": "0acde3af0526c375942fe0735e3bf69a0422bcbc606f98a478209d2f47baa4b5"
+    }
+  ],
+  "terms": "https://www.cdc.gov/nchs/policy/data-user-agreement.html"
+}

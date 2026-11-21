@@ -1,0 +1,104 @@
+{
+  "raw_table_counts": {
+    "P_DEMO": 11933,
+    "P_BMX": 8860,
+    "P_TCHOL": 8068,
+    "P_GLU": 3996,
+    "P_BPXO": 7801,
+    "P_BPQ": 8501
+  },
+  "merged_participants": 11933,
+  "missing_after_merge": {
+    "age": 0,
+    "sex": 0,
+    "bmi": 3462,
+    "totalCholesterol": 5043,
+    "glucose": 8261,
+    "weight": 7937
+  },
+  "attrition": [
+    {
+      "step": "demographics and one-to-one left joins",
+      "remaining": 11933,
+      "excluded": 0
+    },
+    {
+      "step": "age 18–79; exclude topcoded 80+",
+      "remaining": 7628,
+      "excluded": 4305
+    },
+    {
+      "step": "positive official fasting subsample weight",
+      "remaining": 2901,
+      "excluded": 4727
+    },
+    {
+      "step": "documented sex category",
+      "remaining": 2901,
+      "excluded": 0
+    },
+    {
+      "step": "at least two valid paired SBP readings",
+      "remaining": 2807,
+      "excluded": 94
+    },
+    {
+      "step": "five observed finite features; no target or feature imputation",
+      "remaining": 2683,
+      "excluded": 124
+    },
+    {
+      "step": "positive measured BMI and SI laboratory values",
+      "remaining": 2683,
+      "excluded": 0
+    },
+    {
+      "step": "available survey design variables",
+      "remaining": 2683,
+      "excluded": 0
+    }
+  ],
+  "invalid_sbp_readings": 0,
+  "target_definition": "Mean of >=2 valid oscillometric systolic readings at the same examination",
+  "external_overlap_with_v2": 0,
+  "outside_training_bounds_by_feature": {
+    "age": 0,
+    "bmi": 1,
+    "totalCholesterol": 1,
+    "glucose": 1
+  },
+  "api_accepted": 2680,
+  "all_eligible": 2683,
+  "distribution_shift": {
+    "age": {
+      "train_mean": 47.74010327022375,
+      "external_mean": 51.77636973537086,
+      "standardized_mean_difference": 0.23845809214650163
+    },
+    "sex": {
+      "train_mean": 0.5176419965576592,
+      "external_mean": 0.5493850167722698,
+      "standardized_mean_difference": 0.06364857280044076
+    },
+    "bmi": {
+      "train_mean": 30.123063683304647,
+      "external_mean": 29.598509131569145,
+      "standardized_mean_difference": -0.07099652353189354
+    },
+    "totalCholesterol": {
+      "train_mean": 4.757216006884682,
+      "external_mean": 4.859034662691017,
+      "standardized_mean_difference": 0.09311752378196506
+    },
+    "glucose": {
+      "train_mean": 6.255486230636833,
+      "external_mean": 6.044252702199031,
+      "standardized_mean_difference": -0.1075633911949711
+    },
+    "target": {
+      "train_mean": 122.60800344234079,
+      "external_mean": 120.72692259908065,
+      "standardized_mean_difference": -0.10709468826501177
+    }
+  }
+}

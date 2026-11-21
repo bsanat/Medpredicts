@@ -77,7 +77,7 @@
   ],
   "researchOnly": true,
   "qualityStatus": "experimental",
-  "disclaimer": "На внутренней тестовой выборке NHANES взвешенная MAE составляет 11.2 мм рт. ст. Эта средняя ошибка не является интервалом для отдельного результата. Высокие значения давления могут существенно недооцениваться.",
+  "disclaimer": "Исследовательская оценка текущего САД, не диагноз. Взвешенная MAE: 11.2 мм рт. ст. на внутренней выборке NHANES 2017–2020 и 10.5 на независимой NHANES 2021–2023. Интервал 90% накрыл фактическое значение у 91% участников внешней проверки, но при фактическом САД ≥150 мм рт. ст. оценка систематически занижена и интервал часто не содержит истинное значение.",
   "selection": {
     "family": "mlp",
     "split": "validation",
@@ -98,5 +98,29 @@
     "onnx": "1.19.1",
     "onnxruntime": "1.23.2",
     "skl2onnx": "1.19.1"
+  },
+  "predictionInterval": {
+    "method": "split_symmetric_absolute_residual",
+    "level": 0.9,
+    "lowerOffset": -25.534446716308594,
+    "upperOffset": 25.534446716308594,
+    "calibrationDataset": "NHANES 2017–March 2020 internal test split",
+    "calibrationN": 497,
+    "externalDataset": "NHANES-August-2021-August-2023",
+    "externalN": 2680,
+    "externalCoverage": 0.9126865671641791,
+    "externalCoverage95": [
+      0.9013995601620725,
+      0.9227921940416303
+    ],
+    "protocol": "protocols/m2-external-v3.md",
+    "note": "Marginal coverage averaged over a cohort; not a personal guarantee. Coverage is poor when the true SBP is >=150 mmHg."
+  },
+  "externalValidation": {
+    "dataset": "NHANES-August-2021-August-2023",
+    "n": 2680,
+    "weightedMae": 10.522876966544878,
+    "transferAcceptable": true,
+    "nnSuperiorityOverRidge": false
   }
 }

@@ -1,0 +1,808 @@
+{
+  "alpha": 0.1,
+  "calibration_n": 497,
+  "methods": {
+    "split_symmetric_absolute_residual": {
+      "lower_offset": -25.534446716308594,
+      "upper_offset": 25.534446716308594,
+      "calibration": {
+        "n": 497,
+        "covered": 449,
+        "coverage": 0.903420523138833,
+        "coverage_95_wilson": [
+          0.8742725489188375,
+          0.9263800186535301
+        ],
+        "mean_width": 51.06889343261719,
+        "below_lower": 0.014084507042253521,
+        "above_upper": 0.08249496981891348,
+        "weighted_coverage": 0.932677790481343
+      },
+      "external": {
+        "api_accepted": {
+          "n": 2680,
+          "covered": 2446,
+          "coverage": 0.9126865671641791,
+          "coverage_95_wilson": [
+            0.9013995601620725,
+            0.9227921940416303
+          ],
+          "mean_width": 51.06889343261719,
+          "below_lower": 0.03246268656716418,
+          "above_upper": 0.054850746268656714,
+          "weighted_coverage": 0.9351749171692355,
+          "by_group": {
+            "sex": {
+              "female": {
+                "n": 1473,
+                "covered": 1340,
+                "coverage": 0.9097080787508486,
+                "coverage_95_wilson": [
+                  0.8939866304367234,
+                  0.9232981178627315
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.034623217922606926,
+                "above_upper": 0.055668703326544465,
+                "weighted_coverage": 0.9264448927708903,
+                "small_group_caution": false
+              },
+              "male": {
+                "n": 1207,
+                "covered": 1106,
+                "coverage": 0.9163214581607291,
+                "coverage_95_wilson": [
+                  0.8993480331096321,
+                  0.9306532793070453
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.029826014913007456,
+                "above_upper": 0.053852526926263466,
+                "weighted_coverage": 0.9438102374110087,
+                "small_group_caution": false
+              }
+            },
+            "age": {
+              "[18, 40)": {
+                "n": 740,
+                "covered": 726,
+                "coverage": 0.981081081081081,
+                "coverage_95_wilson": [
+                  0.9684957132968292,
+                  0.9886975050951866
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.002702702702702703,
+                "above_upper": 0.016216216216216217,
+                "weighted_coverage": 0.9833894277906938,
+                "small_group_caution": false
+              },
+              "[40, 60)": {
+                "n": 797,
+                "covered": 730,
+                "coverage": 0.9159347553324969,
+                "coverage_95_wilson": [
+                  0.8946180071373692,
+                  0.9332612099627943
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.026348808030112924,
+                "above_upper": 0.05771643663739021,
+                "weighted_coverage": 0.9312500330153524,
+                "small_group_caution": false
+              },
+              "[60, 80)": {
+                "n": 1143,
+                "covered": 990,
+                "coverage": 0.8661417322834646,
+                "coverage_95_wilson": [
+                  0.845170497483903,
+                  0.884660111200635
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.05599300087489064,
+                "above_upper": 0.0778652668416448,
+                "weighted_coverage": 0.8705600539683458,
+                "small_group_caution": false
+              }
+            },
+            "target_range_research_bins": {
+              "[0, 110)": {
+                "n": 707,
+                "covered": 620,
+                "coverage": 0.8769448373408769,
+                "coverage_95_wilson": [
+                  0.8506731020478602,
+                  0.8991424768560794
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.12305516265912306,
+                "above_upper": 0.0,
+                "weighted_coverage": 0.9237260769219826,
+                "small_group_caution": false
+              },
+              "[110, 130)": {
+                "n": 1294,
+                "covered": 1294,
+                "coverage": 1.0,
+                "coverage_95_wilson": [
+                  0.9970401169919422,
+                  1.0
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0,
+                "above_upper": 0.0,
+                "weighted_coverage": 1.0,
+                "small_group_caution": false
+              },
+              "[130, 150)": {
+                "n": 520,
+                "covered": 491,
+                "coverage": 0.9442307692307692,
+                "coverage_95_wilson": [
+                  0.9210539298737037,
+                  0.9608923005499759
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0,
+                "above_upper": 0.05576923076923077,
+                "weighted_coverage": 0.9481277908762766,
+                "small_group_caution": false
+              },
+              "[150, 1000)": {
+                "n": 159,
+                "covered": 41,
+                "coverage": 0.2578616352201258,
+                "coverage_95_wilson": [
+                  0.19614185388061986,
+                  0.33100559045584055
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0,
+                "above_upper": 0.7421383647798742,
+                "weighted_coverage": 0.21427193975177194,
+                "small_group_caution": false
+              }
+            },
+            "medication_descriptive": {
+              "no": {
+                "n": 170,
+                "covered": 145,
+                "coverage": 0.8529411764705882,
+                "coverage_95_wilson": [
+                  0.7919201760444781,
+                  0.8983639527946585
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0058823529411764705,
+                "above_upper": 0.1411764705882353,
+                "weighted_coverage": 0.8493857494072928,
+                "small_group_caution": false
+              },
+              "unknown": {
+                "n": 1747,
+                "covered": 1657,
+                "coverage": 0.9484831139095592,
+                "coverage_95_wilson": [
+                  0.937098315111698,
+                  0.9578999110562143
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.025186033199771037,
+                "above_upper": 0.02633085289066972,
+                "weighted_coverage": 0.9636155170312739,
+                "small_group_caution": false
+              },
+              "yes": {
+                "n": 763,
+                "covered": 644,
+                "coverage": 0.8440366972477065,
+                "coverage_95_wilson": [
+                  0.8165759562940123,
+                  0.8680505645071641
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.05504587155963303,
+                "above_upper": 0.10091743119266056,
+                "weighted_coverage": 0.8665986352202997,
+                "small_group_caution": false
+              }
+            }
+          }
+        },
+        "all_eligible": {
+          "n": 2683,
+          "covered": 2449,
+          "coverage": 0.9127841967946329,
+          "coverage_95_wilson": [
+            0.9015090838684782,
+            0.9228789695011635
+          ],
+          "mean_width": 51.06889343261719,
+          "below_lower": 0.03242638837122624,
+          "above_upper": 0.05478941483414089,
+          "weighted_coverage": 0.9352321891089985,
+          "by_group": {
+            "sex": {
+              "female": {
+                "n": 1474,
+                "covered": 1341,
+                "coverage": 0.9097693351424695,
+                "coverage_95_wilson": [
+                  0.8940578765091406,
+                  0.9233505083621555
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.03459972862957938,
+                "above_upper": 0.05563093622795115,
+                "weighted_coverage": 0.9265239549460798,
+                "small_group_caution": false
+              },
+              "male": {
+                "n": 1209,
+                "covered": 1108,
+                "coverage": 0.9164598842018197,
+                "coverage_95_wilson": [
+                  0.8995128420483229,
+                  0.930768801629029
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.02977667493796526,
+                "above_upper": 0.053763440860215055,
+                "weighted_coverage": 0.9438492388686425,
+                "small_group_caution": false
+              }
+            },
+            "age": {
+              "[18, 40)": {
+                "n": 741,
+                "covered": 727,
+                "coverage": 0.9811066126855601,
+                "coverage_95_wilson": [
+                  0.9685378872533155,
+                  0.9887128021361826
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.002699055330634278,
+                "above_upper": 0.016194331983805668,
+                "weighted_coverage": 0.9833944554288735,
+                "small_group_caution": false
+              },
+              "[40, 60)": {
+                "n": 798,
+                "covered": 731,
+                "coverage": 0.9160401002506265,
+                "coverage_95_wilson": [
+                  0.8947483395039922,
+                  0.9333455344725315
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.02631578947368421,
+                "above_upper": 0.05764411027568922,
+                "weighted_coverage": 0.9312965833158994,
+                "small_group_caution": false
+              },
+              "[60, 80)": {
+                "n": 1144,
+                "covered": 991,
+                "coverage": 0.8662587412587412,
+                "coverage_95_wilson": [
+                  0.8453040621257879,
+                  0.8847619182550983
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.055944055944055944,
+                "above_upper": 0.0777972027972028,
+                "weighted_coverage": 0.8708165538255926,
+                "small_group_caution": false
+              }
+            },
+            "target_range_research_bins": {
+              "[0, 110)": {
+                "n": 708,
+                "covered": 621,
+                "coverage": 0.8771186440677966,
+                "coverage_95_wilson": [
+                  0.8508805092445154,
+                  0.8992865305331549
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.1228813559322034,
+                "above_upper": 0.0,
+                "weighted_coverage": 0.9237584246314736,
+                "small_group_caution": false
+              },
+              "[110, 130)": {
+                "n": 1295,
+                "covered": 1295,
+                "coverage": 1.0,
+                "coverage_95_wilson": [
+                  0.9970423958559155,
+                  0.9999999999999999
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0,
+                "above_upper": 0.0,
+                "weighted_coverage": 1.0,
+                "small_group_caution": false
+              },
+              "[130, 150)": {
+                "n": 521,
+                "covered": 492,
+                "coverage": 0.944337811900192,
+                "coverage_95_wilson": [
+                  0.9212032600609754,
+                  0.9609679026114408
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0,
+                "above_upper": 0.05566218809980806,
+                "weighted_coverage": 0.9482967271019533,
+                "small_group_caution": false
+              },
+              "[150, 1000)": {
+                "n": 159,
+                "covered": 41,
+                "coverage": 0.2578616352201258,
+                "coverage_95_wilson": [
+                  0.19614185388061986,
+                  0.33100559045584055
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0,
+                "above_upper": 0.7421383647798742,
+                "weighted_coverage": 0.21427193975177194,
+                "small_group_caution": false
+              }
+            },
+            "medication_descriptive": {
+              "no": {
+                "n": 170,
+                "covered": 145,
+                "coverage": 0.8529411764705882,
+                "coverage_95_wilson": [
+                  0.7919201760444781,
+                  0.8983639527946585
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.0058823529411764705,
+                "above_upper": 0.1411764705882353,
+                "weighted_coverage": 0.8493857494072928,
+                "small_group_caution": false
+              },
+              "unknown": {
+                "n": 1748,
+                "covered": 1658,
+                "coverage": 0.948512585812357,
+                "coverage_95_wilson": [
+                  0.9371340614489414,
+                  0.9579241026621566
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.02517162471395881,
+                "above_upper": 0.02631578947368421,
+                "weighted_coverage": 0.9636214787385736,
+                "small_group_caution": false
+              },
+              "yes": {
+                "n": 765,
+                "covered": 646,
+                "coverage": 0.8444444444444444,
+                "coverage_95_wilson": [
+                  0.8170469591835123,
+                  0.8683999478638942
+                ],
+                "mean_width": 51.06889343261719,
+                "below_lower": 0.054901960784313725,
+                "above_upper": 0.10065359477124183,
+                "weighted_coverage": 0.867072192602404,
+                "small_group_caution": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "split_asymmetric_signed_residual": {
+      "lower_offset": -19.159952799479186,
+      "upper_offset": 31.174580891927093,
+      "calibration": {
+        "n": 497,
+        "covered": 451,
+        "coverage": 0.9074446680080482,
+        "coverage_95_wilson": [
+          0.8787468920542671,
+          0.9298922347956302
+        ],
+        "mean_width": 50.334533691406264,
+        "below_lower": 0.04627766599597585,
+        "above_upper": 0.04627766599597585,
+        "weighted_coverage": 0.9263702758272353
+      },
+      "external": {
+        "api_accepted": {
+          "n": 2680,
+          "covered": 2360,
+          "coverage": 0.8805970149253731,
+          "coverage_95_wilson": [
+            0.8677723895956253,
+            0.8923321215144802
+          ],
+          "mean_width": 50.33453369140627,
+          "below_lower": 0.08955223880597014,
+          "above_upper": 0.029850746268656716,
+          "weighted_coverage": 0.9038572183200241,
+          "by_group": {
+            "sex": {
+              "female": {
+                "n": 1473,
+                "covered": 1291,
+                "coverage": 0.8764426340801086,
+                "coverage_95_wilson": [
+                  0.8586516229338823,
+                  0.8922752916179781
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.0943652410047522,
+                "above_upper": 0.029192124915139173,
+                "weighted_coverage": 0.8909330162756045,
+                "small_group_caution": false
+              },
+              "male": {
+                "n": 1207,
+                "covered": 1069,
+                "coverage": 0.8856669428334715,
+                "coverage_95_wilson": [
+                  0.8664780660950102,
+                  0.902408721825315
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.08367854183927093,
+                "above_upper": 0.030654515327257662,
+                "weighted_coverage": 0.916641217359488,
+                "small_group_caution": false
+              }
+            },
+            "age": {
+              "[18, 40)": {
+                "n": 740,
+                "covered": 715,
+                "coverage": 0.9662162162162162,
+                "coverage_95_wilson": [
+                  0.9506034339419942,
+                  0.9770135894997065
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.022972972972972974,
+                "above_upper": 0.010810810810810811,
+                "weighted_coverage": 0.9634747603599824,
+                "small_group_caution": false
+              },
+              "[40, 60)": {
+                "n": 797,
+                "covered": 706,
+                "coverage": 0.8858218318695107,
+                "coverage_95_wilson": [
+                  0.8618673179770423,
+                  0.9060749422289917
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.08281053952321205,
+                "above_upper": 0.03136762860727729,
+                "weighted_coverage": 0.8983776158215643,
+                "small_group_caution": false
+              },
+              "[60, 80)": {
+                "n": 1143,
+                "covered": 939,
+                "coverage": 0.821522309711286,
+                "coverage_95_wilson": [
+                  0.7982577419755273,
+                  0.842632935901576
+                ],
+                "mean_width": 50.33453369140628,
+                "below_lower": 0.1373578302712161,
+                "above_upper": 0.04111986001749781,
+                "weighted_coverage": 0.8247545288406872,
+                "small_group_caution": false
+              }
+            },
+            "target_range_research_bins": {
+              "[0, 110)": {
+                "n": 707,
+                "covered": 483,
+                "coverage": 0.6831683168316832,
+                "coverage_95_wilson": [
+                  0.6479630506172346,
+                  0.7163938629589764
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.31683168316831684,
+                "above_upper": 0.0,
+                "weighted_coverage": 0.7633443142035616,
+                "small_group_caution": false
+              },
+              "[110, 130)": {
+                "n": 1294,
+                "covered": 1278,
+                "coverage": 0.9876352395672334,
+                "coverage_95_wilson": [
+                  0.9800089394464283,
+                  0.992374853168588
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.012364760432766615,
+                "above_upper": 0.0,
+                "weighted_coverage": 0.9920521849029463,
+                "small_group_caution": false
+              },
+              "[130, 150)": {
+                "n": 520,
+                "covered": 509,
+                "coverage": 0.9788461538461538,
+                "coverage_95_wilson": [
+                  0.9625215588758329,
+                  0.9881477544380035
+                ],
+                "mean_width": 50.334533691406264,
+                "below_lower": 0.0,
+                "above_upper": 0.021153846153846155,
+                "weighted_coverage": 0.9780511656820698,
+                "small_group_caution": false
+              },
+              "[150, 1000)": {
+                "n": 159,
+                "covered": 90,
+                "coverage": 0.5660377358490566,
+                "coverage_95_wilson": [
+                  0.48834123861816936,
+                  0.6406185492900687
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.0,
+                "above_upper": 0.4339622641509434,
+                "weighted_coverage": 0.4909939865613317,
+                "small_group_caution": false
+              }
+            },
+            "medication_descriptive": {
+              "no": {
+                "n": 170,
+                "covered": 149,
+                "coverage": 0.8764705882352941,
+                "coverage_95_wilson": [
+                  0.8185360241483027,
+                  0.917767046613443
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.01764705882352941,
+                "above_upper": 0.10588235294117647,
+                "weighted_coverage": 0.8748041504616874,
+                "small_group_caution": false
+              },
+              "unknown": {
+                "n": 1747,
+                "covered": 1589,
+                "coverage": 0.909559244419004,
+                "coverage_95_wilson": [
+                  0.8951961025530362,
+                  0.9221251875849874
+                ],
+                "mean_width": 50.334533691406264,
+                "below_lower": 0.07842014882655982,
+                "above_upper": 0.012020606754436176,
+                "weighted_coverage": 0.926029732084374,
+                "small_group_caution": false
+              },
+              "yes": {
+                "n": 763,
+                "covered": 622,
+                "coverage": 0.8152031454783748,
+                "coverage_95_wilson": [
+                  0.7861077412465572,
+                  0.8411405568589013
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.1310615989515072,
+                "above_upper": 0.053735255570117955,
+                "weighted_coverage": 0.8387481293777419,
+                "small_group_caution": false
+              }
+            }
+          }
+        },
+        "all_eligible": {
+          "n": 2683,
+          "covered": 2363,
+          "coverage": 0.8807305255311219,
+          "coverage_95_wilson": [
+            0.8679191020213042,
+            0.8924532650370156
+          ],
+          "mean_width": 50.33453369140627,
+          "below_lower": 0.0894521058516586,
+          "above_upper": 0.02981736861721953,
+          "weighted_coverage": 0.9039421589535042,
+          "by_group": {
+            "sex": {
+              "female": {
+                "n": 1474,
+                "covered": 1292,
+                "coverage": 0.8765264586160109,
+                "coverage_95_wilson": [
+                  0.8587464695041912,
+                  0.8923489834818507
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.09430122116689281,
+                "above_upper": 0.029172320217096336,
+                "weighted_coverage": 0.891050249100074,
+                "small_group_caution": false
+              },
+              "male": {
+                "n": 1209,
+                "covered": 1071,
+                "coverage": 0.8858560794044665,
+                "coverage_95_wilson": [
+                  0.866696346376463,
+                  0.9025715518866646
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.08354011579818031,
+                "above_upper": 0.030603804797353185,
+                "weighted_coverage": 0.9166990769032871,
+                "small_group_caution": false
+              }
+            },
+            "age": {
+              "[18, 40)": {
+                "n": 741,
+                "covered": 716,
+                "coverage": 0.9662618083670715,
+                "coverage_95_wilson": [
+                  0.9506694529397686,
+                  0.9770447495400956
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.022941970310391364,
+                "above_upper": 0.010796221322537112,
+                "weighted_coverage": 0.9634858157099742,
+                "small_group_caution": false
+              },
+              "[40, 60)": {
+                "n": 798,
+                "covered": 707,
+                "coverage": 0.8859649122807017,
+                "coverage_95_wilson": [
+                  0.8620378254489541,
+                  0.9061938407702307
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.08270676691729323,
+                "above_upper": 0.03132832080200501,
+                "weighted_coverage": 0.8984464238913468,
+                "small_group_caution": false
+              },
+              "[60, 80)": {
+                "n": 1144,
+                "covered": 940,
+                "coverage": 0.8216783216783217,
+                "coverage_95_wilson": [
+                  0.7984314070717566,
+                  0.8427721270097854
+                ],
+                "mean_width": 50.33453369140628,
+                "below_lower": 0.13723776223776224,
+                "above_upper": 0.04108391608391608,
+                "weighted_coverage": 0.8251017975140269,
+                "small_group_caution": false
+              }
+            },
+            "target_range_research_bins": {
+              "[0, 110)": {
+                "n": 708,
+                "covered": 484,
+                "coverage": 0.6836158192090396,
+                "coverage_95_wilson": [
+                  0.6484464757718016,
+                  0.7168033937828695
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.3163841807909605,
+                "above_upper": 0.0,
+                "weighted_coverage": 0.7634446796897544,
+                "small_group_caution": false
+              },
+              "[110, 130)": {
+                "n": 1295,
+                "covered": 1279,
+                "coverage": 0.9876447876447877,
+                "coverage_95_wilson": [
+                  0.9800243027487989,
+                  0.9923807520512176
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.012355212355212355,
+                "above_upper": 0.0,
+                "weighted_coverage": 0.9920557622044486,
+                "small_group_caution": false
+              },
+              "[130, 150)": {
+                "n": 521,
+                "covered": 510,
+                "coverage": 0.9788867562380038,
+                "coverage_95_wilson": [
+                  0.9625927244329074,
+                  0.9881705804775368
+                ],
+                "mean_width": 50.334533691406264,
+                "below_lower": 0.0,
+                "above_upper": 0.02111324376199616,
+                "weighted_coverage": 0.9781226481442653,
+                "small_group_caution": false
+              },
+              "[150, 1000)": {
+                "n": 159,
+                "covered": 90,
+                "coverage": 0.5660377358490566,
+                "coverage_95_wilson": [
+                  0.48834123861816936,
+                  0.6406185492900687
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.0,
+                "above_upper": 0.4339622641509434,
+                "weighted_coverage": 0.4909939865613317,
+                "small_group_caution": false
+              }
+            },
+            "medication_descriptive": {
+              "no": {
+                "n": 170,
+                "covered": 149,
+                "coverage": 0.8764705882352941,
+                "coverage_95_wilson": [
+                  0.8185360241483027,
+                  0.917767046613443
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.01764705882352941,
+                "above_upper": 0.10588235294117647,
+                "weighted_coverage": 0.8748041504616874,
+                "small_group_caution": false
+              },
+              "unknown": {
+                "n": 1748,
+                "covered": 1590,
+                "coverage": 0.9096109839816934,
+                "coverage_95_wilson": [
+                  0.8952555473476183,
+                  0.9221700208967007
+                ],
+                "mean_width": 50.334533691406264,
+                "below_lower": 0.07837528604118993,
+                "above_upper": 0.012013729977116704,
+                "weighted_coverage": 0.9260418523359266,
+                "small_group_caution": false
+              },
+              "yes": {
+                "n": 765,
+                "covered": 624,
+                "coverage": 0.8156862745098039,
+                "coverage_95_wilson": [
+                  0.7866560787158906,
+                  0.8415618645552617
+                ],
+                "mean_width": 50.33453369140627,
+                "below_lower": 0.13071895424836602,
+                "above_upper": 0.05359477124183006,
+                "weighted_coverage": 0.8393205524098257,
+                "small_group_caution": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
