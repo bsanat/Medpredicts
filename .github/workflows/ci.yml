@@ -1,0 +1,35 @@
+name: ml-ai CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - name: Install pinned dependencies (CPU torch)
+        run: |
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.lock
+          python -m pip install --no-deps -e .
+      - name: Unit tests
+        run: python -m pytest --cov=medpredict_ml --cov-report=term-missing
+      - name: Verify published bundle checksum
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          meta = json.loads(pathlib.Path("artifacts/metadata.json").read_text())
+          actual = hashlib.sha256(pathlib.Path("artifacts/model.onnx").read_bytes()).hexdigest()
+          assert actual == meta["sha256"], (actual, meta["sha256"])
+          print("model.onnx sha256 OK", actual)
+          PY
