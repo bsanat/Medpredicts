@@ -2,7 +2,7 @@
 
 Bundle **MedPredict-SBP-mlp-v2** находится в [`../artifacts/`](../artifacts/): `model.onnx`, `metadata.json`, `golden.json`. SHA-256 модели: `3a4be6a1746f4230a5dba7346e3948e56cabc400540c91b0fbcd7882299dbe2a`.
 
-Провайдер `OnnxPredictionModel` находится в [MedPredicts/backend](https://github.com/MedPredicts/backend) (ветка `feat/onnx-provider`, до слияния в `main`). Из корня backend:
+Провайдер `OnnxPredictionModel` находится в [`../../backend`](../../backend) монорепозитория. Из каталога `backend/` (bundle — `../ml-ai/artifacts`):
 
 ```sh
 export MEDPREDICT_MODEL_DIRECTORY=/absolute/path/to/ml-ai/artifacts

@@ -32,7 +32,7 @@
 
 ### Фаза 0 — Негіз (1–2 апта, 23.11 – 6.12)
 
-> **Статус (22.11.2026): локалда орындалды, commit/push жоқ.** Алидің `~/MedPredict/ml` workspace-і табылды және `ml-ai` (`feat/publish-m2-pipeline`) тармағына көшірілді. M2 CDC-ден таза жүктеуден толық қайталанды, test метрикалары дәл сәйкес келді (MLP weighted MAE 11,2254). `backend` (`feat/onnx-provider`) тармағына ONNX провайдер қосылды: 48 тест өтті, Python↔Java айырмасы 7,6·10⁻⁶. Нақты API тексерілді: `READY`, болжам 125,3, `demo:false`. Үш репоға CI қосылды (frontend `ci/github-actions`). Қалғаны: commit → push → PR → review (Али, Оралхан), GitHub Release, MLflow.
+> **Статус (22.11.2026): орындалды, монорепо [bsanat/Medpredicts](https://github.com/bsanat/Medpredicts)-ке жүктелді.** Алидің `~/MedPredict/ml` workspace-і `ml-ai/`-ге көшірілді. M2 CDC-ден таза жүктеуден толық қайталанды, test метрикалары дәл сәйкес келді (MLP weighted MAE 11,2254). `backend/`-ке ONNX провайдер қосылды: 48 тест өтті, Python↔Java айырмасы 7,6·10⁻⁶. Нақты API тексерілді: `READY`, болжам 125,3, `demo:false`. Үш бөлікке GitHub Actions CI қосылды (`.github/workflows/`). Қалғаны: Али мен Оралханның review-і, GitHub Release, MLflow.
 - **ml-ai**: `pyproject.toml`, `requirements.lock`, `src/medpredict_ml/` (data, features, train, evaluate, export), `configs/`, `tests/`, `Makefile`/CLI. Шикі деректер Git-ке кірмейді — NHANES жүктеу скрипті + манифест (SHA-256).
 - ONNX bundle → GitHub Release (model.onnx + metadata.json + model_card.md + SHA-256).
 - Тәжірибе журналы: MLflow (локал) немесе қарапайым `runs/*.json` — әр запуск: seed, версиялар, метрикалар.
