@@ -49,9 +49,17 @@ public class PredictionServiceImpl implements PredictionService {
     private void validatePrediction(PredictionResultResponse prediction, String expectedUnit) {
         if (prediction == null || !Double.isFinite(prediction.getPredictedValue())
                 || !expectedUnit.equals(prediction.getUnit())
-                || !beanValidator.validate(prediction).isEmpty()) {
+                || !beanValidator.validate(prediction).isEmpty() || !validInterval(prediction)) {
             throw new InvalidModelResponseException();
         }
+    }
+
+    private static boolean validInterval(PredictionResultResponse prediction) {
+        var interval = prediction.getInterval();
+        return interval == null || (Double.isFinite(interval.getLower()) && Double.isFinite(interval.getUpper())
+                && interval.getLower() <= prediction.getPredictedValue() && prediction.getPredictedValue() <= interval.getUpper()
+                && interval.getLevel() > 0 && interval.getLevel() < 1
+                && interval.getMeasuredCoverage() >= 0 && interval.getMeasuredCoverage() <= 1);
     }
 
 }

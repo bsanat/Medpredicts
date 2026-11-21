@@ -147,6 +147,11 @@ export function createReportPdf(report: Report, assets: ReportAssets, date: Date
   if (y + 35 > 275) nextPage();
   paragraph(copy.resultTitle, 12, true);
   paragraph(`${formatPrediction(result.predictedValue, model.decimalPlaces, language)} ${demo ? model.unit : result.unit}`, 22, true);
+  if (estimated && result.interval) {
+    paragraph(copy.intervalRange(Math.round(result.interval.level * 100), formatPrediction(result.interval.lower, model.decimalPlaces, language),
+      formatPrediction(result.interval.upper, model.decimalPlaces, language), result.unit), 11, true);
+    paragraph(copy.intervalNote(Math.round(result.interval.measuredCoverage * 100)), 9);
+  }
   if (result.modelVersion) paragraph(`${example ? copy.demoVersion : copy.modelVersion}: ${result.modelVersion}`, 9);
   y += 4;
   paragraph(estimated ? copy.estimateDisclaimer : `${copy.disclaimer}.`, 10);

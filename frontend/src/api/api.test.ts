@@ -20,6 +20,20 @@ describe('runtime contract', () => {
       .toMatchObject(semantics);
     expect(parsePrediction({ ...prediction, modelVersion: 'server-demo-v2', demo: true }).demo).toBe(true);
   });
+  it('accepts a calibrated interval that contains the estimate', () => {
+    const interval = { lower: 108.7, upper: 159.7, level: 0.9, measuredCoverage: 0.913, method: 'split_symmetric_absolute_residual' };
+    expect(parsePrediction({ ...prediction, interval }).interval).toEqual(interval);
+  });
+  it.each([
+    { lower: 140, upper: 160, level: 0.9, measuredCoverage: 0.9 },
+    { lower: 100, upper: Infinity, level: 0.9, measuredCoverage: 0.9 },
+    { lower: 100, upper: 160, level: 1, measuredCoverage: 0.9 },
+    { lower: 100, upper: 160, level: 0.9, measuredCoverage: 1.2 },
+    { lower: '100', upper: 160, level: 0.9, measuredCoverage: 0.9 },
+    null,
+  ])('rejects an inconsistent interval %j', (interval) => {
+    expect(() => parsePrediction({ ...prediction, interval })).toThrow();
+  });
   it.each([{ demo: 'false' }, { demo: null }, { predictionType: 'future_forecast' }, { predictionType: null }])(
     'rejects malformed or unsupported prediction semantics %j', (semantics) => {
       expect(() => parsePrediction({ ...prediction, ...semantics })).toThrow();

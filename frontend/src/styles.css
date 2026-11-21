@@ -138,6 +138,9 @@ h3 { font-size: 18px; line-height: 1.4; }
 .prediction-value { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin: 18px 0 12px; }
 .prediction-value > span:first-child { font-size: 60px; font-weight: 700; letter-spacing: -2px; line-height: 1.15; overflow-wrap: anywhere; }
 .prediction-unit { font-size: 16px; color: var(--text-muted); }
+.prediction-interval { margin: 0 0 14px; padding: 10px 14px; border-left: 3px solid var(--primary); background: var(--background); border-radius: 6px; }
+.prediction-interval .interval-range { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+.prediction-interval .interval-note { margin: 0; font-size: 13px; color: var(--text-muted); }
 .model-version { font-size: 12px; color: var(--text-muted); overflow-wrap: anywhere; }
 .demo-explanation { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin-top: 20px; }
 .result-disclaimer { display: flex; gap: 10px; padding: 18px 0; font-size: 13px; line-height: 1.5; color: var(--text-muted); }

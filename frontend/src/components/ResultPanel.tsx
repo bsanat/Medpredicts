@@ -79,6 +79,12 @@ export function ResultPanel({ state, copy, language, model, demo, onEdit, onCanc
         {estimated && <p className="result-tag">{copy.estimateResult}</p>}
         <h3 tabIndex={-1} ref={heading}>{model.indicatorName}</h3>
         <p className="prediction-value"><span>{formatPrediction(state.result.predictedValue, model.decimalPlaces, language)}</span><span className="prediction-unit">{demo ? model.unit : state.result.unit}</span></p>
+        {estimated && state.result.interval && <div className="prediction-interval">
+          <p className="interval-range">{copy.intervalRange(Math.round(state.result.interval.level * 100),
+            formatPrediction(state.result.interval.lower, model.decimalPlaces, language),
+            formatPrediction(state.result.interval.upper, model.decimalPlaces, language), state.result.unit)}</p>
+          <p className="interval-note">{copy.intervalNote(Math.round(state.result.interval.measuredCoverage * 100))}</p>
+        </div>}
         {state.result.modelVersion && <p className="model-version">{example ? copy.demoVersion : copy.modelVersion}: {state.result.modelVersion}</p>}
         {example && <p className="demo-explanation">{copy.demoExplanation}</p>}
         {estimated && <p className="demo-explanation">{copy.estimateExplanation}</p>}

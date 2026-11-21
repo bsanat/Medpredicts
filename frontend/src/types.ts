@@ -23,6 +23,16 @@ export type FormValues = Record<string, string>;
 export type FieldErrors = Record<string, string>;
 export type PredictionInput = Record<string, number | string>;
 
+export interface PredictionInterval {
+  lower: number;
+  upper: number;
+  /** Nominal level of the calibration, e.g. 0.9. */
+  level: number;
+  /** Coverage measured on the external validation cohort; marginal, not a personal guarantee. */
+  measuredCoverage: number;
+  method?: string;
+}
+
 export interface Prediction {
   predictedValue: number;
   unit: string;
@@ -30,6 +40,7 @@ export interface Prediction {
   disclaimer?: string;
   predictionType?: 'estimated_current_measurement';
   demo?: boolean;
+  interval?: PredictionInterval;
 }
 
 export interface PredictionApi {

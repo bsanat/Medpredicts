@@ -4,6 +4,7 @@ import kz.medpredict.core.exception.InputValidationException;
 import kz.medpredict.core.exception.InvalidModelResponseException;
 import kz.medpredict.prediction.infrastructure.model.PredictionModel;
 import kz.medpredict.prediction.model.dto.PredictionFieldResponse;
+import kz.medpredict.prediction.model.dto.PredictionIntervalResponse;
 import kz.medpredict.prediction.model.dto.PredictionModelInfoResponse;
 import kz.medpredict.prediction.model.dto.PredictionResultResponse;
 import kz.medpredict.prediction.service.PredictionService;
@@ -63,7 +64,13 @@ class PredictionServiceTest {
                 new PredictionResultResponse(Double.NaN, "units", "test-v1", "Test"),
                 new PredictionResultResponse(5, "wrong", "test-v1", "Test"),
                 new PredictionResultResponse(5, "units", "", "Test"),
-                new PredictionResultResponse(5, "units", "test-v1", ""))) {
+                new PredictionResultResponse(5, "units", "test-v1", ""),
+                new PredictionResultResponse(5, "units", "test-v1", "Test", null, false,
+                        new PredictionIntervalResponse(6, 9, 0.9, 0.91, "split")),
+                new PredictionResultResponse(5, "units", "test-v1", "Test", null, false,
+                        new PredictionIntervalResponse(1, Double.POSITIVE_INFINITY, 0.9, 0.91, "split")),
+                new PredictionResultResponse(5, "units", "test-v1", "Test", null, false,
+                        new PredictionIntervalResponse(1, 9, 1.0, 0.91, "split")))) {
             when(model.predict(anyMap())).thenReturn(result);
             assertThatThrownBy(() -> service.predict(new PredictionCreateRequest(body))).isInstanceOf(InvalidModelResponseException.class);
         }
@@ -74,7 +81,8 @@ class PredictionServiceTest {
     @Test
     void preservesVersionActuallyReturnedByModel() throws Exception {
         when(model.info()).thenReturn(metadata);
-        var result = new PredictionResultResponse(5, "units", "actual-v2", "Test");
+        var result = new PredictionResultResponse(5, "units", "actual-v2", "Test", null, false,
+                new PredictionIntervalResponse(1, 9, 0.9, 0.91, "split"));
         when(model.predict(anyMap())).thenReturn(result);
         assertThat(service.predict(new PredictionCreateRequest(mapper.readTree("{\"value\":5}")))).isEqualTo(result);
     }

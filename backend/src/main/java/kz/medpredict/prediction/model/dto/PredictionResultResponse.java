@@ -29,8 +29,16 @@ public final class PredictionResultResponse {
     @Schema(description = "True only for an explicitly selected fixed demo provider.")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final Boolean demo;
+    @Schema(description = "Optional calibrated interval; absent for demo and for bundles without an approved calibration.")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final PredictionIntervalResponse interval;
 
     public PredictionResultResponse(double predictedValue, String unit, String modelVersion, String disclaimer) {
-        this(predictedValue, unit, modelVersion, disclaimer, null, null);
+        this(predictedValue, unit, modelVersion, disclaimer, null, null, null);
+    }
+
+    public PredictionResultResponse(double predictedValue, String unit, String modelVersion, String disclaimer,
+            String predictionType, Boolean demo) {
+        this(predictedValue, unit, modelVersion, disclaimer, predictionType, demo, null);
     }
 }

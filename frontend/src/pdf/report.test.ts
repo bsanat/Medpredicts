@@ -44,6 +44,14 @@ describe('PDF report', () => {
     expect(() => createReportPdf({ ...report, demo: false, result: { predictedValue: 1, unit: 'wrong' } }, assets, date)).toThrow();
     expect(() => createReportPdf({ ...report, input: { sex: 'unknown' } }, assets, date)).toThrow();
   });
+  it('includes the calibrated interval for a trained estimate', () => {
+    const pdf = createReportPdf({ ...report, demo: false, model: { ...model, predictionType: 'estimated_current_measurement' },
+      result: { predictedValue: 125.3, unit: model.unit, predictionType: 'estimated_current_measurement', demo: false,
+        interval: { lower: 99.8, upper: 150.8, level: 0.9, measuredCoverage: 0.913 } } }, assets, date);
+    const data = pdf.output();
+    expect(data).toMatch(/^%PDF-/);
+    expect(pdf.getNumberOfPages()).toBeGreaterThanOrEqual(1);
+  });
   it('exports localized demo units while retaining the original response unit', () => {
     const pdf = createReportPdf({ ...report, result: { predictedValue: 134.2, unit: 'мм рт. ст.' } }, assets, date);
     expect(pdf.getNumberOfPages()).toBe(1);

@@ -1,4 +1,4 @@
-import type { FieldDefinition, ModelInfo, Prediction } from '../types';
+import type { FieldDefinition, ModelInfo, Prediction, PredictionInterval } from '../types';
 import { ru } from '../i18n/ru';
 import { ApiError } from './errors';
 
@@ -12,6 +12,14 @@ const validSemantics = (value: Record<string, unknown>) =>
   && (value.demo === undefined || typeof value.demo === 'boolean');
 const unexpected = () => new ApiError('unexpected', ru.apiErrors.unexpected);
 
+function parseInterval(value: unknown, estimate: number): PredictionInterval {
+  if (!record(value) || !finite(value.lower) || !finite(value.upper) || !finite(value.level) || !finite(value.measuredCoverage)
+    || value.lower > estimate || estimate > value.upper || value.level <= 0 || value.level >= 1
+    || value.measuredCoverage < 0 || value.measuredCoverage > 1 || !optionalText(value.method)) throw unexpected();
+  return { lower: value.lower, upper: value.upper, level: value.level, measuredCoverage: value.measuredCoverage,
+    ...(value.method === undefined ? {} : { method: value.method as string }) };
+}
+
 export function parsePrediction(value: unknown, expectedUnit?: string): Prediction {
   if (!record(value) || !finite(value.predictedValue) || !text(value.unit)
     || !optionalText(value.modelVersion) || !optionalText(value.disclaimer) || !validSemantics(value)
@@ -23,6 +31,7 @@ export function parsePrediction(value: unknown, expectedUnit?: string): Predicti
     ...(value.disclaimer === undefined ? {} : { disclaimer: value.disclaimer as string }),
     ...(value.predictionType === undefined ? {} : { predictionType: value.predictionType as Prediction['predictionType'] }),
     ...(value.demo === undefined ? {} : { demo: value.demo as boolean }),
+    ...(value.interval === undefined ? {} : { interval: parseInterval(value.interval, value.predictedValue) }),
   };
 }
 

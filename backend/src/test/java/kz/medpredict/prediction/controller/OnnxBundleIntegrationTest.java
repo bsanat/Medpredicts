@@ -67,8 +67,20 @@ class OnnxBundleIntegrationTest {
                     .andExpect(jsonPath("$.modelVersion").value(metadata.path("modelVersion").textValue()))
                     .andExpect(jsonPath("$.unit").value(metadata.path("unit").textValue()))
                     .andReturn().getResponse().getContentAsString();
-            double actual = mapper.readTree(response).path("predictedValue").doubleValue();
+            var body = mapper.readTree(response);
+            double actual = body.path("predictedValue").doubleValue();
             assertThat(Math.abs(actual - expected)).isLessThanOrEqualTo(tolerance);
+            var calibration = metadata.path("predictionInterval");
+            if (calibration.isObject()) {
+                assertThat(body.path("interval").path("lower").doubleValue())
+                        .isCloseTo(actual + calibration.path("lowerOffset").doubleValue(), org.assertj.core.data.Offset.offset(1e-6));
+                assertThat(body.path("interval").path("upper").doubleValue())
+                        .isCloseTo(actual + calibration.path("upperOffset").doubleValue(), org.assertj.core.data.Offset.offset(1e-6));
+                assertThat(body.path("interval").path("measuredCoverage").doubleValue())
+                        .isEqualTo(calibration.path("externalCoverage").doubleValue());
+            } else {
+                assertThat(body.has("interval")).isFalse();
+            }
             maximumError = Math.max(maximumError, Math.abs(actual - expected));
             distinctOutputs.add(actual);
         }

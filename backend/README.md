@@ -120,6 +120,7 @@ Expected demo result: `predictedValue` 134.2 and `modelVersion` `demo-example`, 
 - `POST /api/v1/predictions`: JSON object with `age`, `sex` (`male`/`female`), `bmi`, `totalCholesterol`, and `glucose` for the demo provider. Numeric strings, nulls, non-finite numbers, invalid categories, and missing required fields are rejected.
 - `200`: `predictedValue`, `unit`, `modelVersion`, `disclaimer`.
 - Both successful endpoints also provide optional `predictionType: estimated_current_measurement` and `demo`. Trained inference returns `demo: false`; the explicit demo provider returns `demo: true`.
+- Optional `interval` `{lower, upper, level, measuredCoverage, method}`: present only when the bundle metadata contains an approved `predictionInterval` calibration (split conformal, protocol `ml-ai/protocols/m2-external-v3.md`). Bounds are `prediction + lowerOffset/upperOffset`; the service rejects intervals that do not contain the estimate. Coverage is marginal over the external NHANES 2021–2023 cohort and poor for true SBP ≥150 mmHg.
 - `400` field errors: `{"error":"VALIDATION_ERROR","fields":[{"field":"age","message":"Обязательное поле"}]}`.
 - Malformed objects, duplicate keys, trailing JSON, or unknown keys: `400` `INVALID_REQUEST`, without echoing submitted values. Unknown field names cannot be returned in `fields` because the frontend rejects those responses.
 - Unavailable or invalid inference: `503` `MODEL_UNAVAILABLE`. No automatic fallback.

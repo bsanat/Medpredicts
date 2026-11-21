@@ -17,6 +17,8 @@ export const en: Copy = {
   estimateResult: 'Experimental trained-model estimate',
   estimateExplanation: 'The model estimates current systolic blood pressure. This is not an actual measurement of your blood pressure or a forecast of future values.',
   estimateDisclaimer: 'This research model is not a certified medical device. It is not intended for diagnosis or treatment, does not replace blood-pressure measurement with a monitor, and must not be used to change medications. Performance on NHANES does not establish applicability to Kazakhstan’s population.',
+  intervalRange: (level, lower, upper, unit) => `${level}% interval: ${lower}–${upper} ${unit}`,
+  intervalNote: (coverage) => `In independent validation (NHANES 2021–2023) this interval contained the measured value for ${coverage}% of participants. That is a group average, not a guarantee for an individual; when the measured pressure is ≥150 mmHg the interval often misses it.`,
   estimateAbout: 'MedPredict is a graduation research prototype. Trained on open NHANES data, the model estimates current systolic blood pressure using age, sex, BMI, total cholesterol, and fasting plasma glucose. It does not forecast future changes in blood pressure.',
   unconfigured: 'Mode not configured',
   hero: ['Predicting medical', 'measurements'],
@@ -147,9 +149,9 @@ export const en: Copy = {
       ["Studied population", "US participants aged 18–79 with complete data and positive fasting weights. Applicability to Kazakhstan’s population has not been established."],
       ["Model version", "MedPredict-SBP-mlp-v2"],
       ["Evaluation method", "PyTorch MLP 5 → 32 → 16 → 1. Five features: age, sex, BMI, total cholesterol, and fasting plasma glucose; both laboratory inputs in mmol/L. Preprocessing fitted on train only; selection used validation."],
-      ["Metrics", "Internal test, n=497: weighted MAE 11.225 mmHg for MLP and 11.268 for Ridge. A robust MLP advantage has not been established; average error is not an interval for an individual result."],
+      ["Metrics", "Internal test, n=497: weighted MAE 11.225 mmHg for MLP and 11.268 for Ridge. Independent NHANES 2021–2023 validation, n=2,680: MLP 10.523 (95% CI 10.20–10.89), Ridge 10.584. A robust MLP advantage over Ridge has not been established. The 90% conformal interval (±25.5 mmHg) covered 91.3% of measured values externally."],
       ["Ranges and categories", "API bounds describe training support, not clinical reference ranges. No diagnoses or risk categories are defined."],
-      ["Limitations", "At measured SBP ≥150 mmHg, all 42 of 42 test estimates were too low; weighted MAE was 41.366 mmHg. No clinical validation. The model is not intended for diagnosis, treatment, or changing medications."]
+      ["Limitations", "At measured SBP ≥150 mmHg the estimate is systematically too low: 42 of 42 internal test estimates (MAE 41.366); externally MAE 35.8 and the interval covered only 26% of such cases. No clinical validation. The model is not intended for diagnosis, treatment, or changing medications."]
     ],
     "modelRows": [
       [

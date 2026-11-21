@@ -110,8 +110,10 @@ public final class OnnxPredictionModel implements PredictionModel, AutoCloseable
                     || !Float.isFinite(values[0][0])) {
                 throw new ModelUnavailableException();
             }
-            return new PredictionResultResponse(values[0][0], metadata.info().getUnit(), metadata.info().getModelVersion(),
-                    metadata.disclaimer(), ModelArtifactMetadata.PREDICTION_TYPE, false);
+            double estimate = values[0][0];
+            var interval = metadata.interval() == null ? null : metadata.interval().around(estimate);
+            return new PredictionResultResponse(estimate, metadata.info().getUnit(), metadata.info().getModelVersion(),
+                    metadata.disclaimer(), ModelArtifactMetadata.PREDICTION_TYPE, false, interval);
         } catch (OrtException exception) {
             throw new ModelUnavailableException();
         }

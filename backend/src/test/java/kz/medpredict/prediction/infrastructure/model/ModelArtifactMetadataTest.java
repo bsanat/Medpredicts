@@ -69,6 +69,26 @@ public class ModelArtifactMetadataTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    private static final String INTERVAL = "\"predictionInterval\":{\"method\":\"split_symmetric_absolute_residual\","
+            + "\"level\":0.9,\"lowerOffset\":-25.5,\"upperOffset\":25.5,\"externalCoverage\":0.913},";
+
+    @Test
+    void intervalCalibrationIsOptionalAndValidated() throws Exception {
+        assertThat(read(METADATA, "").interval()).isNull();
+        var calibrated = read(METADATA.replace("{\"schemaVersion\"", "{" + INTERVAL + "\"schemaVersion\""), "");
+        assertThat(calibrated.interval().level()).isEqualTo(0.9);
+        var interval = calibrated.interval().around(120);
+        assertThat(interval.getLower()).isEqualTo(94.5);
+        assertThat(interval.getUpper()).isEqualTo(145.5);
+        assertThat(interval.getMeasuredCoverage()).isEqualTo(0.913);
+        for (String invalid : new String[]{INTERVAL.replace("0.9,", "1.5,"), INTERVAL.replace("-25.5", "3"),
+                INTERVAL.replace("0.913", "2"), INTERVAL.replace("split_symmetric_absolute_residual", "Bad Method"),
+                "\"predictionInterval\":\"wide\","}) {
+            assertThatThrownBy(() -> read(METADATA.replace("{\"schemaVersion\"", "{" + invalid + "\"schemaVersion\""), ""))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
+    }
+
     private ModelArtifactMetadata read(String value, String version) throws Exception {
         return ModelArtifactMetadata.read(mapper.readTree(value), validator, version);
     }
