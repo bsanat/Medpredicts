@@ -1,0 +1,339 @@
+{
+  "protocol_sha256": "c8adb36ebbf2d512ea047fc966e8ce4912192f59bc392a3543a722ff427e8561",
+  "split_manifest_sha256": "9e7e14dacc7fff40a7e844d8125d72b24115ff8f479e8feb0f82d44d17aefff9",
+  "grid_report_sha256": "4d1ed50e6a643721ab82f0327ba8482eaaf691897f80f738e0b73b62378ff570",
+  "scripts": {
+    "m2_v5_grid.py": "69fabbe6912f6add430fb53b2d5bc1c983ef535b85d02e020a6bf247dfc1245e",
+    "m2_v5_grid_outputs.py": "d2b090891aa099fd77d2e759d003ac9f65ba4c7e27789b3a28ede9cb110b296c",
+    "m2_v5_cv.py": "40b41dbfb4452854ef28ab508ddc21871dcc7ac3dfc81ae4a43ca2a9bd28bb87",
+    "m2_v5_audit.py": "c7a1cd6f9df7afa34031aa41b8a901f418d30d00528c447e2a7fae08a3fc8145"
+  },
+  "mlp_source_sha256": "deb0a21b4dc4e8a020e3b0a6511a1001f611c417791be9a147fa4ea7b509b752",
+  "baseline_onnx_sha256": "3a4be6a1746f4230a5dba7346e3948e56cabc400540c91b0fbcd7882299dbe2a",
+  "baseline_metadata_sha256": "deb1ae208c77d509dda608930263991fa280ed6685dcaa4ab8a685fbe9edc13f",
+  "python": "3.12.1",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.7.2",
+    "pyreadstat": "1.3.1",
+    "torch": "2.9.1",
+    "catboost": "1.2.8",
+    "tabm": "0.0.3",
+    "rtdl-num-embeddings": "0.0.12",
+    "joblib": "1.6.0"
+  },
+  "point": {
+    "family": "ridge",
+    "fields": [
+      "age",
+      "sex",
+      "bmi",
+      "totalCholesterol",
+      "hba1c",
+      "medication",
+      "bpq020",
+      "smoking",
+      "pad680"
+    ],
+    "weight": 2,
+    "alpha": 0.1,
+    "form": "deterministic"
+  },
+  "ridge_reference": {
+    "family": "ridge",
+    "fields": [
+      "age",
+      "sex",
+      "bmi",
+      "totalCholesterol",
+      "hba1c",
+      "medication",
+      "bpq020",
+      "smoking",
+      "pad680"
+    ],
+    "weight": 2,
+    "alpha": 0.1,
+    "form": "deterministic"
+  },
+  "point_base_5f": {
+    "family": "ridge",
+    "fields": [
+      "age",
+      "sex",
+      "bmi",
+      "totalCholesterol",
+      "hba1c"
+    ],
+    "weight": 2,
+    "alpha": 0.1,
+    "form": "deterministic"
+  },
+  "point_selection_deployment_candidate": true,
+  "deployment_blocking_risk_groups": [
+    "bpq020_no_ge150",
+    "bpq020_no_ge140"
+  ],
+  "feature_contract": {
+    "age": "years",
+    "sex": {
+      "male": 0,
+      "female": 1
+    },
+    "bmi": "kg/m^2",
+    "totalCholesterol": "mmol/L",
+    "hba1c": "percent",
+    "pad680": "minutes/day",
+    "categorical_encoding": "fixed one-hot categories after numeric fields",
+    "categories": {
+      "medication": [
+        "yes",
+        "no",
+        "unknown"
+      ],
+      "bpq020": [
+        "yes",
+        "no",
+        "unknown"
+      ],
+      "smoking": [
+        "never",
+        "former",
+        "current",
+        "unknown"
+      ]
+    }
+  },
+  "point_config": {
+    "mlp": {
+      "hidden": [
+        32,
+        16
+      ],
+      "dropout": 0.1,
+      "weight_decay": 0.05,
+      "learning_rate": 0.001
+    },
+    "settings": {
+      "max_epochs": 500,
+      "patience": 40,
+      "batch_size": 128
+    },
+    "tabm": {
+      "n_blocks": 2,
+      "d_block": 64,
+      "k": 8,
+      "dropout": 0.1,
+      "epochs": 80,
+      "lr": 0.003,
+      "weight_decay": 0.01,
+      "batch_size": 128,
+      "smooth_l1_beta_mmhg": 8
+    },
+    "catboost": {
+      "iterations": 400,
+      "depth": 4,
+      "learning_rate": 0.035,
+      "l2_leaf_reg": 5,
+      "loss_function": "MAE",
+      "task_type": "CPU"
+    },
+    "ridge_alphas": [
+      0.1,
+      1,
+      10,
+      100
+    ],
+    "seeds": [
+      2026,
+      2027,
+      2028,
+      2029,
+      2030
+    ],
+    "high_weights": [
+      1,
+      2
+    ]
+  },
+  "probability_config": {
+    "fields": [
+      "age",
+      "sex",
+      "bmi",
+      "totalCholesterol",
+      "hba1c",
+      "medication"
+    ],
+    "classifier": {
+      "max_leaf_nodes": 15,
+      "learning_rate": 0.05,
+      "l2_regularization": 10,
+      "max_iter": 200,
+      "early_stopping": false
+    },
+    "logistic_C": 1,
+    "platt_C": 1,
+    "event_sbp_gte": 140,
+    "calibration_min_specificity": 0.8
+  },
+  "cqr_config": {
+    "fields": [
+      "age",
+      "sex",
+      "bmi",
+      "totalCholesterol",
+      "hba1c",
+      "medication"
+    ],
+    "config": {
+      "n_estimators": 200,
+      "max_depth": 2,
+      "learning_rate": 0.05,
+      "min_samples_leaf": 20,
+      "loss": "quantile"
+    },
+    "quantiles": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "level": 0.9
+  },
+  "final": {
+    "artifacts": {
+      "point": {
+        "path": "data/processed/m2-v5/frozen/point.joblib",
+        "bytes": 1276,
+        "sha256": "5fa67a36d64e7c1d211155871dc9a4c9380dd7d3080e4a92759001a1956e2920"
+      },
+      "ridge_reference": {
+        "path": "data/processed/m2-v5/frozen/ridge_reference.joblib",
+        "bytes": 1276,
+        "sha256": "5fa67a36d64e7c1d211155871dc9a4c9380dd7d3080e4a92759001a1956e2920"
+      },
+      "point_base_5f": {
+        "path": "data/processed/m2-v5/frozen/point_base_5f.joblib",
+        "bytes": 948,
+        "sha256": "d7d5a3ccb2cb1250b5ffaea3f7e82de793bc955b0440180e2d916bb069a86ad5"
+      },
+      "probability": {
+        "path": "data/processed/m2-v5/frozen/probability.joblib",
+        "bytes": 1848598,
+        "sha256": "05f5223049b39d0faa4294b3099a2775059fe9903151c6d5fe657fd1b21ceaf7"
+      },
+      "cqr": {
+        "path": "data/processed/m2-v5/frozen/cqr.joblib",
+        "bytes": 2334831,
+        "sha256": "a5994df37f557a45b95198d4306273ca66248ca46e93d8c86ededa7d86ab797f"
+      }
+    },
+    "point_common_fit_rows": {
+      "n": 9709,
+      "high_n": 746,
+      "sha256": "6aa92e6dfdcb400081621b08f8398fa67e6d647cf3f0d9217c1c20788d30d58c",
+      "by_cycle_and_sbp_bin": {
+        "2017-2020:0": 1372,
+        "2017-2020:1": 3264,
+        "2017-2020:2": 447,
+        "2017-2020:3": 479,
+        "2021-2023:0": 1041,
+        "2021-2023:1": 2558,
+        "2021-2023:2": 281,
+        "2021-2023:3": 267
+      }
+    },
+    "point_mlp_fit_rows": {
+      "n": 8253,
+      "high_n": 634,
+      "sha256": "1f707248f7f1bc6d843059e17069f8e49eb38fa024946f16de9be9963fda0d42",
+      "by_cycle_and_sbp_bin": {
+        "2017-2020:0": 1166,
+        "2017-2020:1": 2775,
+        "2017-2020:2": 380,
+        "2017-2020:3": 407,
+        "2021-2023:0": 885,
+        "2021-2023:1": 2174,
+        "2021-2023:2": 239,
+        "2021-2023:3": 227
+      }
+    },
+    "point_mlp_early_stop_rows": {
+      "n": 1456,
+      "high_n": 112,
+      "sha256": "0907c781d25594a6ba6605f2e0ce3feb53fda82fc7be56039969514239b0c76b",
+      "by_cycle_and_sbp_bin": {
+        "2017-2020:0": 206,
+        "2017-2020:1": 489,
+        "2017-2020:2": 67,
+        "2017-2020:3": 72,
+        "2021-2023:0": 156,
+        "2021-2023:1": 384,
+        "2021-2023:2": 42,
+        "2021-2023:3": 40
+      }
+    },
+    "probability_and_quantile_fit_rows": {
+      "n": 9771,
+      "high_n": 754,
+      "sha256": "30addbd1c7390911c06aad6082b4e9335817ccefbe4415fa7531f5d35ded184e",
+      "by_cycle_and_sbp_bin": {
+        "2017-2020:0": 1379,
+        "2017-2020:1": 3285,
+        "2017-2020:2": 449,
+        "2017-2020:3": 484,
+        "2021-2023:0": 1050,
+        "2021-2023:1": 2571,
+        "2021-2023:2": 283,
+        "2021-2023:3": 270
+      }
+    },
+    "probability_calibration": {
+      "n": 1222,
+      "high_n": 94,
+      "sha256": "4d2e5eb9fb7abab9107d1b690b564ca8e9928b33e58ab4de1f677870b9bb22cb",
+      "by_cycle_and_sbp_bin": {
+        "2017-2020:0": 173,
+        "2017-2020:1": 411,
+        "2017-2020:2": 56,
+        "2017-2020:3": 60,
+        "2021-2023:0": 131,
+        "2021-2023:1": 322,
+        "2021-2023:2": 35,
+        "2021-2023:3": 34
+      }
+    },
+    "cqr_calibration": {
+      "n": 1213,
+      "high_n": 95,
+      "sha256": "4e812958683f6c4ddd2e8a0b7c8474351549a8e5eed17d0229bd4e42974c5c48",
+      "by_cycle_and_sbp_bin": {
+        "2017-2020:0": 170,
+        "2017-2020:1": 407,
+        "2017-2020:2": 56,
+        "2017-2020:3": 61,
+        "2021-2023:0": 131,
+        "2021-2023:1": 320,
+        "2021-2023:2": 34,
+        "2021-2023:3": 34
+      }
+    },
+    "probability_thresholds": {
+      "hist_gradient_boosting": 0.18638329428682002,
+      "logistic_same_inputs": 0.16581960531095505,
+      "logistic_age_only": 0.1721915309453559,
+      "constant": 1.0
+    },
+    "cqr_radius": 6.023057053774323,
+    "serialization_replay": {
+      "rows": 8,
+      "exact_prediction_agreement": true
+    }
+  },
+  "sealed_cycle_manifest_reference": {
+    "stage_b_sha256": "87a15d4985ffa614654b72be1c6ef25a46164cc2f0a67bf98bfe14ce888bcb3c",
+    "cycle": "2015-2016",
+    "records_opened": false
+  }
+}

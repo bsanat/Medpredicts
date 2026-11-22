@@ -13,7 +13,7 @@ from sklearn.ensemble import GradientBoostingRegressor, HistGradientBoostingClas
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score, roc_curve
 
-from m2_v5_cv import CATEGORIES, arm_folds, describe_ids, matrix, split_off
+from m2_v5_cv import CATEGORIES, arm_folds, describe_ids, hash_ids, matrix, split_off
 from m2_v5_grid import (A1C, BUNDLE, MANIFEST, NEW, OLD, PROB_FIELDS, PROTOCOL, REPORT, ROOT, SEED, SEEDS,
                         SPLITS, bundle_predict, descriptor, freeze_point,
                         point_matrix, point_job, subgroup_masks, weights)
@@ -360,8 +360,13 @@ def freeze_bundles(frame, splits, config, chosen, ridge, base_spec):
 def complete_stage_d(pool, frame, roles, folds, config, report, chosen, ridge, base_spec, selected, baseline):
     report["probability_and_cqr_cv"] = cv_outputs(pool, frame, folds, chosen, config, selected, baseline)
     write_json(REPORT, report)
-    report["exploratory_c3"] = diagnose_c3(pool, frame, roles, config)
-    write_json(REPORT, report)
+    finish_stage_d(pool, frame, roles, config, report, chosen, ridge, base_spec)
+
+
+def finish_stage_d(pool, frame, roles, config, report, chosen, ridge, base_spec):
+    if "exploratory_c3" not in report:
+        report["exploratory_c3"] = diagnose_c3(pool, frame, roles, config)
+        write_json(REPORT, report)
     print("Exploratory diagnosis complete; freezing local artifacts", flush=True)
     frozen = freeze_bundles(frame, read_json(SPLITS)["splits"], config, chosen, ridge, base_spec)
     report["final_freeze"] = {key: value for key, value in frozen.items() if key != "artifacts"}
