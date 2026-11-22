@@ -40,3 +40,14 @@ def test_oscillometric_target_ignores_a_fourth_reading():
     target, count = measurement_target(frame, auscultatory=False)
     assert count.tolist() == [2]
     assert target.tolist() == [121.]
+
+
+def test_zero_diastolic_sensitivity_changes_only_zero_readings():
+    frame = pd.DataFrame([[160, 140, 302, 150, 0, 82, 0, -1], [0, 140, 120, 130, 0, 80, 120, np.nan]],
+                         columns=bp_columns(auscultatory=True))
+    strict, strict_counts = measurement_target(frame, auscultatory=True)
+    relaxed, relaxed_counts = measurement_target(frame, auscultatory=True, allow_zero_diastolic=True)
+    np.testing.assert_array_equal(strict_counts, [1, 2])
+    np.testing.assert_array_equal(relaxed_counts, [2, 2])
+    np.testing.assert_allclose(strict, [np.nan, 135], equal_nan=True)
+    np.testing.assert_allclose(relaxed, [150, 135])

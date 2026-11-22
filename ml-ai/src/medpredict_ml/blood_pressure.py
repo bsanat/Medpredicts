@@ -19,11 +19,13 @@ def bp_columns(*, auscultatory: bool) -> list[str]:
     return [f"{prefix}{kind}{i}" for kind in ("SY", "DI") for i in range(1, readings + 1)]
 
 
-def measurement_target(frame: pd.DataFrame, *, auscultatory: bool) -> tuple[pd.Series, pd.Series]:
+def measurement_target(frame: pd.DataFrame, *, auscultatory: bool,
+                       allow_zero_diastolic: bool = False) -> tuple[pd.Series, pd.Series]:
     columns = bp_columns(auscultatory=auscultatory)
     systolic, diastolic = np.split(frame[columns].to_numpy(float), 2, axis=1)
     valid = np.isfinite(systolic) & (systolic > 0) & (systolic <= 300)
-    valid &= np.isnan(diastolic) | (np.isfinite(diastolic) & (diastolic > 0) & (systolic > diastolic))
+    positive_dbp = (diastolic > 0) | (allow_zero_diastolic & (diastolic == 0))
+    valid &= np.isnan(diastolic) | (np.isfinite(diastolic) & positive_dbp & (systolic > diastolic))
     n = valid.sum(axis=1)
     target = np.divide(np.where(valid, systolic, 0).sum(axis=1), n,
                        out=np.full(len(frame), np.nan), where=n >= 2)

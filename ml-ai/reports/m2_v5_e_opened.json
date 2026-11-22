@@ -1,0 +1,12 @@
+{
+  "cycle": "2015-2016",
+  "marked_at_utc": "2026-11-22T13:24:08.266915+00:00",
+  "authorized": "One external M2-v5 evaluation, confirmed by project owner",
+  "protocol_commit": "307e3a2ba7061232f974c03894e4c370da5f39ac",
+  "records_read_at_marker": false,
+  "manifest_sha256": "acc6f89ffe6649b6ec31277fd32c8a133951d4e72497cb9af0d63c501fe7b5e7",
+  "protocol_sha256": "466142d494c1f1cd09fc072e3ba8dc4c72c30ad1bc4cb47a849a8d20898aeb5a",
+  "runner_sha256": "76a16a45f8dd850be12aa320fde8d23db58988dde634418f5b3a88f6a26374d5",
+  "measurement_source_sha256": "7655a6781ca6159bc9570ffc62bb41c8beb777762f81e5fffb25b26f96241a5c",
+  "development_reference_sha256": "25e9b5f5400590899d023faba1d7e01dcdcd9fa586e35a96eb1075760cd2e4ad"
+}

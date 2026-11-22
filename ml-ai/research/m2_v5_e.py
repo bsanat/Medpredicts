@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -23,7 +23,8 @@ from medpredict_ml.metrics import regression_metrics
 from medpredict_ml.model import MLP, RawInputModel
 
 B_REPORT = ROOT / "reports/m2_v5_audit.json"
-LOG = ROOT / "reports/m2_v5_e_opened.json"
+MARKER = ROOT / "reports/m2_v5_e_opened.json"
+LOG = ROOT / "reports/m2_v5_e_attempts.json"
 DRY_REPORT = ROOT / "reports/m2_v5_e_dry_run.json"
 V2_ONNX = ROOT / "artifacts/model.onnx"
 V2_METADATA = ROOT / "artifacts/metadata.json"
@@ -62,15 +63,17 @@ def load_sealed(audit):
     return frame
 
 
-def prepare(raw, cycle, metadata):
+def prepare(raw, cycle, metadata, *, allow_zero_diastolic=False):
+    wide, fasting = {SEALED: ("WTMEC2YR", "WTSAF2YR"), OLD: ("WTMECPRP", "WTSAFPRP"),
+                     NEW: ("WTPH2YR", "WTSAF2YR")}[cycle]
     frame = raw.rename(columns={"RIDAGEYR": "age", "RIAGENDR": "sex", "BMXBMI": "bmi", "LBDTCSI": "totalCholesterol",
-                                "LBDGLUSI": "glucose", "LBXGH": "hba1c", "WTSAF2YR": "fasting_weight",
-                                "WTMEC2YR" if cycle == SEALED else "WTPH2YR": "wide_weight",
+                                "LBDGLUSI": "glucose", "LBXGH": "hba1c", fasting: "fasting_weight", wide: "wide_weight",
                                 "SDMVSTRA": "stratum", "SDMVPSU": "psu"}).copy()
-    frame["target"], _ = measurement_target(frame, auscultatory=cycle == SEALED)
+    frame["target"], _ = measurement_target(frame, auscultatory=cycle == SEALED,
+                                            allow_zero_diastolic=allow_zero_diastolic)
     frame["cycle"] = cycle
     # m2_v5_cv encodes the pre-pandemic route for OLD, the same route used by BPQ_I.
-    frame["medication"] = medication_status(frame, OLD if cycle == SEALED else NEW)
+    frame["medication"] = medication_status(frame, OLD if cycle == SEALED else cycle)
     frame["bpq020"] = frame.BPQ020.map({1: "yes", 2: "no"}).fillna("unknown")
     smoke = frame.SMQ040.where(frame.SMQ020.eq(1)).map({1: "current", 2: "current", 3: "former"})
     frame["smoking"] = smoke.mask(frame.SMQ020.eq(2), "never").fillna("unknown")
@@ -101,10 +104,10 @@ def prepare(raw, cycle, metadata):
         "source_rows_in_scope": n_source, "expanded_attrition": flow, "paired_exclusions": paired_flow}
 
 
-def load_verified():
+def load_verified(protocol_sha=None):
     frozen, audit = read_json(MANIFEST), read_json(B_REPORT)
     pre = frozen["pre_e"]
-    files = [(PROTOCOL, pre["protocol_sha256"]), (SPLITS, frozen["split_manifest_sha256"]),
+    files = [(PROTOCOL, protocol_sha or pre["protocol_sha256"]), (SPLITS, frozen["split_manifest_sha256"]),
              (REPORT, frozen["grid_report_sha256"]), (V2_ONNX, frozen["baseline_onnx_sha256"]),
              (V2_METADATA, frozen["baseline_metadata_sha256"]), (B_REPORT, frozen["sealed_cycle_manifest_reference"]["stage_b_sha256"]),
              (ROOT / "research/m2_v5_pre_e.py", pre["freeze_script_sha256"]),
@@ -135,7 +138,7 @@ def python_parity(checkpoint, rows, onnx):
             "max_absolute_difference": float(np.max(np.abs(scores - onnx))), "absolute_tolerance": .01}
 
 
-def predictions(frame, models):
+def point_predictions(frame, models):
     pairs = frame.loc[frame.paired]
     if pairs.empty:
         raise ValueError("No participants can be evaluated using v2")
@@ -148,6 +151,11 @@ def predictions(frame, models):
         bundle = models[filename]
         complete = frame[bundle["spec"]["fields"]].notna().all(axis=1)
         values.loc[complete, label] = bundle_predict(bundle, frame.loc[complete])
+    return values
+
+
+def predictions(frame, models):
+    values = point_predictions(frame, models)
     scores = probability_predict(models["probability"], frame)
     decisions = {name: estimate >= models["probability"]["thresholds"][name] for name, estimate in scores.items()}
     metadata = read_json(V2_METADATA)["predictionInterval"]
@@ -259,17 +267,16 @@ def bootstrapped(frame, values, probability, intervals):
                    if len(values) >= .95 * REPLICATES else None} for name, values in draws.items()}
 
 
-def gate(candidate, paired, cqr_full, probability, frozen):
+def gate(candidate, paired, cqr_full, probability):
     overall, tail = (paired[key]["models"] for key in ("overall", "sbp_ge150"))
     a, b = overall[candidate]["weighted_mae"], overall["v2"]["weighted_mae"]
     c, d = tail[candidate]["weighted_mae"], tail["v2"]["weighted_mae"]
     p, q = (probability[name]["roc_auc"] for name in (PROB_REGISTERED, PROB_UI))
     blockers = []
-    spec = frozen["point"] if candidate == "main" else frozen["pre_e"]["safe_point"]
     for label in (key for key in paired if "_no_ge" in key):
         measures = paired[label]["models"]
         current, base = [measures[key] for key in (candidate, f"{candidate}_base_5f")]
-        if "bpq020" in spec["fields"] and current["n"] and (
+        if current["n"] and (
                 current["weighted_mae"] > base["weighted_mae"] or
                 abs(current["weighted_mean_signed_error"]) > abs(base["weighted_mean_signed_error"])):
             blockers.append(label)
@@ -303,14 +310,63 @@ def evaluate(frame, values, scores, flags, intervals, frozen):
                        "point_paired": point_paired, "cqr_expanded": cqr_full,
                        "cqr_paired": interval_on(both, candidate, "fasting_weight"),
                        "v2_interval_paired": interval_on(both, "v2", "fasting_weight"),
-                       "gates": gate(candidate, point_paired, cqr_full, probability, frozen)})
+                       "gates": gate(candidate, point_paired, cqr_full, probability)})
     return {"candidate_order": ["main", "safe"], "candidates": result, "probability": probability,
             "probability_thresholds": frozen["pre_e"]["probability"]["thresholds"],
             "probability_auc_deltas": {
                 "registered_candidate_minus_same_fields_logistic": auc_difference(probability, PROB_REGISTERED, PROB_UI),
                 "interface_logistic_minus_age_logistic": auc_difference(probability, PROB_UI, PROB_AGE)},
             "paired_psu_bootstrap": {"seed": BOOTSTRAP_SEED, "replicates": REPLICATES,
-                                     "metrics": bootstrapped(frame, values, scores, intervals)}}
+                                     "metrics": bootstrapped(frame, values, scores, intervals)},
+            "defense_point": defense_point(frame, values)}
+
+
+def defense_point(frame, values):
+    common = frame.loc[frame.paired & values[["main", "safe"]].notna().all(axis=1)]
+    groups = point_summary(common, values, ("main", "safe", "v2"), "fasting_weight")
+    result = {}
+    for label, mask in point_groups(common).items():
+        if label.startswith("sbp_"):
+            rows = common.loc[mask]
+            result[label] = {**groups[label], "weighted_mean_sbp":
+                             float(np.average(rows.target, weights=rows.fasting_weight)) if len(rows) else None}
+    return result
+
+
+def zero_dbp_sensitivity(raw, models, metadata, registered):
+    _, strict = measurement_target(raw, auscultatory=True)
+    target, permissive = measurement_target(raw, auscultatory=True, allow_zero_diastolic=True)
+    excluded = permissive - strict
+    lost = (strict < 2) & (permissive >= 2)
+    frame, _ = prepare(raw, SEALED, metadata, allow_zero_diastolic=True)
+    eligible = raw.SEQN.isin(frame.index)
+    counts = {}
+    for scope, population in (("source", pd.Series(True, index=raw.index)), ("expanded_eligible", eligible)):
+        counts[scope] = {}
+        for label, mask in (("overall", population), ("ge150", population & target.ge(150))):
+            counts[scope][label] = {"excluded_readings": int(excluded[mask].sum()),
+                                    "participants_with_excluded_reading": int((mask & excluded.gt(0)).sum()),
+                                    "participants_lost_minimum_two_readings": int((mask & lost).sum())}
+    values = point_predictions(frame, models)
+    paired = {}
+    for strict_result in registered:
+        candidate = strict_result["candidate"]
+        rows = frame.loc[frame.paired & values[candidate].notna()]
+        paired[candidate] = {}
+        for label, subgroup in (("overall", rows), ("ge150", rows.loc[rows.target.ge(150)])):
+            y, weights = subgroup.target.to_numpy(), subgroup.fasting_weight.to_numpy()
+            metrics = [point_stats(y, values.loc[subgroup.index, model].to_numpy(), weights)["weighted_mae"]
+                       for model in (candidate, "v2")]
+            a, b = metrics
+            comparison = strict_result["point_paired"]["overall" if label == "overall" else "sbp_ge150"]
+            strict_a, strict_b = [comparison["models"][model]["weighted_mae"] for model in (candidate, "v2")]
+            paired[candidate][label] = {"n": len(subgroup), "mae": a, "v2_mae": b,
+                                         "delta_mae": a - b if a is not None and b is not None else None,
+                                         "reduction_pct": 100 * (1 - a / b) if a is not None and b else None,
+                                         "delta_n_vs_registered": len(subgroup) - comparison["n"],
+                                         "delta_mae_vs_registered": a - strict_a if a is not None and strict_a is not None else None,
+                                         "delta_v2_mae_vs_registered": b - strict_b if b is not None and strict_b is not None else None}
+    return {"descriptive_only": True, "flow": counts, "paired": paired}
 
 
 def auc_difference(metrics, a, b):
@@ -337,7 +393,8 @@ def measurement_comparison(reference, current):
             for model in (external["candidate"], "v2"):
                 a, b = [row["models"][model] for row in (dev[field][group], summary)]
                 old, new = a["weighted_mean_signed_error"], b["weighted_mean_signed_error"]
-                comparison.append({"candidate": external["candidate"], "group": group, "model": model,
+                comparison.append({"development_cycle": reference["cycle"], "candidate": external["candidate"],
+                                   "group": group, "model": model,
                                    "development_n": a["n"], "external_n": b["n"],
                                    "development_bias": old, "external_bias": new,
                                    "external_minus_development": new - old if old is not None and new is not None else None})
@@ -423,16 +480,29 @@ def render(report):
                       for name, item in m["paired_psu_bootstrap"]["metrics"].items()])
     section += ["## Метод измерения САД", "",
                 "В 2015–2016 САД измеряли аускультативно, в development — осциллометрически. "
-                "Разницу метода нельзя отделить от различий когорт. Development-ориентир получен на калибровочных частях." , "",
+                "Разницу метода нельзя отделить от различий когорт. Development-ориентир получен на калибровочных частях.", "",
                 "[Парное сравнение методов NCHS](https://stacks.cdc.gov/view/cdc/104185)", ""]
     if "measurement_comparison" in report:
-        section += table(["Кандидат", "Диапазон", "Модель", "n 2021–2023 / 2015–2016",
-                          "Bias 2021–2023", "Bias 2015–2016", "Δ bias"],
-                         [(row["candidate"], row["group"], row["model"],
+        section += table(["Цикл разработки", "Кандидат", "Диапазон", "Модель", "n development / E",
+                          "Bias development", "Bias 2015–2016", "Δ bias"],
+                         [(row["development_cycle"], row["candidate"], row["group"], row["model"],
                            f"{row['development_n']} / {row['external_n']}",
                            *[format_number(row[key]) for key in
                              ("development_bias", "external_bias", "external_minus_development")])
                           for row in report["measurement_comparison"]])
+    if sensitivity := report.get("zero_dbp_sensitivity"):
+        section += ["## ДАД=0. Описательный анализ чувствительности", "",
+                    "Срез ≥150 задан по САД, рассчитанному с допуском ДАД=0. Анализ чувствительности не меняет решение.", ""]
+        section += table(["Популяция", "Срез", "Исключено измерений", "Затронуто участников", "Потеряно из-за минимума двух"],
+                         [(population, group, *item.values()) for population, groups in sensitivity["flow"].items()
+                          for group, item in groups.items()])
+        section += table(["Кандидат", "Срез", "n (Δ к основной)", "MAE", "MAE v2", "ΔMAE к v2",
+                          "Снижение MAE, %", "ΔMAE к основной", "ΔMAE v2 к основной"],
+                         [(candidate, group, f"{item['n']} ({item['delta_n_vs_registered']:+d})",
+                           *(format_number(item[key]) for key in
+                           ("mae", "v2_mae", "delta_mae", "reduction_pct", "delta_mae_vs_registered",
+                            "delta_v2_mae_vs_registered")))
+                          for candidate, groups in sensitivity["paired"].items() for group, item in groups.items()])
     section += ["## Проверки артефактов", "", f"Синтетические эталоны: {report['probe_replay']['synthetic_n']}. "
                 "Хэши предсказаний совпали с заморозкой.",
                 f"Максимальное отклонение ONNX от архивных Python-эталонов: "
@@ -444,14 +514,44 @@ def render(report):
     return "\n".join(section)
 
 
-def fetch_rows(mode, audit):
+def fetch_rows(mode, audit, *, development_cycle=NEW):
     if mode == "sealed":
         return load_sealed(audit), SEALED
     from m2_v5_cv import development
     dev, _ = development()
     _, cqr, prob = final_sets(dev, read_json(SPLITS)["splits"])
-    raw, _ = load_development(NEW, audit["source_manifest"])
-    return raw.loc[raw.SEQN.isin(np.concatenate([cqr, prob]))], NEW
+    raw, _ = load_development(development_cycle, audit["source_manifest"])
+    return raw.loc[raw.SEQN.isin(np.concatenate([cqr, prob]))], development_cycle
+
+
+def old_development_reference(audit, models):
+    raw, cycle = fetch_rows("dry-run", audit, development_cycle=OLD)
+    frame, _ = prepare(raw, cycle, read_json(V2_METADATA))
+    points = point_predictions(frame, models)
+    candidates = []
+    for name in ("main", "safe"):
+        rows = frame.loc[frame.paired & points[name].notna()]
+        candidates.append({"candidate": name, "point_paired": point_summary(rows, points, (name, "v2"), "fasting_weight")})
+    return {"cycle": cycle, "metrics": {"candidates": candidates}}
+
+
+def verify_opening_marker(manifest_sha):
+    marker_path = str(MARKER.relative_to(ROOT.parent))
+    committed = subprocess.check_output(["git", "show", f"HEAD:{marker_path}"], cwd=ROOT.parent)
+    if MARKER.read_bytes() != committed:
+        raise ValueError("Opening marker must match the committed marker")
+    marker = read_json(MARKER)
+    opening_commit = subprocess.check_output(["git", "log", "-1", "--format=%H", "--", marker_path],
+                                             cwd=ROOT.parent, text=True).strip()
+    committed_protocol = subprocess.check_output(
+        ["git", "show", f"{marker['protocol_commit']}:{PROTOCOL.relative_to(ROOT.parent)}"], cwd=ROOT.parent)
+    if (marker["cycle"] != SEALED or marker["manifest_sha256"] != manifest_sha or
+            marker["runner_sha256"] != sha256(Path(__file__)) or
+            marker["measurement_source_sha256"] != sha256(ROOT / "src/medpredict_ml/blood_pressure.py") or
+            marker["development_reference_sha256"] != sha256(DRY_REPORT) or
+            marker["protocol_sha256"] != sha256(PROTOCOL) or PROTOCOL.read_bytes() != committed_protocol):
+        raise ValueError("Opening marker does not match the prospective protocol, runner or inputs")
+    return marker, opening_commit
 
 
 def timestamp():
@@ -465,7 +565,8 @@ def run(mode, args):
     docs = ROOT / "docs" / ("m2-v5-final.md" if sealed else "m2-v5-e-dry-run.md")
     if output.exists() or docs.exists():
         raise ValueError("Refusing to overwrite an existing evaluation result")
-    frozen, audit, models, replay = load_verified()
+    marker, opening_commit = verify_opening_marker(manifest_sha) if sealed else (None, None)
+    frozen, audit, models, replay = load_verified(marker["protocol_sha256"] if marker else None)
     attempt = None
     if sealed:
         reference = read_json(DRY_REPORT)
@@ -475,12 +576,16 @@ def run(mode, args):
         if history["manifest_sha256"] != manifest_sha or any(
                 item["status"] != "failed_before_metrics" for item in history["attempts"]):
             raise ValueError("Sealed evaluation is not eligible for a retry")
-        attempt = {"started_at_utc": timestamp(), "runner_sha256": sha256(Path(__file__)), "status": "loading"}
+        attempt = {"started_at_utc": timestamp(), "opening_commit": opening_commit,
+                   "runner_sha256": marker["runner_sha256"], "status": "loading"}
         history["attempts"].append(attempt)
         write_json(LOG, history)
     try:
+        if sealed:
+            old_reference = old_development_reference(audit, models)
         raw, cycle = fetch_rows(mode, audit)
-        frame, flow = prepare(raw, cycle, read_json(V2_METADATA))
+        metadata = read_json(V2_METADATA)
+        frame, flow = prepare(raw, cycle, metadata)
         values, scores, flags, intervals = predictions(frame, models)
         report = {"mode": "sealed" if sealed else "development_calibration_dry_run",
                   "cycle": cycle, "non_confirmatory": not sealed, "sealed_records_read": sealed,
@@ -495,7 +600,12 @@ def run(mode, args):
             write_json(LOG, history)
         report["metrics"] = evaluate(frame, values, scores, flags, intervals, frozen)
         if sealed:
-            report["measurement_comparison"] = measurement_comparison(reference, report["metrics"])
+            report["opening_commit"] = opening_commit
+            report["protocol_commit"] = marker["protocol_commit"]
+            report["protocol_sha256"] = marker["protocol_sha256"]
+            report["measurement_comparison"] = [*measurement_comparison(old_reference, report["metrics"]),
+                                                *measurement_comparison(reference, report["metrics"])]
+            report["zero_dbp_sensitivity"] = zero_dbp_sensitivity(raw, models, metadata, report["metrics"]["candidates"])
         write_json(output, report)
         docs.write_text(render(report), encoding="utf-8")
         if attempt is not None:
