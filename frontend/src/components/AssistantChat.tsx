@@ -30,7 +30,7 @@ export function AssistantChat({ copy, language, openFromRoute }: { copy: Copy; l
   }
 
   useEffect(() => {
-    if (openFromRoute) openChat();
+    if (openFromRoute && !dialog.current?.open) dialog.current?.showModal();
   }, [openFromRoute]);
 
   useEffect(() => {
@@ -44,12 +44,12 @@ export function AssistantChat({ copy, language, openFromRoute }: { copy: Copy; l
   }, [text.contextQuestion]);
 
   useEffect(() => {
-    if (!client || !started) return;
+    if (!client || (!started && !openFromRoute)) return;
     const controller = new AbortController();
     client.status(controller.signal).then((ok) => setAvailability(ok ? 'available' : 'unavailable'))
       .catch((reason: unknown) => { if (!controller.signal.aborted) setAvailability('unavailable'); return reason; });
     return () => controller.abort();
-  }, [client, started]);
+  }, [client, started, openFromRoute]);
   useEffect(() => () => request.current?.abort(), []);
   useEffect(() => { if (log.current) log.current.scrollTop = log.current.scrollHeight; }, [messages, busy]);
 
@@ -67,7 +67,7 @@ export function AssistantChat({ copy, language, openFromRoute }: { copy: Copy; l
       const reply = await client.ask({ message: question, language, history, ...(context ? { resultContext: context } : {}) },
         controller.signal);
       setMessages((current) => [...current, { role: 'assistant', text: reply.answer, reply }]);
-      setContext(undefined);
+      setContext((current) => current === context ? undefined : current);
     } catch (reason) {
       if (controller.signal.aborted) return;
       setError(text.errors[reason instanceof AssistantError ? reason.kind : 'unexpected']);

@@ -354,4 +354,3 @@ h3 { font-size: 18px; line-height: 1.4; }
 .assistant-form textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--input-border); border-radius: 6px; font: inherit; resize: none; }
 .assistant-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
 .assistant-counter { font-size: 12px; color: var(--text-muted); }
-

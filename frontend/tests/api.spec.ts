@@ -278,3 +278,45 @@ test('explicit demo marker labels a server example independently of its version'
   await expect(page.locator('.model-version')).toHaveText(`${copies.ru.demoVersion}: server-demo-v2`);
   await expect(page.getByText(copies.ru.estimateExplanation, { exact: true })).toHaveCount(0);
 });
+
+test('assistant opens over the result and keeps the conversation when closed', async ({ page }) => {
+  const trained = { ...demoModelInfo, demo: false, modelVersion: 'MedPredict-SBP-v1', predictionType: 'estimated_current_measurement' };
+  await page.route('**/api/v1/model/info', (route) => route.fulfill({ json: trained }));
+  await page.route('**/api/v1/predictions', (route) => route.fulfill({ json: {
+    predictedValue: 126.7, unit: trained.unit, demo: false, predictionType: trained.predictionType,
+  } }));
+  await page.route('**/api/v1/assistant/status', (route) => route.fulfill({ json: { available: true } }));
+  await page.route('**/api/v1/assistant/messages', (route) => {
+    expect(route.request().postDataJSON()).toEqual({
+      message: copies.ru.assistant.contextQuestion, language: 'ru', history: [], resultContext: { predictedValue: 126.7 },
+    });
+    return route.fulfill({ json: { answer: 'Ответ для проверки интерфейса.', sources: [], refused: false, model: 'test' } });
+  });
+
+  await page.goto('/#/predict');
+  const launcher = page.getByRole('button', { name: copies.ru.assistantNav, exact: true });
+  const dialog = page.getByRole('dialog', { name: copies.ru.assistant.title });
+  await expect(dialog).toBeHidden();
+  await launcher.click();
+  await expect(dialog).toBeVisible();
+  const bounds = (await dialog.boundingBox())!;
+  const viewport = page.viewportSize()!;
+  expect(viewport.width - bounds.x - bounds.width).toBeLessThan(32);
+  expect(viewport.height - bounds.y - bounds.height).toBeLessThan(32);
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(launcher).toBeFocused();
+  await fillExample(page);
+  await page.getByRole('button', { name: copies.ru.submit, exact: true }).click();
+  const explain = page.getByRole('button', { name: copies.ru.explainWithAssistant });
+  await explain.click();
+  await expect(page).toHaveURL(/#\/predict$/);
+  await expect(dialog.getByRole('textbox')).toHaveValue(copies.ru.assistant.contextQuestion);
+  await dialog.getByRole('button', { name: copies.ru.assistant.send, exact: true }).click();
+  await expect(dialog.getByText('Ответ для проверки интерфейса.')).toBeVisible();
+  await dialog.getByRole('button', { name: copies.ru.assistant.close }).click();
+  await expect(explain).toBeFocused();
+  await launcher.click();
+  await expect(dialog.getByText('Ответ для проверки интерфейса.')).toBeVisible();
+  await expectNoOverflow(page);
+});

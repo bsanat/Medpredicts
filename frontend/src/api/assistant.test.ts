@@ -1,6 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { AssistantError, contextFromPrediction, createAssistantClient, parseAssistantReply } from './assistant';
-import { setPendingAssistantContext, takePendingAssistantContext } from './assistantContext';
 
 afterEach(() => vi.unstubAllGlobals());
 const signal = () => new AbortController().signal;
@@ -22,12 +21,6 @@ describe('assistant contract', () => {
     expect(context).toEqual({ predictedValue: 125.3, intervalLower: 99.8, intervalUpper: 150.8, measuredCoverage: 0.913,
       referenceValue: 122.7, contributions: [{ key: 'age', value: 1.4 }, { key: 'sex', value: 1.2 }], warnings: ['OUT_OF_DISTRIBUTION'] });
     expect(Object.keys(context)).not.toContain('unit');
-  });
-
-  it('keeps a pending context in memory for exactly one read', () => {
-    setPendingAssistantContext({ predictedValue: 120 });
-    expect(takePendingAssistantContext()).toEqual({ predictedValue: 120 });
-    expect(takePendingAssistantContext()).toBeUndefined();
   });
 
   it('posts to the backend with trimmed history and maps HTTP failures', async () => {
