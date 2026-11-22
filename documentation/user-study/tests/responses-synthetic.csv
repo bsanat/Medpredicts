@@ -1,0 +1,11 @@
+participant_id,round,language,t1_seconds,t1_errors,t1_status,t2_seconds,t2_errors,t2_status,t3_seconds,t3_errors,t3_status,t4_seconds,t4_errors,t4_status,t5_seconds,t5_errors,t5_status,t6_seconds,t6_errors,t6_status,sus1,sus2,sus3,sus4,sus5,sus6,sus7,sus8,sus9,sus10,q1,q2_text,q2_rater1,q2_rater2,q2_final,q3,q4,q5_text,q5_rater1,q5_rater2,q5_final,q6,q7
+P01,1,ru,"35,5",1,unaided,,,,,,,,,,,,,,,,4,2,4,2,4,2,4,2,4,2,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P02,1,kk,46.5,2,assisted,,,,,,,,,,,,,,,,4,2,4,2,4,2,4,2,4,2,no,SYNTHETIC FIXTURE Q2,correct,partial,correct,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P03,1,ru,120,5,technical,,,,,,,,,,,,,,,,4,2,4,2,4,2,4,2,4,2,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P04,1,kk,61,1,not_completed,,,,,,,,,,,,,,,,4,2,4,2,4,2,4,2,4,2,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P05,1,ru,,,,,,,,,,,,,,,,,,,3,2,3,2,3,2,3,2,3,2,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P06,1,kk,36,0,unaided,,,,,,,,,,,,,,,,3,2,3,2,3,2,3,2,3,2,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P07,1,ru,,0,unaided,,,,,,,,,,,,,,,,3,2,3,2,3,2,3,2,3,2,no,SYNTHETIC FIXTURE Q2,partial,partial,,yes,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P08,1,kk,,,missing,,,,,,,,,,,,,,,,3,2,3,2,3,2,3,2,3,2,no,SYNTHETIC FIXTURE Q2,incorrect,incorrect,,yes,,SYNTHETIC FIXTURE Q5,correct,incorrect,,no,unsure
+P09,2,ru,20,0,unaided,,,,,,,,,,,,,,,,5,1,5,1,5,1,5,1,5,1,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
+P10,2,kk,24,0,unaided,,,,,,,,,,,,,,,,5,1,5,1,5,1,5,1,5,,no,SYNTHETIC FIXTURE Q2,correct,correct,,no,no,SYNTHETIC FIXTURE Q5,correct,correct,,no,no
