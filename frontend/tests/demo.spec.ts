@@ -111,8 +111,7 @@ test('complete demo journey, repeat request and invalidate a stale result', asyn
   await expect(page.getByText('Демонстрационный режим', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expectNoOverflow(page);
-  await page.getByRole('button', { name: 'Перейти к форме' }).click();
-  await expect(page.getByLabel('Возраст')).toBeFocused();
+  await expect(page.getByLabel('Возраст')).toBeVisible();
   await fillExample(page);
   await page.getByRole('button', { name: 'Получить учебную оценку' }).click();
   await expect(page.getByRole('button', { name: 'Получить учебную оценку' })).toBeDisabled();
@@ -121,6 +120,7 @@ test('complete demo journey, repeat request and invalidate a stale result', asyn
   await expect(page.getByText('Версия демопримера: demo-example')).toBeVisible();
   await expectNoOverflow(page);
   await page.getByRole('button', { name: 'Изменить данные' }).click();
+  await expect(page.getByLabel('Возраст')).toBeFocused();
   await expect(page.getByLabel('Возраст')).toHaveValue('52');
   await expect(page.getByText('134,2', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Получить учебную оценку' }).click();
@@ -150,8 +150,11 @@ test('keyboard navigation, submit and edit remain usable', async ({ page }, test
   await page.getByRole('link', { name: 'Перейти к основному содержимому' }).focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#main')).toBeFocused();
-  await page.getByRole('button', { name: 'Перейти к форме' }).focus();
-  await page.keyboard.press('Enter');
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('button', { name: 'Ассистент', exact: true })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('button', { name: 'Заполнить пример', exact: true })).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(page.getByLabel('Возраст')).toBeFocused();
   await page.keyboard.type('52');
   await page.keyboard.press('Tab');

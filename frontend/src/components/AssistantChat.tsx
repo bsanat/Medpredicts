@@ -10,7 +10,7 @@ import { Icon } from './Icon';
 interface Message { role: 'user' | 'assistant'; text: string; reply?: AssistantReply }
 type Availability = 'checking' | 'available' | 'unavailable' | 'demo';
 
-export function AssistantChat({ copy, language, openFromRoute }: { copy: Copy; language: Language; openFromRoute: boolean }) {
+export function AssistantChat({ copy, language, openFromRoute, showLauncher }: { copy: Copy; language: Language; openFromRoute: boolean; showLauncher: boolean }) {
   const [client] = useState<AssistantClient | undefined>(configuredAssistant);
   const [started, setStarted] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -35,8 +35,11 @@ export function AssistantChat({ copy, language, openFromRoute }: { copy: Copy; l
 
   useEffect(() => {
     function openWithResult(event: Event) {
-      setContext((event as CustomEvent<AssistantResultContext>).detail);
-      setDraft(text.contextQuestion);
+      const result = (event as CustomEvent<AssistantResultContext | undefined>).detail;
+      if (result) {
+        setContext(result);
+        setDraft(text.contextQuestion);
+      }
       openChat();
     }
     window.addEventListener(OPEN_ASSISTANT, openWithResult);
@@ -83,10 +86,10 @@ export function AssistantChat({ copy, language, openFromRoute }: { copy: Copy; l
   }
 
   return <>
-    <button className="button button-primary assistant-launcher" type="button" onClick={openChat}
+    {showLauncher && <button className="button button-primary assistant-launcher" type="button" onClick={openChat}
       aria-haspopup="dialog" aria-controls="assistant-chat">
       <Icon name="brain" />{copy.assistantNav}
-    </button>
+    </button>}
     <dialog ref={dialog} id="assistant-chat" className="assistant-chat" aria-labelledby="assistant-heading"
       onClose={() => { if (context) { setContext(undefined); setDraft(''); } }}>
       <header className="assistant-header">

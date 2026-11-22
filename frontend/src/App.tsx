@@ -59,6 +59,6 @@ export default function App() {
         : <InformationPage route={route} copy={copy} model={mode === 'real' && flow.metadata.status === 'ready' ? flow.metadata.model : undefined} />}
     </main>
     <SiteFooter copy={copy} />
-    <AssistantChat copy={copy} language={language} openFromRoute={route === '/assistant'} />
+    <AssistantChat copy={copy} language={language} openFromRoute={route === '/assistant'} showLauncher={route !== '/predict'} />
   </>;
 }

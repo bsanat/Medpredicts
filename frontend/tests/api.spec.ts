@@ -294,11 +294,13 @@ test('assistant opens over the result and keeps the conversation when closed', a
   });
 
   await page.goto('/#/predict');
-  const launcher = page.getByRole('button', { name: copies.ru.assistantNav, exact: true });
+  const launcher = page.locator('.prediction-top').getByRole('button', { name: copies.ru.assistantNav, exact: true });
   const dialog = page.getByRole('dialog', { name: copies.ru.assistant.title });
+  await expect(page.locator('.assistant-launcher')).toHaveCount(0);
   await expect(dialog).toBeHidden();
   await launcher.click();
   await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('textbox')).toHaveValue('');
   const bounds = (await dialog.boundingBox())!;
   const viewport = page.viewportSize()!;
   expect(viewport.width - bounds.x - bounds.width).toBeLessThan(32);
