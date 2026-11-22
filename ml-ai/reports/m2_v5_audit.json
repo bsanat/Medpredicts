@@ -1,0 +1,1469 @@
+{
+  "protocol_sha256": "fa222343695fee153f949d11fc0a7f558939c15f2dd618e41c107152f2a8aafd",
+  "script_sha256": "c7a1cd6f9df7afa34031aa41b8a901f418d30d00528c447e2a7fae08a3fc8145",
+  "registered_seed": 2026,
+  "python": "3.12.1",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyreadstat": "1.3.1"
+  },
+  "audited_at_utc": "2026-11-22T00:25:31.730335+00:00",
+  "source_manifest": [
+    {
+      "cycle": "2017-2020",
+      "table": "P_DEMO",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_DEMO.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_DEMO.htm",
+      "bytes": 3614720,
+      "sha256": "2e46c6c26bf77cd8989f64011ace12cbf42c0f3e03414eb59acc5328c8f87913",
+      "downloaded_at_utc": "2026-11-22T00:24:27.182256+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_BMX",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BMX.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BMX.htm",
+      "bytes": 2520640,
+      "sha256": "7038d0da3169420a4a3cbaec09ac586a701b38e1c7b925431b60e13ac24fed66",
+      "downloaded_at_utc": "2026-11-22T00:24:27.064293+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_TCHOL",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_TCHOL.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_TCHOL.htm",
+      "bytes": 294000,
+      "sha256": "759cd9c408b5d1b91f6cfb5d5e67920a301f7478c0e90ce7adf4bbd277a45ac8",
+      "downloaded_at_utc": "2026-11-22T00:24:24.694917+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_GHB",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_GHB.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_GHB.htm",
+      "bytes": 167600,
+      "sha256": "dac9e423f56041c2ec46486cb16be16d3347e0a81a575985882ffad5a60e1195",
+      "downloaded_at_utc": "2026-11-22T00:24:26.453652+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_BPXO",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BPXO.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BPXO.htm",
+      "bytes": 1039840,
+      "sha256": "5edbcb81e99fe8dad38deb8b642570278b200c525d88ffa29ae3ceb4dd38bde4",
+      "downloaded_at_utc": "2026-11-22T00:24:25.544805+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_BPQ",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BPQ.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BPQ.htm",
+      "bytes": 899520,
+      "sha256": "88af3557dd185cee2533c94c5302b361e89a54eb50754704f35d4e8120868c02",
+      "downloaded_at_utc": "2026-11-22T00:24:25.510475+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_SMQ",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_SMQ.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_SMQ.htm",
+      "bytes": 1428560,
+      "sha256": "29b7f6c59ab570c042c866312f0eb4329009e85fadbda6f9427a8bf31ecb3a3f",
+      "downloaded_at_utc": "2026-11-22T00:24:26.078979+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_PAQ",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_PAQ.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_PAQ.htm",
+      "bytes": 1321440,
+      "sha256": "d0e13cebf96181949e983ab58d14c58689e801e8711d366d2b5daab3c7b9ee65",
+      "downloaded_at_utc": "2026-11-22T00:24:42.342037+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2017-2020",
+      "table": "P_GLU",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_GLU.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_GLU.htm",
+      "bytes": 164160,
+      "sha256": "91b83c46fb4707c431838159135e93693a0572bce54074f5a890f0ee104732b3",
+      "downloaded_at_utc": "2026-11-22T00:24:26.548618+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "DEMO_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DEMO_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DEMO_L.htm",
+      "bytes": 2582160,
+      "sha256": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+      "downloaded_at_utc": "2026-11-22T00:24:27.420439+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "BMX_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BMX_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BMX_L.htm",
+      "bytes": 1563200,
+      "sha256": "44440c416d9ad709e8b1708a5975378ab4d5b18edc39eb5015c2ae7186500170",
+      "downloaded_at_utc": "2026-11-22T00:24:27.627104+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "TCHOL_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/TCHOL_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/TCHOL_L.htm",
+      "bytes": 259520,
+      "sha256": "5c3312e555bb0706fd97cbd63fcbc9e78f00bda8d2d149732d9dd368169b25d3",
+      "downloaded_at_utc": "2026-11-22T00:24:27.551760+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "GHB_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/GHB_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/GHB_L.htm",
+      "bytes": 174000,
+      "sha256": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+      "downloaded_at_utc": "2026-11-22T00:24:27.931710+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "BPXO_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPXO_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPXO_L.htm",
+      "bytes": 696720,
+      "sha256": "189aa9bed689d2c69cf8d780b01de85073276fea5694dd52cdf696229f9054a6",
+      "downloaded_at_utc": "2026-11-22T00:24:28.276343+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "BPQ_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPQ_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BPQ_L.htm",
+      "bytes": 409680,
+      "sha256": "0acde3af0526c375942fe0735e3bf69a0422bcbc606f98a478209d2f47baa4b5",
+      "downloaded_at_utc": "2026-11-22T00:24:28.843254+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "SMQ_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/SMQ_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/SMQ_L.htm",
+      "bytes": 651120,
+      "sha256": "abbefebfa5585b1e19c079fa14be20c113a4649318070197214b258d05b93c50",
+      "downloaded_at_utc": "2026-11-22T00:24:28.591325+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "PAQ_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/PAQ_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/PAQ_L.htm",
+      "bytes": 409520,
+      "sha256": "de34acfed4523f10f52bea06e64ed33c8db973cb38d3539eeceb2b68039248c8",
+      "downloaded_at_utc": "2026-11-22T00:24:28.599925+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2021-2023",
+      "table": "GLU_L",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/GLU_L.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/GLU_L.htm",
+      "bytes": 129200,
+      "sha256": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+      "downloaded_at_utc": "2026-11-22T00:24:32.390727+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": true,
+      "sealed_until_stage_e": false
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "DEMO_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/DEMO_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/DEMO_I.htm",
+      "bytes": 3756480,
+      "sha256": "c9297c6c37ae8f78f29be9568fa2a03cf3b112616a39afee04030fc775a66a0d",
+      "downloaded_at_utc": "2026-11-22T00:24:40.295863+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "BMX_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BMX_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BMX_I.htm",
+      "bytes": 1989600,
+      "sha256": "d31da84e14212b4e58e8340598a5b8e2144fac83333563e966eb1b332e4141d6",
+      "downloaded_at_utc": "2026-11-22T00:24:29.752564+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "TCHOL_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/TCHOL_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/TCHOL_I.htm",
+      "bytes": 193760,
+      "sha256": "e7f51cf7c002db01d023278922d89d72318c679967e72ff259ba532b2d72e54d",
+      "downloaded_at_utc": "2026-11-22T00:24:44.183855+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "GHB_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/GHB_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/GHB_I.htm",
+      "bytes": 108960,
+      "sha256": "e4bc626cd12f6057c7806aef4f85874c9bf1407a7480d6621a4af142260addd2",
+      "downloaded_at_utc": "2026-11-22T00:24:29.598661+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "BPX_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BPX_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BPX_I.htm",
+      "bytes": 1607120,
+      "sha256": "45d5c9fa101ccc6da82241bd45c99611595e699665eed2cfed232e9070b52cc1",
+      "downloaded_at_utc": "2026-11-22T00:24:30.817042+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "BPQ_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BPQ_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/BPQ_I.htm",
+      "bytes": 559120,
+      "sha256": "7f7e51cd0497eb648f64eaafaf7ed07825d617c32b2cd6853ed249fce1143a38",
+      "downloaded_at_utc": "2026-11-22T00:24:30.858632+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "SMQ_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/SMQ_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/SMQ_I.htm",
+      "bytes": 2681040,
+      "sha256": "529ce1c407e99dce937ca75d14c8c630e0c9c30a4a9a851760cd2884bbb28fe0",
+      "downloaded_at_utc": "2026-11-22T00:24:36.907056+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "PAQ_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/PAQ_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/PAQ_I.htm",
+      "bytes": 6973680,
+      "sha256": "c508dc563a907b2fcd05048f37008197257a3e1c6eb64563623c60459c1afc9d",
+      "downloaded_at_utc": "2026-11-22T00:24:32.425147+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    },
+    {
+      "cycle": "2015-2016",
+      "table": "GLU_I",
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/GLU_I.xpt",
+      "codebook": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/GLU_I.htm",
+      "bytes": 103440,
+      "sha256": "3a52f14346060819c79faa8d646c1dfc33d5a85c1df13d23e10aa4fff0d1bb87",
+      "downloaded_at_utc": "2026-11-22T00:24:39.728299+00:00",
+      "xpt_header_verified": true,
+      "records_parsed": false,
+      "sealed_until_stage_e": true
+    }
+  ],
+  "sealed_cycle": "2015-2016",
+  "sealed_records_parsed": false,
+  "development": {
+    "2017-2020": {
+      "demographics_n": 15560,
+      "raw_weights": {
+        "WTMECPRP": {
+          "n": 15560,
+          "positive": 14300,
+          "zero": 1260,
+          "missing": 0,
+          "zero_fraction": 0.08097686375321336,
+          "missing_fraction": 0.0,
+          "sum": 322324171.99290395
+        },
+        "WTSAFPRP": {
+          "n": 15560,
+          "positive": 4476,
+          "zero": 614,
+          "missing": 10470,
+          "zero_fraction": 0.03946015424164524,
+          "missing_fraction": 0.672879177377892,
+          "sum": 274269346.97713566
+        }
+      },
+      "raw_questionnaire": {
+        "bpq": {
+          "BPQ020": {
+            "present_in_cycle": true,
+            "n": 15560,
+            "yes": 3597,
+            "no": 6586,
+            "refused": 0,
+            "dont_know": 12,
+            "not_applicable": 5365,
+            "missing_on_expected_route": 0,
+            "missing_route_undetermined": 0,
+            "route_mismatch": 0,
+            "invalid": 0
+          },
+          "BPQ040A": {
+            "present_in_cycle": true,
+            "n": 15560,
+            "yes": 3279,
+            "no": 314,
+            "refused": 1,
+            "dont_know": 3,
+            "not_applicable": 11963,
+            "missing_on_expected_route": 0,
+            "missing_route_undetermined": 0,
+            "route_mismatch": 0,
+            "invalid": 0
+          },
+          "BPQ050A": {
+            "present_in_cycle": true,
+            "n": 15560,
+            "yes": 2786,
+            "no": 493,
+            "refused": 0,
+            "dont_know": 0,
+            "not_applicable": 12281,
+            "missing_on_expected_route": 0,
+            "missing_route_undetermined": 0,
+            "route_mismatch": 0,
+            "invalid": 0
+          },
+          "BPQ150": {
+            "present_in_cycle": false
+          }
+        },
+        "smq020_codes": {
+          "1": 3889,
+          "2": 5799,
+          "7": 2,
+          "9": 3,
+          "missing": 5867
+        },
+        "smq040_codes": {
+          "1": 1306,
+          "2": 378,
+          "3": 2205,
+          "7": 0,
+          "9": 0,
+          "missing": 11671
+        },
+        "pad680": {
+          "n": 15560,
+          "valid": 9610,
+          "valid_fraction": 0.6176092544987146,
+          "missing": 5884,
+          "code_7777": 6,
+          "code_9999": 60,
+          "code_7777_fraction": 0.00038560411311053987,
+          "code_9999_fraction": 0.0038560411311053984,
+          "other_invalid": 0
+        }
+      },
+      "expanded": {
+        "n": 6997,
+        "sbp_bins": {
+          "lt110": 1724,
+          "110_to_lt140": 4107,
+          "140_to_lt150": 561,
+          "ge150": 605
+        },
+        "weight": "WTMECPRP",
+        "weights": {
+          "n": 6997,
+          "positive": 6997,
+          "zero": 0,
+          "missing": 0,
+          "zero_fraction": 0.0,
+          "missing_fraction": 0.0,
+          "sum": 205136935.041161
+        },
+        "design": {
+          "strata": 24,
+          "nested_psu": 49,
+          "singleton_strata": 0
+        },
+        "selection_flow": [
+          {
+            "rule": "age_18_to_79",
+            "n_before": 15560,
+            "excluded": 6549,
+            "remaining": 9011
+          },
+          {
+            "rule": "documented_sex",
+            "n_before": 9011,
+            "excluded": 0,
+            "remaining": 9011
+          },
+          {
+            "rule": "two_valid_sbp_readings",
+            "n_before": 9011,
+            "excluded": 1455,
+            "remaining": 7556
+          },
+          {
+            "rule": "observed_design",
+            "n_before": 7556,
+            "excluded": 0,
+            "remaining": 7556
+          },
+          {
+            "rule": "positive_expanded_weight",
+            "n_before": 7556,
+            "excluded": 0,
+            "remaining": 7556
+          },
+          {
+            "rule": "observed_positive_BMXBMI",
+            "n_before": 7556,
+            "excluded": 62,
+            "remaining": 7494
+          },
+          {
+            "rule": "observed_positive_LBDTCSI",
+            "n_before": 7494,
+            "excluded": 487,
+            "remaining": 7007
+          },
+          {
+            "rule": "observed_positive_LBXGH",
+            "n_before": 7007,
+            "excluded": 10,
+            "remaining": 6997
+          }
+        ],
+        "c4": {
+          "medication": {
+            "n": 6997,
+            "known_n": 2244,
+            "valid_fraction": 0.3207088752322424,
+            "known_ge150": 408,
+            "categories": {
+              "unknown": 4753,
+              "yes": 1890,
+              "no": 354
+            },
+            "category_fractions": {
+              "unknown": 0.6792911247677577,
+              "yes": 0.27011576389881375,
+              "no": 0.050593111333428614
+            },
+            "complete_case_n": 6997,
+            "complete_case_ge150": 605
+          },
+          "bpq020": {
+            "n": 6997,
+            "known_n": 6989,
+            "valid_fraction": 0.9988566528512219,
+            "known_ge150": 604,
+            "categories": {
+              "no": 4508,
+              "yes": 2481,
+              "unknown": 8
+            },
+            "category_fractions": {
+              "no": 0.64427611833643,
+              "yes": 0.35458053451479205,
+              "unknown": 0.0011433471487780477
+            },
+            "complete_case_n": 6997,
+            "complete_case_ge150": 605
+          },
+          "smoking": {
+            "n": 6997,
+            "known_n": 6993,
+            "valid_fraction": 0.999428326425611,
+            "known_ge150": 603,
+            "categories": {
+              "never": 4184,
+              "former": 1514,
+              "current": 1295,
+              "unknown": 4
+            },
+            "category_fractions": {
+              "never": 0.597970558810919,
+              "former": 0.21637844790624552,
+              "current": 0.1850793197084465,
+              "unknown": 0.0005716735743890238
+            },
+            "complete_case_n": 6997,
+            "complete_case_ge150": 605
+          },
+          "pad680": {
+            "n": 6997,
+            "known_n": 6953,
+            "valid_fraction": 0.9937115906817208,
+            "known_ge150": 600,
+            "categories": {
+              "valid": 6953,
+              "unknown": 44
+            },
+            "category_fractions": {
+              "valid": 0.9937115906817208,
+              "unknown": 0.006288409318279262
+            },
+            "complete_case_n": 6953,
+            "complete_case_ge150": 600
+          }
+        },
+        "questionnaire": {
+          "bpq": {
+            "BPQ020": {
+              "present_in_cycle": true,
+              "n": 6997,
+              "yes": 2481,
+              "no": 4508,
+              "refused": 0,
+              "dont_know": 8,
+              "not_applicable": 0,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ040A": {
+              "present_in_cycle": true,
+              "n": 6997,
+              "yes": 2244,
+              "no": 235,
+              "refused": 1,
+              "dont_know": 1,
+              "not_applicable": 4516,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ050A": {
+              "present_in_cycle": true,
+              "n": 6997,
+              "yes": 1890,
+              "no": 354,
+              "refused": 0,
+              "dont_know": 0,
+              "not_applicable": 4753,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ150": {
+              "present_in_cycle": false
+            }
+          },
+          "smq020_codes": {
+            "1": 2809,
+            "2": 4184,
+            "7": 2,
+            "9": 2,
+            "missing": 0
+          },
+          "smq040_codes": {
+            "1": 1003,
+            "2": 292,
+            "3": 1514,
+            "7": 0,
+            "9": 0,
+            "missing": 4188
+          },
+          "pad680": {
+            "n": 6997,
+            "valid": 6953,
+            "valid_fraction": 0.9937115906817208,
+            "missing": 12,
+            "code_7777": 2,
+            "code_9999": 30,
+            "code_7777_fraction": 0.0002858367871945119,
+            "code_9999_fraction": 0.004287551807917679,
+            "other_invalid": 0
+          }
+        }
+      },
+      "paired_v2": {
+        "n": 3310,
+        "sbp_bins": {
+          "lt110": 849,
+          "110_to_lt140": 1925,
+          "140_to_lt150": 257,
+          "ge150": 279
+        },
+        "weight": "WTSAFPRP",
+        "weights": {
+          "n": 3310,
+          "positive": 3310,
+          "zero": 0,
+          "missing": 0,
+          "zero_fraction": 0.0,
+          "missing_fraction": 0.0,
+          "sum": 216307283.2435205
+        },
+        "design": {
+          "strata": 24,
+          "nested_psu": 49,
+          "singleton_strata": 0
+        },
+        "selection_flow": [
+          {
+            "rule": "positive_fasting_weight",
+            "n_before": 6997,
+            "excluded": 3686,
+            "remaining": 3311
+          },
+          {
+            "rule": "observed_positive_fasting_glucose",
+            "n_before": 3311,
+            "excluded": 0,
+            "remaining": 3311
+          },
+          {
+            "rule": "v2_bounds_age",
+            "n_before": 3311,
+            "excluded": 0,
+            "remaining": 3311
+          },
+          {
+            "rule": "v2_bounds_bmi",
+            "n_before": 3311,
+            "excluded": 0,
+            "remaining": 3311
+          },
+          {
+            "rule": "v2_bounds_totalCholesterol",
+            "n_before": 3311,
+            "excluded": 0,
+            "remaining": 3311
+          },
+          {
+            "rule": "v2_bounds_glucose",
+            "n_before": 3311,
+            "excluded": 1,
+            "remaining": 3310
+          }
+        ],
+        "c4": {
+          "medication": {
+            "n": 3310,
+            "known_n": 1099,
+            "valid_fraction": 0.33202416918429,
+            "known_ge150": 204,
+            "categories": {
+              "unknown": 2211,
+              "yes": 919,
+              "no": 180
+            },
+            "category_fractions": {
+              "unknown": 0.66797583081571,
+              "yes": 0.27764350453172204,
+              "no": 0.054380664652567974
+            },
+            "complete_case_n": 3310,
+            "complete_case_ge150": 279
+          },
+          "bpq020": {
+            "n": 3310,
+            "known_n": 3307,
+            "valid_fraction": 0.9990936555891239,
+            "known_ge150": 279,
+            "categories": {
+              "no": 2100,
+              "yes": 1207,
+              "unknown": 3
+            },
+            "category_fractions": {
+              "no": 0.6344410876132931,
+              "yes": 0.3646525679758308,
+              "unknown": 0.0009063444108761329
+            },
+            "complete_case_n": 3310,
+            "complete_case_ge150": 279
+          },
+          "smoking": {
+            "n": 3310,
+            "known_n": 3307,
+            "valid_fraction": 0.9990936555891239,
+            "known_ge150": 277,
+            "categories": {
+              "never": 1961,
+              "former": 733,
+              "current": 613,
+              "unknown": 3
+            },
+            "category_fractions": {
+              "never": 0.5924471299093655,
+              "former": 0.22145015105740182,
+              "current": 0.1851963746223565,
+              "unknown": 0.0009063444108761329
+            },
+            "complete_case_n": 3310,
+            "complete_case_ge150": 279
+          },
+          "pad680": {
+            "n": 3310,
+            "known_n": 3292,
+            "valid_fraction": 0.9945619335347432,
+            "known_ge150": 276,
+            "categories": {
+              "valid": 3292,
+              "unknown": 18
+            },
+            "category_fractions": {
+              "valid": 0.9945619335347432,
+              "unknown": 0.005438066465256798
+            },
+            "complete_case_n": 3292,
+            "complete_case_ge150": 276
+          }
+        },
+        "questionnaire": {
+          "bpq": {
+            "BPQ020": {
+              "present_in_cycle": true,
+              "n": 3310,
+              "yes": 1207,
+              "no": 2100,
+              "refused": 0,
+              "dont_know": 3,
+              "not_applicable": 0,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ040A": {
+              "present_in_cycle": true,
+              "n": 3310,
+              "yes": 1099,
+              "no": 106,
+              "refused": 1,
+              "dont_know": 1,
+              "not_applicable": 2103,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ050A": {
+              "present_in_cycle": true,
+              "n": 3310,
+              "yes": 919,
+              "no": 180,
+              "refused": 0,
+              "dont_know": 0,
+              "not_applicable": 2211,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ150": {
+              "present_in_cycle": false
+            }
+          },
+          "smq020_codes": {
+            "1": 1346,
+            "2": 1961,
+            "7": 1,
+            "9": 2,
+            "missing": 0
+          },
+          "smq040_codes": {
+            "1": 472,
+            "2": 141,
+            "3": 733,
+            "7": 0,
+            "9": 0,
+            "missing": 1964
+          },
+          "pad680": {
+            "n": 3310,
+            "valid": 3292,
+            "valid_fraction": 0.9945619335347432,
+            "missing": 4,
+            "code_7777": 0,
+            "code_9999": 14,
+            "code_7777_fraction": 0.0,
+            "code_9999_fraction": 0.004229607250755287,
+            "other_invalid": 0
+          }
+        }
+      },
+      "joins": {
+        "P_DEMO": {
+          "rows": 15560,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_BMX": {
+          "rows": 14300,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_TCHOL": {
+          "rows": 12198,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_GHB": {
+          "rows": 10409,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_BPXO": {
+          "rows": 11656,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_BPQ": {
+          "rows": 10195,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_SMQ": {
+          "rows": 11137,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_PAQ": {
+          "rows": 9693,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "P_GLU": {
+          "rows": 5090,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        }
+      }
+    },
+    "2021-2023": {
+      "demographics_n": 11933,
+      "raw_weights": {
+        "WTPH2YR": {
+          "n": 11933,
+          "positive": 6750,
+          "zero": 449,
+          "missing": 4734,
+          "zero_fraction": 0.03762674935054052,
+          "missing_fraction": 0.3967149920388838,
+          "sum": 279992596.0
+        },
+        "WTSAF2YR": {
+          "n": 11933,
+          "positive": 3361,
+          "zero": 635,
+          "missing": 7937,
+          "zero_fraction": 0.05321377692114305,
+          "missing_fraction": 0.6651303109025392,
+          "sum": 279992595.93949234
+        }
+      },
+      "raw_questionnaire": {
+        "bpq": {
+          "BPQ020": {
+            "present_in_cycle": true,
+            "n": 11933,
+            "yes": 2969,
+            "no": 5518,
+            "refused": 1,
+            "dont_know": 10,
+            "not_applicable": 3432,
+            "missing_on_expected_route": 3,
+            "missing_route_undetermined": 0,
+            "route_mismatch": 0,
+            "invalid": 0
+          },
+          "BPQ040A": {
+            "present_in_cycle": false
+          },
+          "BPQ050A": {
+            "present_in_cycle": false
+          },
+          "BPQ150": {
+            "present_in_cycle": true,
+            "n": 11933,
+            "yes": 2442,
+            "no": 523,
+            "refused": 0,
+            "dont_know": 4,
+            "not_applicable": 8961,
+            "missing_on_expected_route": 0,
+            "missing_route_undetermined": 3,
+            "route_mismatch": 0,
+            "invalid": 0
+          }
+        },
+        "smq020_codes": {
+          "1": 3243,
+          "2": 4878,
+          "7": 7,
+          "9": 7,
+          "missing": 3798
+        },
+        "smq040_codes": {
+          "1": 952,
+          "2": 238,
+          "3": 2053,
+          "7": 0,
+          "9": 0,
+          "missing": 8690
+        },
+        "pad680": {
+          "n": 11933,
+          "valid": 8065,
+          "valid_fraction": 0.6758568675102656,
+          "missing": 3795,
+          "code_7777": 6,
+          "code_9999": 67,
+          "code_7777_fraction": 0.0005028073409871785,
+          "code_9999_fraction": 0.005614681974356826,
+          "other_invalid": 0
+        }
+      },
+      "expanded": {
+        "n": 5218,
+        "sbp_bins": {
+          "lt110": 1312,
+          "110_to_lt140": 3215,
+          "140_to_lt150": 353,
+          "ge150": 338
+        },
+        "weight": "WTPH2YR",
+        "weights": {
+          "n": 5218,
+          "positive": 5218,
+          "zero": 0,
+          "missing": 0,
+          "zero_fraction": 0.0,
+          "missing_fraction": 0.0,
+          "sum": 222289985.706914
+        },
+        "design": {
+          "strata": 15,
+          "nested_psu": 30,
+          "singleton_strata": 0
+        },
+        "selection_flow": [
+          {
+            "rule": "age_18_to_79",
+            "n_before": 11933,
+            "excluded": 4305,
+            "remaining": 7628
+          },
+          {
+            "rule": "documented_sex",
+            "n_before": 7628,
+            "excluded": 0,
+            "remaining": 7628
+          },
+          {
+            "rule": "two_valid_sbp_readings",
+            "n_before": 7628,
+            "excluded": 1829,
+            "remaining": 5799
+          },
+          {
+            "rule": "observed_design",
+            "n_before": 5799,
+            "excluded": 0,
+            "remaining": 5799
+          },
+          {
+            "rule": "positive_expanded_weight",
+            "n_before": 5799,
+            "excluded": 266,
+            "remaining": 5533
+          },
+          {
+            "rule": "observed_positive_BMXBMI",
+            "n_before": 5533,
+            "excluded": 42,
+            "remaining": 5491
+          },
+          {
+            "rule": "observed_positive_LBDTCSI",
+            "n_before": 5491,
+            "excluded": 270,
+            "remaining": 5221
+          },
+          {
+            "rule": "observed_positive_LBXGH",
+            "n_before": 5221,
+            "excluded": 3,
+            "remaining": 5218
+          }
+        ],
+        "c4": {
+          "medication": {
+            "n": 5218,
+            "known_n": 1809,
+            "valid_fraction": 0.346684553468762,
+            "known_ge150": 229,
+            "categories": {
+              "unknown": 3409,
+              "yes": 1489,
+              "no": 320
+            },
+            "category_fractions": {
+              "unknown": 0.6533154465312381,
+              "yes": 0.28535837485626675,
+              "no": 0.06132617861249521
+            },
+            "complete_case_n": 5218,
+            "complete_case_ge150": 338
+          },
+          "bpq020": {
+            "n": 5218,
+            "known_n": 5216,
+            "valid_fraction": 0.9996167113836719,
+            "known_ge150": 338,
+            "categories": {
+              "no": 3405,
+              "yes": 1811,
+              "unknown": 2
+            },
+            "category_fractions": {
+              "no": 0.6525488692985818,
+              "yes": 0.34706784208509006,
+              "unknown": 0.0003832886163280951
+            },
+            "complete_case_n": 5218,
+            "complete_case_ge150": 338
+          },
+          "smoking": {
+            "n": 5218,
+            "known_n": 5209,
+            "valid_fraction": 0.9982752012265236,
+            "known_ge150": 338,
+            "categories": {
+              "never": 3161,
+              "former": 1292,
+              "current": 756,
+              "unknown": 9
+            },
+            "category_fractions": {
+              "never": 0.6057876581065542,
+              "former": 0.2476044461479494,
+              "current": 0.14488309697201993,
+              "unknown": 0.0017247987734764277
+            },
+            "complete_case_n": 5218,
+            "complete_case_ge150": 338
+          },
+          "pad680": {
+            "n": 5218,
+            "known_n": 5185,
+            "valid_fraction": 0.9936757378305864,
+            "known_ge150": 335,
+            "categories": {
+              "valid": 5185,
+              "unknown": 33
+            },
+            "category_fractions": {
+              "valid": 0.9936757378305864,
+              "unknown": 0.006324262169413568
+            },
+            "complete_case_n": 5185,
+            "complete_case_ge150": 335
+          }
+        },
+        "questionnaire": {
+          "bpq": {
+            "BPQ020": {
+              "present_in_cycle": true,
+              "n": 5218,
+              "yes": 1811,
+              "no": 3405,
+              "refused": 0,
+              "dont_know": 2,
+              "not_applicable": 0,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ040A": {
+              "present_in_cycle": false
+            },
+            "BPQ050A": {
+              "present_in_cycle": false
+            },
+            "BPQ150": {
+              "present_in_cycle": true,
+              "n": 5218,
+              "yes": 1489,
+              "no": 320,
+              "refused": 0,
+              "dont_know": 2,
+              "not_applicable": 3407,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            }
+          },
+          "smq020_codes": {
+            "1": 2048,
+            "2": 3161,
+            "7": 3,
+            "9": 4,
+            "missing": 2
+          },
+          "smq040_codes": {
+            "1": 610,
+            "2": 146,
+            "3": 1292,
+            "7": 0,
+            "9": 0,
+            "missing": 3170
+          },
+          "pad680": {
+            "n": 5218,
+            "valid": 5185,
+            "valid_fraction": 0.9936757378305864,
+            "missing": 6,
+            "code_7777": 1,
+            "code_9999": 26,
+            "code_7777_fraction": 0.00019164430816404754,
+            "code_9999_fraction": 0.004982752012265236,
+            "other_invalid": 0
+          }
+        }
+      },
+      "paired_v2": {
+        "n": 2678,
+        "sbp_bins": {
+          "lt110": 705,
+          "110_to_lt140": 1642,
+          "140_to_lt150": 172,
+          "ge150": 159
+        },
+        "weight": "WTSAF2YR",
+        "weights": {
+          "n": 2678,
+          "positive": 2678,
+          "zero": 0,
+          "missing": 0,
+          "zero_fraction": 0.0,
+          "missing_fraction": 0.0,
+          "sum": 225104468.74341547
+        },
+        "design": {
+          "strata": 15,
+          "nested_psu": 30,
+          "singleton_strata": 0
+        },
+        "selection_flow": [
+          {
+            "rule": "positive_fasting_weight",
+            "n_before": 5218,
+            "excluded": 2537,
+            "remaining": 2681
+          },
+          {
+            "rule": "observed_positive_fasting_glucose",
+            "n_before": 2681,
+            "excluded": 0,
+            "remaining": 2681
+          },
+          {
+            "rule": "v2_bounds_age",
+            "n_before": 2681,
+            "excluded": 0,
+            "remaining": 2681
+          },
+          {
+            "rule": "v2_bounds_bmi",
+            "n_before": 2681,
+            "excluded": 1,
+            "remaining": 2680
+          },
+          {
+            "rule": "v2_bounds_totalCholesterol",
+            "n_before": 2680,
+            "excluded": 1,
+            "remaining": 2679
+          },
+          {
+            "rule": "v2_bounds_glucose",
+            "n_before": 2679,
+            "excluded": 1,
+            "remaining": 2678
+          }
+        ],
+        "c4": {
+          "medication": {
+            "n": 2678,
+            "known_n": 933,
+            "valid_fraction": 0.34839432412247945,
+            "known_ge150": 114,
+            "categories": {
+              "unknown": 1745,
+              "yes": 763,
+              "no": 170
+            },
+            "category_fractions": {
+              "unknown": 0.6516056758775205,
+              "yes": 0.2849141150112024,
+              "no": 0.06348020911127707
+            },
+            "complete_case_n": 2678,
+            "complete_case_ge150": 159
+          },
+          "bpq020": {
+            "n": 2678,
+            "known_n": 2677,
+            "valid_fraction": 0.9996265870052278,
+            "known_ge150": 159,
+            "categories": {
+              "no": 1743,
+              "yes": 934,
+              "unknown": 1
+            },
+            "category_fractions": {
+              "no": 0.6508588498879762,
+              "yes": 0.3487677371172517,
+              "unknown": 0.0003734129947722181
+            },
+            "complete_case_n": 2678,
+            "complete_case_ge150": 159
+          },
+          "smoking": {
+            "n": 2678,
+            "known_n": 2674,
+            "valid_fraction": 0.9985063480209111,
+            "known_ge150": 159,
+            "categories": {
+              "never": 1665,
+              "former": 676,
+              "current": 333,
+              "unknown": 4
+            },
+            "category_fractions": {
+              "never": 0.621732636295743,
+              "former": 0.2524271844660194,
+              "current": 0.12434652725914862,
+              "unknown": 0.0014936519790888724
+            },
+            "complete_case_n": 2678,
+            "complete_case_ge150": 159
+          },
+          "pad680": {
+            "n": 2678,
+            "known_n": 2658,
+            "valid_fraction": 0.9925317401045557,
+            "known_ge150": 157,
+            "categories": {
+              "valid": 2658,
+              "unknown": 20
+            },
+            "category_fractions": {
+              "valid": 0.9925317401045557,
+              "unknown": 0.0074682598954443615
+            },
+            "complete_case_n": 2658,
+            "complete_case_ge150": 157
+          }
+        },
+        "questionnaire": {
+          "bpq": {
+            "BPQ020": {
+              "present_in_cycle": true,
+              "n": 2678,
+              "yes": 934,
+              "no": 1743,
+              "refused": 0,
+              "dont_know": 1,
+              "not_applicable": 0,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            },
+            "BPQ040A": {
+              "present_in_cycle": false
+            },
+            "BPQ050A": {
+              "present_in_cycle": false
+            },
+            "BPQ150": {
+              "present_in_cycle": true,
+              "n": 2678,
+              "yes": 763,
+              "no": 170,
+              "refused": 0,
+              "dont_know": 1,
+              "not_applicable": 1744,
+              "missing_on_expected_route": 0,
+              "missing_route_undetermined": 0,
+              "route_mismatch": 0,
+              "invalid": 0
+            }
+          },
+          "smq020_codes": {
+            "1": 1009,
+            "2": 1665,
+            "7": 1,
+            "9": 2,
+            "missing": 1
+          },
+          "smq040_codes": {
+            "1": 261,
+            "2": 72,
+            "3": 676,
+            "7": 0,
+            "9": 0,
+            "missing": 1669
+          },
+          "pad680": {
+            "n": 2678,
+            "valid": 2658,
+            "valid_fraction": 0.9925317401045557,
+            "missing": 4,
+            "code_7777": 1,
+            "code_9999": 15,
+            "code_7777_fraction": 0.0003734129947722181,
+            "code_9999_fraction": 0.005601194921583271,
+            "other_invalid": 0
+          }
+        }
+      },
+      "joins": {
+        "DEMO_L": {
+          "rows": 11933,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "BMX_L": {
+          "rows": 8860,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "TCHOL_L": {
+          "rows": 8068,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "GHB_L": {
+          "rows": 7199,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "BPXO_L": {
+          "rows": 7801,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "BPQ_L": {
+          "rows": 8501,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "SMQ_L": {
+          "rows": 9015,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "PAQ_L": {
+          "rows": 8153,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        },
+        "GLU_L": {
+          "rows": 3996,
+          "unique_seqn": true,
+          "outside_demographics": 0
+        }
+      }
+    }
+  },
+  "stop_findings": [],
+  "cross_cycle": {
+    "seqn_overlap": 0,
+    "raw_stratum_label_overlap": 0,
+    "raw_psu_label_overlap": 2,
+    "raw_nested_psu_overlap": 0,
+    "merged_stratum_key": [
+      "cycle",
+      "SDMVSTRA"
+    ],
+    "merged_psu_key": [
+      "cycle",
+      "SDMVSTRA",
+      "SDMVPSU"
+    ],
+    "prefixed_nested_psu_overlap": 0
+  }
+}
