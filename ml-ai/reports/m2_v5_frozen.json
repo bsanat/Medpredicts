@@ -335,5 +335,283 @@
     "stage_b_sha256": "87a15d4985ffa614654b72be1c6ef25a46164cc2f0a67bf98bfe14ce888bcb3c",
     "cycle": "2015-2016",
     "records_opened": false
+  },
+  "pre_e": {
+    "protocol_sha256": "9b5f4858c53e6fa9d79c52bef5f930f2395aa58ba91b6ecc4d5ccf09967e5155",
+    "freeze_script_sha256": "9203774d1109bc0d1c74f8e9723b8b4b132833bdbb41a5daa2d11aef9e372d60",
+    "additional_artifacts": {
+      "safe_point": {
+        "path": "data/processed/m2-v5/frozen/safe_point.joblib",
+        "sha256": "ceddb51a825c198d5a75d2322de9c581de862af051fe08837145a7571ac900ae",
+        "bytes": 39231
+      },
+      "safe_base_5f": {
+        "path": "data/processed/m2-v5/frozen/safe_base_5f.joblib",
+        "sha256": "4be39d0b78001751b62714adcb60598366fedf8199a54451acf8991b78239926",
+        "bytes": 36903
+      },
+      "safe_cqr_radius": {
+        "path": "data/processed/m2-v5/frozen/safe_cqr_radius.joblib",
+        "sha256": "ff36998cfac3043acb2ca82f54b48a8ae3706903e5c9489fc83ce1ccd9af017f",
+        "bytes": 21
+      }
+    },
+    "safe_point": {
+      "family": "mlp",
+      "fields": [
+        "age",
+        "sex",
+        "bmi",
+        "totalCholesterol",
+        "hba1c",
+        "medication"
+      ],
+      "weight": 2,
+      "alpha": null,
+      "form": "ensemble",
+      "selection_trace": {
+        "deployment_candidate": true,
+        "admissible_count": 64,
+        "within_0_01_high": {
+          "best": 32.86299673527562,
+          "remaining_n": 2
+        },
+        "within_0_01_overall": {
+          "best": 10.872557923467674,
+          "remaining_n": 1
+        },
+        "fewest_fields": {
+          "best": 6,
+          "remaining_n": 1
+        },
+        "family_order": {
+          "best": 1,
+          "remaining_n": 1
+        },
+        "fixed_seed_before_ensemble": {
+          "best": 1,
+          "remaining_n": 1
+        },
+        "smaller_multiplier": {
+          "best": 2,
+          "remaining_n": 1
+        },
+        "smaller_alpha": {
+          "best": 0,
+          "remaining_n": 1
+        },
+        "lexicographic_fields": [
+          "age",
+          "sex",
+          "bmi",
+          "totalCholesterol",
+          "hba1c",
+          "medication"
+        ]
+      },
+      "delta_overall_vs_fold_v2": 0.18591361403211515,
+      "high_reduction_percent": 9.579057355088894,
+      "seed_sd": {
+        "overall_mae": 0.03460451187780728,
+        "high_mae": 0.21801987478840856
+      }
+    },
+    "cv_point_metrics": {
+      "main": {
+        "overall_mae": 11.095123624428409,
+        "overall_bias": 2.2906133649364024,
+        "overall_rmse": 14.462327682429093,
+        "overall_r2": 0.18271177894512614,
+        "high_mae": 29.877462600037145,
+        "high_bias": -29.877462600037145
+      },
+      "main_base_5f": {
+        "overall_mae": 11.319111557860216,
+        "overall_bias": 2.4645171576638987,
+        "overall_rmse": 14.801345989301906,
+        "overall_r2": 0.143945792389924,
+        "high_mae": 32.25059209603131,
+        "high_bias": -32.25059209603131
+      },
+      "safe": {
+        "overall_mae": 10.872557923467674,
+        "overall_bias": 1.6530766021974985,
+        "overall_rmse": 14.422593659571927,
+        "overall_r2": 0.1871964704247916,
+        "high_mae": 32.868587341787155,
+        "high_bias": -32.868587341787155
+      },
+      "safe_base_5f": {
+        "overall_mae": 10.941256230791357,
+        "overall_bias": 1.852786888269958,
+        "overall_rmse": 14.50833238186664,
+        "overall_r2": 0.17750391736116655,
+        "high_mae": 33.107261090189034,
+        "high_bias": -33.107261090189034
+      },
+      "fold_v2": {
+        "overall_mae": 10.68664430943556,
+        "overall_bias": 0.14817996685306192,
+        "overall_rmse": 14.343108754489531,
+        "overall_r2": 0.19613072839491563,
+        "high_mae": 36.35063557218622,
+        "high_bias": -36.35063557218622
+      }
+    },
+    "cv_undiagnosed_risk": {
+      "bpq020_no_ge150": {
+        "n": 87,
+        "models": {
+          "main": {
+            "mae": 33.90888579504329,
+            "signed_bias": -33.90888579504329
+          },
+          "main_base_5f": {
+            "mae": 30.290356045115054,
+            "signed_bias": -30.290356045115054
+          },
+          "safe": {
+            "mae": 32.44354363866362,
+            "signed_bias": -32.44354363866362
+          },
+          "safe_base_5f": {
+            "mae": 31.18339036798194,
+            "signed_bias": -31.18339036798194
+          },
+          "fold_v2": {
+            "mae": 34.11966364885796,
+            "signed_bias": -34.11966364885796
+          }
+        }
+      },
+      "bpq020_no_ge140": {
+        "n": 231,
+        "models": {
+          "main": {
+            "mae": 24.487997609033737,
+            "signed_bias": -24.487997609033737
+          },
+          "main_base_5f": {
+            "mae": 21.174679571004365,
+            "signed_bias": -21.172669521165528
+          },
+          "safe": {
+            "mae": 22.987055330882846,
+            "signed_bias": -22.986837281566718
+          },
+          "safe_base_5f": {
+            "mae": 21.731965349650554,
+            "signed_bias": -21.731965349650554
+          },
+          "fold_v2": {
+            "mae": 24.449085082140822,
+            "signed_bias": -24.449085082140822
+          }
+        }
+      },
+      "medication_no_ge150": {
+        "n": 143,
+        "models": {
+          "main": {
+            "mae": 32.411751954225196,
+            "signed_bias": -32.411751954225196
+          },
+          "main_base_5f": {
+            "mae": 34.117872917132416,
+            "signed_bias": -34.117872917132416
+          },
+          "safe": {
+            "mae": 36.29329295862109,
+            "signed_bias": -36.29329295862109
+          },
+          "safe_base_5f": {
+            "mae": 34.9463766922549,
+            "signed_bias": -34.9463766922549
+          },
+          "fold_v2": {
+            "mae": 37.77433741143126,
+            "signed_bias": -37.77433741143126
+          }
+        }
+      },
+      "medication_no_ge140": {
+        "n": 329,
+        "models": {
+          "main": {
+            "mae": 23.158434451459726,
+            "signed_bias": -23.019319111806908
+          },
+          "main_base_5f": {
+            "mae": 23.35953035561279,
+            "signed_bias": -23.358079777329547
+          },
+          "safe": {
+            "mae": 25.325606562909734,
+            "signed_bias": -25.325449204820124
+          },
+          "safe_base_5f": {
+            "mae": 23.991858382480277,
+            "signed_bias": -23.991858382480277
+          },
+          "fold_v2": {
+            "mae": 26.79698681728274,
+            "signed_bias": -26.79698681728274
+          }
+        }
+      }
+    },
+    "safe_cqr": {
+      "radius": 6.023057053774323,
+      "calibration": {
+        "n": 1222,
+        "high_n": 95,
+        "sha256": "6878922ce27734950287003e613514a630fca7388fe6a7c507e06ca14579a240",
+        "by_cycle_and_sbp_bin": {
+          "2017-2020:0": 172,
+          "2017-2020:1": 411,
+          "2017-2020:2": 56,
+          "2017-2020:3": 61,
+          "2021-2023:0": 131,
+          "2021-2023:1": 322,
+          "2021-2023:2": 35,
+          "2021-2023:3": 34
+        }
+      }
+    },
+    "probability": {
+      "registered_candidate": "hist_gradient_boosting",
+      "interface_candidate": "logistic_same_inputs",
+      "interface_comparator": "logistic_age_only",
+      "thresholds": {
+        "hist_gradient_boosting": 0.18638329428682002,
+        "logistic_same_inputs": 0.16581960531095505,
+        "logistic_age_only": 0.1721915309453559,
+        "constant": 1.0
+      }
+    },
+    "probe_replay": {
+      "synthetic_n": 4,
+      "v2_onnx_sha256": "b5cc185350a92c5077e9e90220fbdd7d475b8b9e14102d6f6b38b1119a2d9c17",
+      "v2_python_golden_max_abs_error": 7.62939453125e-06,
+      "point_sha256": {
+        "point": "eaab997293deb9dc597ded7c79b014209d82dc94fa830bfcd41d60d8dbc19306",
+        "ridge_reference": "eaab997293deb9dc597ded7c79b014209d82dc94fa830bfcd41d60d8dbc19306",
+        "point_base_5f": "321343721d617a6ae9cfab5bf92c1d4f7653a77c9be091f4e1e4648d79c9e15b",
+        "safe_point": "a30de70380b79e422755526e776daa650e7e47c33079b6edc9fca69e38cc7472",
+        "safe_base_5f": "ce820507bf7787eb13b93fc2ea5bac9d38f30188b8d093e4771d89b6dc16304a"
+      },
+      "probability_sha256": {
+        "hist_gradient_boosting": "c0ca79324e4bccd9b0bb13a40f81a6a64d9ba89e8084b27972b22202759c7d5a",
+        "logistic_same_inputs": "9589346b0a0604a66a94019d06ebb87122b8f934a7da0a2778757085e987a946",
+        "logistic_age_only": "e706db3c2a848be373a8b5c4aee0d01c9bd9e685996192dfe145a5e8cd7af8b0",
+        "constant": "ff04ceb126769ef8420718cfc8b79340fc6b8545222190ae5c373cc6a68e1fbd"
+      },
+      "interval_sha256": {
+        "main": "49dbd464d23c8b3e6262d3887b1c123f0f07b4e46e08019a7b2300e6c681b502",
+        "safe": "49dbd464d23c8b3e6262d3887b1c123f0f07b4e46e08019a7b2300e6c681b502"
+      }
+    },
+    "secondary_comparison_multiplicity": "nominal 95% intervals, no multiplicity adjustment",
+    "sealed_cycle_read": false
   }
 }
