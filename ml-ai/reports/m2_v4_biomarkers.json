@@ -1,0 +1,369 @@
+{
+  "protocol_sha256": "17273422dcbacf96a2e06c09f5c1380df1f478ced6e8f8f0bb2be4654c7ee4df",
+  "script_sha256": "d124d731a02e19a397600bb2b44641d20870a4efaa62173f0b098aa3c6377ec2",
+  "training_script_sha256": "920c1b3faf5dfea4a87315ae361a69784fdd4b3fa1211fede6dbd559b9f6d743",
+  "data_loader_sha256": "6d3bf83bd94f88097f037b8828252304bec825b033ee8a6fa519ad4b5e7baac3",
+  "input_sha256": {
+    "dataset": "8b7d69e4c428708d6f0eb0d4f9f8e9df6a8b5c67c1abf8d51aa79075eba8b42c",
+    "body_measures": "7038d0da3169420a4a3cbaec09ac586a701b38e1c7b925431b60e13ac24fed66",
+    "v2_onnx": "3a4be6a1746f4230a5dba7346e3948e56cabc400540c91b0fbcd7882299dbe2a"
+  },
+  "laboratory_sources": {
+    "P_GHB": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_GHB.xpt",
+      "sha256": "dac9e423f56041c2ec46486cb16be16d3347e0a81a575985882ffad5a60e1195",
+      "column": "LBXGH"
+    },
+    "P_BIOPRO": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_BIOPRO.xpt",
+      "sha256": "f242cb9f9da5787f77d81ffb02822350e01cea4adf072d23bc96eb008182010c",
+      "column": "LBDSCRSI"
+    }
+  },
+  "seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "test_used": false,
+  "packages": {
+    "tabm": "0.0.3",
+    "rtdl-num-embeddings": "0.0.12",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyreadstat": "1.3.1",
+    "scikit-learn": "1.7.2",
+    "torch": "2.9.1",
+    "onnxruntime": "1.23.2"
+  },
+  "original_counts": {
+    "train": 2324,
+    "validation": 497
+  },
+  "train_n": 2316,
+  "validation_n": 492,
+  "validation_sbp_ge_150_n": 39,
+  "v2_onnx": {
+    "overall_mae": 10.420274285291729,
+    "sbp_ge_150_mae": 34.3203588009915
+  },
+  "thresholds": {
+    "max_overall_mae": 10.920274285291729,
+    "max_tail_mae": 25.740269100743625
+  },
+  "models": {
+    "tabm_5f": {
+      "features": [
+        "age",
+        "sex",
+        "bmi",
+        "totalCholesterol",
+        "glucose"
+      ],
+      "runs": [
+        {
+          "seed": 2026,
+          "overall_mae": 10.682711627292223,
+          "sbp_ge_150_mae": 29.80609973470515,
+          "overall_delta_vs_v2": 0.26243734200049396,
+          "tail_reduction_percent_vs_v2": 13.15329799569559,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.0,
+            "sbp_ge_150_mae": 0.0
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2027,
+          "overall_mae": 10.696727944251625,
+          "sbp_ge_150_mae": 29.92712547997937,
+          "overall_delta_vs_v2": 0.2764536589598965,
+          "tail_reduction_percent_vs_v2": 12.800662564417042,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.0,
+            "sbp_ge_150_mae": 0.0
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2028,
+          "overall_mae": 10.821803790444715,
+          "sbp_ge_150_mae": 28.992079401874758,
+          "overall_delta_vs_v2": 0.40152950515298613,
+          "tail_reduction_percent_vs_v2": 15.525127315868303,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.0,
+            "sbp_ge_150_mae": 0.0
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2029,
+          "overall_mae": 10.705476102649875,
+          "sbp_ge_150_mae": 29.298594669790823,
+          "overall_delta_vs_v2": 0.2852018173581463,
+          "tail_reduction_percent_vs_v2": 14.632026897852823,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.0,
+            "sbp_ge_150_mae": 0.0
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2030,
+          "overall_mae": 10.692089410623048,
+          "sbp_ge_150_mae": 29.134797050254505,
+          "overall_delta_vs_v2": 0.2718151253313188,
+          "tail_reduction_percent_vs_v2": 15.109287699484032,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.0,
+            "sbp_ge_150_mae": 0.0
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        }
+      ],
+      "mean": {
+        "overall_mae": 10.719761775052296,
+        "sbp_ge_150_mae": 29.43173926732093,
+        "overall_delta_vs_v2": 0.29948748976056727,
+        "tail_reduction_percent_vs_v2": 14.244080494663535,
+        "delta_vs_tabm_5f": {
+          "overall_mae": 0.0,
+          "sbp_ge_150_mae": 0.0
+        },
+        "passes_overall": true,
+        "passes_tail": false,
+        "passes_both": false
+      },
+      "sample_sd": {
+        "overall_mae": 0.05763177054550353,
+        "sbp_ge_150_mae": 0.4137499911311566
+      },
+      "pass_counts": {
+        "passes_overall": 5,
+        "passes_tail": 0,
+        "passes_both": 0
+      }
+    },
+    "tabm_hba1c": {
+      "features": [
+        "age",
+        "sex",
+        "bmi",
+        "totalCholesterol",
+        "glucose",
+        "LBXGH"
+      ],
+      "runs": [
+        {
+          "seed": 2026,
+          "overall_mae": 10.609876471717907,
+          "sbp_ge_150_mae": 29.42938460616545,
+          "overall_delta_vs_v2": 0.18960218642617832,
+          "tail_reduction_percent_vs_v2": 14.250941323739163,
+          "delta_vs_tabm_5f": {
+            "overall_mae": -0.07283515557431564,
+            "sbp_ge_150_mae": -0.37671512853970057
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2027,
+          "overall_mae": 10.622404369814442,
+          "sbp_ge_150_mae": 29.62364060066994,
+          "overall_delta_vs_v2": 0.20213008452271275,
+          "tail_reduction_percent_vs_v2": 13.684933271111,
+          "delta_vs_tabm_5f": {
+            "overall_mae": -0.07432357443718374,
+            "sbp_ge_150_mae": -0.3034848793094298
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2028,
+          "overall_mae": 10.795620284857504,
+          "sbp_ge_150_mae": 29.114128685878434,
+          "overall_delta_vs_v2": 0.3753459995657753,
+          "tail_reduction_percent_vs_v2": 15.169509576813223,
+          "delta_vs_tabm_5f": {
+            "overall_mae": -0.02618350558721083,
+            "sbp_ge_150_mae": 0.1220492840036762
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2029,
+          "overall_mae": 10.68998106674689,
+          "sbp_ge_150_mae": 29.14284557396995,
+          "overall_delta_vs_v2": 0.26970678145516125,
+          "tail_reduction_percent_vs_v2": 15.08583653522868,
+          "delta_vs_tabm_5f": {
+            "overall_mae": -0.015495035902985066,
+            "sbp_ge_150_mae": -0.15574909582087315
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2030,
+          "overall_mae": 10.711818819917317,
+          "sbp_ge_150_mae": 28.518236341803437,
+          "overall_delta_vs_v2": 0.29154453462558827,
+          "tail_reduction_percent_vs_v2": 16.905774478734305,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.019729409294269473,
+            "sbp_ge_150_mae": -0.6165607084510683
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        }
+      ],
+      "mean": {
+        "overall_mae": 10.685940202610812,
+        "sbp_ge_150_mae": 29.165647161697443,
+        "overall_delta_vs_v2": 0.2656659173190832,
+        "tail_reduction_percent_vs_v2": 15.01939903712527,
+        "delta_vs_tabm_5f": {
+          "overall_mae": -0.033821572441484093,
+          "sbp_ge_150_mae": -0.2660921056234855
+        },
+        "passes_overall": true,
+        "passes_tail": false,
+        "passes_both": false
+      },
+      "sample_sd": {
+        "overall_mae": 0.07506371471087166,
+        "sbp_ge_150_mae": 0.4188168648782564
+      },
+      "pass_counts": {
+        "passes_overall": 5,
+        "passes_tail": 0,
+        "passes_both": 0
+      }
+    },
+    "tabm_creatinine": {
+      "features": [
+        "age",
+        "sex",
+        "bmi",
+        "totalCholesterol",
+        "glucose",
+        "LBDSCRSI"
+      ],
+      "runs": [
+        {
+          "seed": 2026,
+          "overall_mae": 10.672257170510244,
+          "sbp_ge_150_mae": 29.707400102206403,
+          "overall_delta_vs_v2": 0.2519828852185153,
+          "tail_reduction_percent_vs_v2": 13.4408813309138,
+          "delta_vs_tabm_5f": {
+            "overall_mae": -0.01045445678197865,
+            "sbp_ge_150_mae": -0.09869963249874658
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2027,
+          "overall_mae": 10.810835823363039,
+          "sbp_ge_150_mae": 30.20921489490827,
+          "overall_delta_vs_v2": 0.3905615380713101,
+          "tail_reduction_percent_vs_v2": 11.978732302660134,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.11410787911141362,
+            "sbp_ge_150_mae": 0.28208941492890105
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2028,
+          "overall_mae": 10.796499775542955,
+          "sbp_ge_150_mae": 30.194431446192596,
+          "overall_delta_vs_v2": 0.3762254902512261,
+          "tail_reduction_percent_vs_v2": 12.02180716910135,
+          "delta_vs_tabm_5f": {
+            "overall_mae": -0.02530401490176004,
+            "sbp_ge_150_mae": 1.2023520443178377
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2029,
+          "overall_mae": 10.815195212913295,
+          "sbp_ge_150_mae": 30.179063870731724,
+          "overall_delta_vs_v2": 0.39492092762156616,
+          "tail_reduction_percent_vs_v2": 12.066584018754877,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.10971911026341985,
+            "sbp_ge_150_mae": 0.880469200940901
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        },
+        {
+          "seed": 2030,
+          "overall_mae": 10.879135774834594,
+          "sbp_ge_150_mae": 29.81072004558187,
+          "overall_delta_vs_v2": 0.45886148954286554,
+          "tail_reduction_percent_vs_v2": 13.139835692158751,
+          "delta_vs_tabm_5f": {
+            "overall_mae": 0.18704636421154675,
+            "sbp_ge_150_mae": 0.6759229953273653
+          },
+          "passes_overall": true,
+          "passes_tail": false,
+          "passes_both": false
+        }
+      ],
+      "mean": {
+        "overall_mae": 10.794784751432825,
+        "sbp_ge_150_mae": 30.020166071924173,
+        "overall_delta_vs_v2": 0.3745104661410963,
+        "tail_reduction_percent_vs_v2": 12.52956810271778,
+        "delta_vs_tabm_5f": {
+          "overall_mae": 0.07502297638052902,
+          "sbp_ge_150_mae": 0.5884268046032446
+        },
+        "passes_overall": true,
+        "passes_tail": false,
+        "passes_both": false
+      },
+      "sample_sd": {
+        "overall_mae": 0.07550706654234163,
+        "sbp_ge_150_mae": 0.24137449035189526
+      },
+      "pass_counts": {
+        "passes_overall": 5,
+        "passes_tail": 0,
+        "passes_both": 0
+      }
+    }
+  }
+}
