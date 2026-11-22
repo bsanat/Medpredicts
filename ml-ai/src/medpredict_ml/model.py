@@ -26,10 +26,10 @@ def fit_preprocessor(x: np.ndarray, y: np.ndarray, weight: np.ndarray) -> dict:
 
 
 class MLP(nn.Module):
-    def __init__(self, hidden: list[int], dropout: float = 0.):
+    def __init__(self, hidden: list[int], dropout: float = 0., *, input_features: int = 5):
         super().__init__()
         layers = []
-        previous = 5
+        previous = input_features
         for dimension in hidden:
             layers.extend([nn.Linear(previous, dimension), nn.ReLU()])
             if dropout:
@@ -56,7 +56,7 @@ class RawInputModel(nn.Module):
 def train_network(x: np.ndarray, y: np.ndarray, weight: np.ndarray, xv: np.ndarray, yv: np.ndarray,
                   wv: np.ndarray, preprocessing: dict, candidate: dict, settings: dict, seed: int):
     set_seed(seed)
-    model = MLP(candidate["hidden"], candidate["dropout"])
+    model = MLP(candidate["hidden"], candidate["dropout"], input_features=x.shape[1])
     optimizer = torch.optim.AdamW(model.parameters(), lr=candidate["learning_rate"], weight_decay=candidate["weight_decay"])
     mean, scale = np.array(preprocessing["x_mean"]), np.array(preprocessing["x_scale"])
     xt = torch.tensor((x-mean)/scale, dtype=torch.float32)
